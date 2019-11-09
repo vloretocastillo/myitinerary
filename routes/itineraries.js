@@ -3,14 +3,18 @@ const itineraries = require('express').Router();
 const itineraryModel = require('../model/ItineraryModel')
 
 itineraries.get('/all', (req, res) => {
-    // itineraryModel.find({})
-    //     .then(files => {
-    //         res.send(files)
-    //     })
-    //     .catch(err => console.log(err));
+    
 });
 
-itineraries.post('/', (req, res) => {
+itineraries.get('/:id', (req, res) => {
+    
+});
+
+itineraries.put('/:id', (req, res) => {
+    
+});
+
+itineraries.delete('/:id', (req, res) => {
     
 });
 

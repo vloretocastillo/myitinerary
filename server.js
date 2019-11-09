@@ -4,6 +4,9 @@ const port = process.env.PORT || 5000;
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const citiesRouter = require('./routes/cities');
+
+const itinerariesRouter = require('./routes/itineraries');
+
 const db = require('./keys').mongoURI;
 const mongoose = require('mongoose');
 
@@ -18,6 +21,7 @@ app.use(
 );
 app.use(cors());
 app.use('/api/cities', citiesRouter)
+app.use('/api/itineraries', itinerariesRouter)
 
 
 mongoose.connect(db, { useNewUrlParser: true, dbName: "mytinerary" })

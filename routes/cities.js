@@ -34,4 +34,16 @@ cities.post('/', (req, res) => {
     
 });
 
+cities.get('/:id', (req, res) => {
+    
+});
+
+cities.put('/:id', (req, res) => {
+    
+});
+
+cities.delete('/:id', (req, res) => {
+    
+});
+
 module.exports = cities;
