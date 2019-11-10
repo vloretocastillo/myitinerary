@@ -61,6 +61,6 @@ cities.get('/:id', (req, res) => retrieveOneCity(req, res));
 
 cities.put('/:id', (req, res) => updateOneCity(req, res));
 
-cities.delete('/:id', (req, res) => deleteOneCity(req,res));
+cities.delete('/:id', (req, res) => deleteOneCity(req, res));
 
 module.exports = cities;
