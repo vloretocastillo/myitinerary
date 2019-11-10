@@ -46,11 +46,54 @@ const retrieveOneCity = (req, res) => {
 }
 
 const updateOneCity = (req, res) => {
+    
+    cityModel.findByIdAndUpdate(req.params.id, {
+        name: req.body.name,
+        country: req.body.country
+    }, {new: true})
+    .then(file => {
 
+        console.log('file: ', file)
+
+        if(!file) {
+            return res.status(404).send({
+                message: "Note not found with id " + req.params.id
+            });
+        }
+        res.send(file);
+    })
+    .catch(err => {
+        if(err.kind === 'ObjectId') {
+            return res.status(404).send({
+                message: "Note not found with id " + req.params.id
+            });                
+        }
+        return res.status(500).send({
+            message: "Error updating note with id " + req.params.id
+        });
+    });
+    
 }
 
 const deleteOneCity = (req, res) => {
-    
+    cityModel.findByIdAndRemove(req.params.id)
+    .then(file => {
+        if(!file) {
+            return res.status(404).send({
+                message: "Note not found with id " + req.params.id
+            });
+        }
+        res.send({message: "Note deleted successfully!"});
+    }).catch(err => {
+        if(err.kind === 'ObjectId' || err.name === 'NotFound') {
+            return res.status(404).send({
+                message: "Note not found with id " + req.params.id
+            });                
+        }
+        return res.status(500).send({
+            message: "Could not delete note with id " + req.params.id
+        });
+    });
 }
 
 cities.get('/all', (req,res) => retrieveAllCities(req,res));
