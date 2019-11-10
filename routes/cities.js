@@ -46,11 +46,11 @@ const retrieveOneCity = (req, res) => {
 }
 
 const updateOneCity = (req, res) => {
-    
+
 }
 
 const deleteOneCity = (req, res) => {
-
+    
 }
 
 cities.get('/all', (req,res) => retrieveAllCities(req,res));
