@@ -53,7 +53,7 @@ const updateOneCity = (req, res) => {
     }, {new: true})
     .then(file => {
 
-        console.log('file: ', file)
+        // console.log('file: ', file)
 
         if(!file) {
             return res.status(404).send({
