@@ -25,17 +25,25 @@ cities.post('/', (req, res) => {
             } else {
                 res.send('error')
             }
-        })
-
-
-
-    
-
-    
+        }) 
+        .catch(err => console.log(err));
 });
 
 cities.get('/:id', (req, res) => {
-    
+    const id = req.params.id
+    // console.log(id)
+    // res.send(`${id}`)
+
+    cityModel.find({_id : req.params.id})
+        .then((file)=> {
+            console.log('file found: ', file)
+            if (file) {
+                res.send(file)
+            } else {
+                res.send('not found')
+            }
+        })
+        .catch(err => console.log(err));
 });
 
 cities.put('/:id', (req, res) => {
