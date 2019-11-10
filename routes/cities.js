@@ -30,20 +30,31 @@ cities.post('/', (req, res) => {
 });
 
 cities.get('/:id', (req, res) => {
-    const id = req.params.id
-    // console.log(id)
-    // res.send(`${id}`)
+    // cityModel.find({_id : req.params.id})
+    //     .then((file)=> {
+    //         if (file) {
+    //             res.send(file)
+    //         } else {
+    //             res.send('not found')
+    //         }
+    //     })
+    //     .catch(err => console.log(err));
 
-    cityModel.find({_id : req.params.id})
-        .then((file)=> {
-            console.log('file found: ', file)
-            if (file) {
-                res.send(file)
-            } else {
-                res.send('not found')
-            }
+    cityModel.find({_id : req.params.id})  // .findById(req.params.id)
+        .then((file) => {
+            res.send(file);  
         })
-        .catch(err => console.log(err));
+        .catch(err => {
+            if(err.kind === 'ObjectId') {
+                return res.status(404).send({
+                    message: "Note not found with id " + req.params.id
+                });                
+            }
+            return res.status(500).send({
+                message: "Error retrieving note with id " + req.params.id
+            });
+        });
+
 });
 
 cities.put('/:id', (req, res) => {
