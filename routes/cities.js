@@ -2,6 +2,7 @@
 const cities = require('express').Router();
 const cityModel = require('../model/CityModel')
 
+
 const retrieveAllCities = (req, res) => {
     cityModel.find({})
     .then(files => {
@@ -11,13 +12,19 @@ const retrieveAllCities = (req, res) => {
 }
 
 const createOneCity = (req,res) => {
+    // console.log('body: ',req.body)
+
     cityModel.find({name : req.body.name})
         .then((file)=>{
             if (file.length === 0) {
                 const newCity = new cityModel({
                     name: req.body.name,
-                    country: req.body.country
+                    country: req.body.country, 
+                    itineraries : req.body.itineraries
                 })
+
+                // console.log('newCity: ', newCity)
+
                 newCity.save()
                   .then(city => { res.send(city) })
                   .catch(err => { res.status(500).send("Server error")}) 
