@@ -20,14 +20,10 @@ const createOneCity = (req,res) => {
                 const newCity = new cityModel({
                     name: req.body.name,
                     country: req.body.country, 
-                    itineraries : req.body.itineraries
+                    // itineraries : req.body.itineraries
                 })
-
-                // console.log('newCity: ', newCity)
-
                 newCity.save()
                   .then(city => { res.send(city) })
-                //   .catch(err => { res.status(500).send("Server error")}) 
             } else {
                 return res.send({
                     message: "This city exists in database"
@@ -59,21 +55,13 @@ const retrieveOneCity = (req, res) => {
 
 const updateOneCity = (req, res) => {
 
-    // let newItineraries;
-    // if (req.body.itineraries) {
-    //     let currentCity = cityModel.find({name: req.body.name})
-
-    // }
     
     cityModel.findByIdAndUpdate(req.params.id, {
         name: req.body.name,
         country: req.body.country,
-        // itineraries: req.body.itineraries
     }, {new: true})
     .then(file => {
-        // console.log('req.body.itineraries: ', req.body.itineraries)
-        file.itineraries = [...file.itineraries, ...req.body.itineraries] //push(req.body.itineraries[0])
-        // console.log('file.itineraries: ', file.itineraries)
+        // file.itineraries = [...file.itineraries, ...req.body.itineraries] //push(req.body.itineraries[0])
         file.save()
         if(!file) {
             return res.status(404).send({
