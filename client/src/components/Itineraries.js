@@ -8,7 +8,6 @@ class Itineraries extends React.Component {
    
     state = {
         itineraries : [],
-        // currentCity : ''
     }
   
 
@@ -23,14 +22,6 @@ class Itineraries extends React.Component {
         return itineraries
     }
 
-    handleInputSearch = (e) => {
-        
-    }
-
-    citiesToRender = () =>{
-        
-    }
-
     componentDidMount() {
         this.fetchItineraries()
             .then((itineraries)=>{ this.setState({ itineraries }) })
@@ -42,8 +33,6 @@ class Itineraries extends React.Component {
     }
 
     render() {
-        
-        // console.log(this.state.itineraries)
 
         let itineraries = this.state.itineraries.map((el) => {
             return (
@@ -53,10 +42,6 @@ class Itineraries extends React.Component {
                 </li>
             )
         });
-
-        // console.log(this.state.itineraries[0].parentCityName)
-        // let currentCity = this.state.itineraries[0].title
-
         return (
             <div className="main-container">
                 {this.state.currentCity}

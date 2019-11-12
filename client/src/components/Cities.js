@@ -58,9 +58,7 @@ class Cities extends React.Component {
                 <ul>
                     {cities}
                 </ul>
-                {/* <footer>
-                    <Link to='/'><img src={home} className="" alt="home" /></Link>
-                </footer> */}
+                
             </div>
         )
     }

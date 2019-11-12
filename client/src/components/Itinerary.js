@@ -26,7 +26,6 @@ class Itinerary extends React.Component {
     componentDidMount() {
         this.fetchItinerary()
             .then((itinerary)=>{ this.setState({ itinerary: itinerary[0] }) })
-            // .then(()=> console.log(this.state.itinerary))
            
     }
 

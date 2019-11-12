@@ -6,13 +6,11 @@ import { Link } from 'react-router-dom';
 // import '../css/Footer.css';
 
 function Footer() {
-    
-        return (
-            <footer>
-                <Link to='/'><img src={home} className="" alt="home" /></Link>
-            </footer>
-        )
-    
+    return (
+        <footer>
+            <Link to='/'><img src={home} className="" alt="home" /></Link>
+        </footer>
+    )    
 }
 
 export default Footer;

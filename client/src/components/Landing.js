@@ -11,7 +11,6 @@ class Landing extends React.Component {
     render (){
         return (
             <div className="main-container">
-                {/* <Nav /> */}
                 <header className="">
                     <img src={logo} className="" alt="logo" />
                 </header>
@@ -34,9 +33,7 @@ class Landing extends React.Component {
                     </div>
                 </section>
 
-                {/* <footer>
-                    <Link to='/'><img src={home} className="" alt="home" /></Link>
-                </footer> */}
+             
             </div>
         )
     }
