@@ -1,6 +1,7 @@
 import React from 'react';
-import home from '../assets/home.png';
+// import home from '../assets/home.png';
 import { Link } from 'react-router-dom'
+import Itineraries from './Itineraries';
 
 // import '../css/Cities.css';
 
@@ -41,7 +42,12 @@ class Cities extends React.Component {
 
     render() {
         let cities = this.citiesToRender().map((el) => {
-            return <li key={el._id}> {el.name} - {el.country} </li>
+            return (
+                <li key={el._id}> 
+                    {el.name} - {el.country} 
+                    <Link to={ `/itineraries?city=${el.name}`} >Itineraries</Link>
+                </li>
+            )
         });
 
         return (
@@ -52,9 +58,9 @@ class Cities extends React.Component {
                 <ul>
                     {cities}
                 </ul>
-                <footer>
+                {/* <footer>
                     <Link to='/'><img src={home} className="" alt="home" /></Link>
-                </footer>
+                </footer> */}
             </div>
         )
     }

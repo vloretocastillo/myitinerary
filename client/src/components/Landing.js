@@ -3,7 +3,7 @@ import logo from '../assets/logo.png';
 import circle from '../assets/circle.png';
 import home from '../assets/home.png';
 import { Link } from 'react-router-dom';
-import Nav from  './Nav'
+// import Nav from  './Nav'
 
 import '../css/Landing.css';
 
@@ -11,7 +11,7 @@ class Landing extends React.Component {
     render (){
         return (
             <div className="main-container">
-                <Nav />
+                {/* <Nav /> */}
                 <header className="">
                     <img src={logo} className="" alt="logo" />
                 </header>
@@ -34,9 +34,9 @@ class Landing extends React.Component {
                     </div>
                 </section>
 
-                <footer>
+                {/* <footer>
                     <Link to='/'><img src={home} className="" alt="home" /></Link>
-                </footer>
+                </footer> */}
             </div>
         )
     }
