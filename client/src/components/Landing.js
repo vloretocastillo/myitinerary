@@ -2,7 +2,8 @@ import React from 'react';
 import logo from '../assets/logo.png';
 import circle from '../assets/circle.png';
 import home from '../assets/home.png';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import Nav from  './Nav'
 
 import '../css/Landing.css';
 
@@ -10,6 +11,7 @@ class Landing extends React.Component {
     render (){
         return (
             <div className="main-container">
+                <Nav />
                 <header className="">
                     <img src={logo} className="" alt="logo" />
                 </header>

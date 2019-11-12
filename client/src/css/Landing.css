@@ -13,29 +13,29 @@ img {
 
 header {
     /* border: 0.5px solid red; */
-    padding-top: 12%;
+    padding-top: 9%;
 }
 
 .slogan {
     /* border: 0.5px solid red; */
     padding: 0 2%;
-    margin-top: 12%;
+    margin-top: 7%;
 }
 
 .call-to-action {
     /* border: 0.5px solid red; */
-    margin-top: 14%;
+    margin-top: 7%;
 }
 
 .call-to-action img {
     width: 25%;
-    margin-top: 5%;
+    margin-top: 1%;
     /* height: 50px; */
 }
 
 .links {
     /* border: 0.5px solid red; */
-    margin-top: 15%;
+    margin-top: 12%;
 }
 
 .links p {
@@ -49,7 +49,7 @@ header {
 
 footer {
     /* border: 0.5px solid red; */
-    margin-top: 10%;
+    margin-top: 3%;
     padding: 1%;
 }
 
