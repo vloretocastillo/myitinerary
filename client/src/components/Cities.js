@@ -1,9 +1,11 @@
 import React from 'react';
 // import home from '../assets/home.png';
 import { Link } from 'react-router-dom'
-import Itineraries from './Itineraries';
+// import Itineraries from './Itineraries';
 
 // import '../css/Cities.css';
+
+import { connect } from 'react-redux'
 
 class Cities extends React.Component {
    
@@ -41,6 +43,7 @@ class Cities extends React.Component {
     }
 
     render() {
+        console.log('from redux: ', this.props.cities)
         let cities = this.citiesToRender().map((el) => {
             return (
                 <li key={el._id}> 
@@ -64,4 +67,10 @@ class Cities extends React.Component {
     }
 }
 
-export default Cities;
+const mapStateToProps = (state) => {
+    return {
+        cities: state.cities
+    }
+}
+
+export default connect(mapStateToProps)(Cities);

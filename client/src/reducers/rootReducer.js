@@ -1,6 +1,6 @@
 
 const initState = {
-    cities: [],
+    cities: ['city1', 'city2'],
     itineraries: []
 }
 
@@ -8,4 +8,4 @@ const rootReducer = (state = initState, action) => {
     return state
 }
 
-module.exports = rootReducer
+export default rootReducer
