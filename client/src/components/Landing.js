@@ -22,7 +22,7 @@ class Landing extends React.Component {
 
                 <section className="call-to-action">
                     <p>Start Browsing</p>
-                    <img src={circle} className="" alt="circle arrow" />
+                    <Link to='/cities'><img src={circle} className="" alt="circle arrow" /></Link>
 
                 </section>
 

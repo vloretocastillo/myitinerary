@@ -94,17 +94,14 @@ const deleteOneItinerary = (req, res) => {
 }
 
 const retrieveAllItinerariesByCityName = (req, res) => {
-    
     itineraryModel.find({parentCityName : req.query.city })
     .then(files => {
         res.send(files)
     })
     .catch(err => console.log(err));
 }
+
 itineraries.get('/', (req,res) => retrieveAllItinerariesByCityName(req,res));
-
-
-
 
 itineraries.get('/all', (req,res) => retrieveAllItineraries(req,res));
 

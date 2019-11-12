@@ -49,7 +49,7 @@ class Itineraries extends React.Component {
             return (
                 <li key={el._id}> 
                     {el.title} 
-                    {/* <Link to={ `/itineraries?cityId=${el._id}`} >Itineraries</Link> */}
+                    <Link to={`/itinerary/${el._id}` }>See Details</Link>
                 </li>
             )
         });

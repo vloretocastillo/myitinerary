@@ -3,6 +3,7 @@ import Nav from  './components/Nav'
 import Landing from './components/Landing';
 import Cities from './components/Cities';
 import Itineraries from './components/Itineraries';
+import Itinerary from './components/Itinerary';
 import Footer from './components/Footer';
 
 
@@ -20,6 +21,7 @@ function App() {
             <Route exact path='/signup' component={Landing} />
             <Route exact path='/cities' component={Cities} />
             <Route path='/itineraries' component={Itineraries} />
+            <Route path='/itinerary' component={Itinerary} />
           </Switch>
           <Footer />
         </div>
