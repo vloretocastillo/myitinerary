@@ -1,12 +1,7 @@
 import React from 'react';
-// import home from '../assets/home.png';
 import { Link } from 'react-router-dom'
-// import Itineraries from './Itineraries';
-
 // import '../css/Cities.css';
-
 import { connect } from 'react-redux'
-
 import { retrieveCities } from '../actions/dataActions'
 
 class Cities extends React.Component {
@@ -75,7 +70,6 @@ class Cities extends React.Component {
 const mapStateToProps = (state) => {
     return {
         cities: state.data.cities,
-        // itineraries: state.data.itineraries
     }
 }
 

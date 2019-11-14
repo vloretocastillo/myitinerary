@@ -1,12 +1,7 @@
 import React from 'react';
-// import logo from '../assets/logo.png';
-// import circle from '../assets/circle.png';
-// import home from '../assets/home.png';
-// import { Link } from 'react-router-dom'
-
 // import '../css/Navbar.css';
-// import Navbar from 'react-bootstrap/Navbar'
-import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
+// import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
+import { Navbar, Nav } from 'react-bootstrap';
 
 
 class Nave extends React.Component {

@@ -1,9 +1,7 @@
 import React from 'react';
-import home from '../assets/home.png';
+// import home from '../assets/home.png';
 import { Link } from 'react-router-dom'
-
 // import '../css/Itineraries.css';
-
 import { connect } from 'react-redux'
 import { retrieveItineraries } from '../actions/dataActions'
 
@@ -11,9 +9,7 @@ class Itineraries extends React.Component {
    
     state = {
         itineraries : [],
-        // path : ''
     }
-  
 
     // fetchItineraries = async () => {
     //     const path = `${this.props.location.pathname + this.props.location.search}`
@@ -27,10 +23,7 @@ class Itineraries extends React.Component {
     // }
 
     componentDidMount() {
-        
-        // let path = `${this.props.location.pathname + this.props.location.search}`
-        let queryString = this.props.location.search
-        // this.setState({ path : path})
+                let queryString = this.props.location.search
         this.props.retrieveItineraries(queryString)
             .then((itineraries)=>{ this.setState({ itineraries: this.props.itineraries }) })
             .then(()=>{
@@ -65,13 +58,11 @@ class Itineraries extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        // cities: state.data.cities,
         itineraries: state.data.itineraries
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
-    
     return {
         retrieveItineraries: (queryString) => dispatch(retrieveItineraries(queryString))
     }

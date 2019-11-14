@@ -5,14 +5,14 @@ const initState = {
 
 const dataReducer = (state = initState, action) => {
 
-    if (action.type == 'RETRIEVE_CITIES') {
+    if (action.type === 'RETRIEVE_CITIES') {
         return {
             ...state,
             cities: action.cities
         }
     }
 
-    if (action.type == 'RETRIEVE_ITINERARIES') {
+    if (action.type === 'RETRIEVE_ITINERARIES') {
         return {
             ...state,
             itineraries: action.itineraries

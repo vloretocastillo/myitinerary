@@ -1,6 +1,6 @@
 import React from 'react';
 // import home from '../assets/home.png';
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 
 // import '../css/Itinerary.css';
 
