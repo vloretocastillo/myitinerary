@@ -3,7 +3,7 @@ import home from '../assets/home.png';
 import { Link } from 'react-router-dom';
 
 
-// import '../css/Footer.css';
+import '../css/Footer.css';
 
 function Footer() {
     return (

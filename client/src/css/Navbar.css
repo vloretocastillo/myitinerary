@@ -1,0 +1,13 @@
+.avatar {
+    width: 100%;
+    color: white;
+}
+
+.profile-img-link {
+    /* border: 1px solid red; */
+    width: 9%;
+}
+
+.profile-img-link:hover {
+    cursor: pointer;
+}

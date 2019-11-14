@@ -20,17 +20,24 @@ class Landing extends React.Component {
                 </section>
 
                 <section className="call-to-action">
-                    <p>Start Browsing</p>
+                    {/* <p>Start Browsing</p> */}
                     <Link to='/cities'><img src={circle} className="" alt="circle arrow" /></Link>
 
                 </section>
 
-                <section className="links">
+                {/* <section className="links">
                     <p>Want to buil your own MYtinerary</p>
                     <div className='links-wrapper'>
                         <Link to='/login'>Log in</Link>
                         <Link to='/signup'>Create Account</Link>
                     </div>
+                </section> */}
+
+                <section className="popular-itineraries">
+                    <p>Popular MYitineraries</p>
+                    <article>
+                        one here
+                    </article>
                 </section>
 
              
