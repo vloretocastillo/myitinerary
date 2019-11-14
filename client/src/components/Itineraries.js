@@ -23,7 +23,7 @@ class Itineraries extends React.Component {
     // }
 
     componentDidMount() {
-                let queryString = this.props.location.search
+        const queryString = this.props.location.search
         this.props.retrieveItineraries(queryString)
             .then((itineraries)=>{ this.setState({ itineraries: this.props.itineraries }) })
             .then(()=>{

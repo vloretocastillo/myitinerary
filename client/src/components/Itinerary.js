@@ -4,6 +4,9 @@ import React from 'react';
 
 // import '../css/Itinerary.css';
 
+import { connect } from 'react-redux'
+import { retrieveItinerary } from '../actions/dataActions'
+
 class Itinerary extends React.Component {
    
     state = {
@@ -11,20 +14,22 @@ class Itinerary extends React.Component {
     }
   
 
-    fetchItinerary = async () => {
-        const itineraryId = this.props.location.pathname.split('/').pop()
-        const fetchPath = `http://localhost:5000/api/itineraries/${itineraryId}`
-        const itinerary = await fetch(fetchPath, {
-                method: 'GET',
-            })
-            .then(res =>  res.json() )
-            .catch(err => console.error(err)) 
-        return itinerary
-    }
+    // fetchItinerary = async () => {
+    //     const itineraryId = this.props.location.pathname.split('/').pop()
+    //     const fetchPath = `http://localhost:5000/api/itineraries/${itineraryId}`
+    //     const itinerary = await fetch(fetchPath, {
+    //             method: 'GET',
+    //         })
+    //         .then(res =>  res.json() )
+    //         .catch(err => console.error(err)) 
+    //     return itinerary
+    // }
 
     
     componentDidMount() {
-        this.fetchItinerary()
+        // this.fetchItinerary()
+        const itineraryId = this.props.location.pathname.split('/').pop()
+        this.props.retrieveItinerary(itineraryId)
             .then((itinerary)=>{ this.setState({ itinerary: itinerary[0] }) })
            
     }
@@ -46,4 +51,19 @@ class Itinerary extends React.Component {
     }
 }
 
-export default Itinerary;
+// export default Itinerary;
+
+const mapStateToProps = (state) => {
+    return {
+        // itinerary: state.data.itineraries
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        retrieveItinerary: (itineraryId) => dispatch(retrieveItinerary(itineraryId))
+    }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Itinerary);

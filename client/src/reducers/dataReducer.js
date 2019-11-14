@@ -1,6 +1,7 @@
 const initState = {
-    cities: ['city1', 'city2'],
-    itineraries : ['itinerary1,', 'iti2']
+    cities: [],
+    itineraries : [],
+    itinerary: {}
 }
 
 const dataReducer = (state = initState, action) => {
@@ -16,6 +17,13 @@ const dataReducer = (state = initState, action) => {
         return {
             ...state,
             itineraries: action.itineraries
+        }
+    }
+
+    if (action.type === 'RETRIEVE_ITINERARY') {
+        return {
+            ...state,
+            itinerary: action.itinerary
         }
     }
     
