@@ -25,7 +25,7 @@ class Itineraries extends React.Component {
     componentDidMount() {
         const queryString = this.props.location.search
         this.props.retrieveItineraries(queryString)
-            .then((itineraries)=>{ this.setState({ itineraries: this.props.itineraries }) })
+            .then(()=>{ this.setState({ itineraries: this.props.itineraries }) })
             .then(()=>{
                 if (this.state.itineraries.length > 0) {
                     this.setState({ currentCity : this.props.itineraries[0].parentCityName})

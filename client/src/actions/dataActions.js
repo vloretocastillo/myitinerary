@@ -20,9 +20,6 @@ module.exports = {
 
     retrieveItineraries : (queryString) => {
 
-        // const path = `${this.props.location.pathname + this.props.location.search}`
-        // console.log(path)
-
         const fetchPath = `http://localhost:5000/api/itineraries${queryString}`
         return async (dispatch) => {
              await fetch(fetchPath, {
