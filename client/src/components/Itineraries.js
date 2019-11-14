@@ -4,30 +4,38 @@ import { Link } from 'react-router-dom'
 
 // import '../css/Itineraries.css';
 
+import { connect } from 'react-redux'
+import { retrieveItineraries } from '../actions/dataActions'
+
 class Itineraries extends React.Component {
    
     state = {
         itineraries : [],
+        // path : ''
     }
   
 
-    fetchItineraries = async () => {
-        const path = `${this.props.location.pathname + this.props.location.search}`
-        const fetchPath = `http://localhost:5000/api${path}`
-        const itineraries = await fetch(fetchPath, {
-                method: 'GET',
-            })
-            .then(res =>  res.json() )
-            .catch(err => console.error(err)) 
-        return itineraries
-    }
+    // fetchItineraries = async () => {
+    //     const path = `${this.props.location.pathname + this.props.location.search}`
+    //     const fetchPath = `http://localhost:5000/api${path}`
+    //     const itineraries = await fetch(fetchPath, {
+    //             method: 'GET',
+    //         })
+    //         .then(res =>  res.json() )
+    //         .catch(err => console.error(err)) 
+    //     return itineraries
+    // }
 
     componentDidMount() {
-        this.fetchItineraries()
-            .then((itineraries)=>{ this.setState({ itineraries }) })
+        
+        // let path = `${this.props.location.pathname + this.props.location.search}`
+        let queryString = this.props.location.search
+        // this.setState({ path : path})
+        this.props.retrieveItineraries(queryString)
+            .then((itineraries)=>{ this.setState({ itineraries: this.props.itineraries }) })
             .then(()=>{
                 if (this.state.itineraries.length > 0) {
-                    this.setState({ currentCity : this.state.itineraries[0].parentCityName})
+                    this.setState({ currentCity : this.props.itineraries[0].parentCityName})
                 }
             })
     }
@@ -54,4 +62,20 @@ class Itineraries extends React.Component {
     }
 }
 
-export default Itineraries;
+
+const mapStateToProps = (state) => {
+    return {
+        // cities: state.data.cities,
+        itineraries: state.data.itineraries
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    
+    return {
+        retrieveItineraries: (queryString) => dispatch(retrieveItineraries(queryString))
+    }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Itineraries);

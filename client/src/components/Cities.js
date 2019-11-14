@@ -75,7 +75,7 @@ class Cities extends React.Component {
 const mapStateToProps = (state) => {
     return {
         cities: state.data.cities,
-        itineraries: state.data.itineraries
+        // itineraries: state.data.itineraries
     }
 }
 

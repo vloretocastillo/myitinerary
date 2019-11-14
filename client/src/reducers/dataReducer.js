@@ -11,6 +11,13 @@ const dataReducer = (state = initState, action) => {
             cities: action.cities
         }
     }
+
+    if (action.type == 'RETRIEVE_ITINERARIES') {
+        return {
+            ...state,
+            itineraries: action.itineraries
+        }
+    }
     
     else return state
 }
