@@ -1,11 +1,12 @@
+import authReducer from './authReducer'
+import dataReducer from './dataReducer'
+import { combineReducers } from 'redux'
 
-const initState = {
-    cities: ['city1', 'city2'],
-    itineraries: []
-}
 
-const rootReducer = (state = initState, action) => {
-    return state
-}
+
+const rootReducer = combineReducers({
+    auth: authReducer,
+    data: dataReducer
+})
 
 export default rootReducer

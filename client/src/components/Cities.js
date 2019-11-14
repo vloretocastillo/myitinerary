@@ -7,6 +7,8 @@ import { Link } from 'react-router-dom'
 
 import { connect } from 'react-redux'
 
+import { retrieveCities } from '../actions/dataActions'
+
 class Cities extends React.Component {
    
     state = {
@@ -16,14 +18,14 @@ class Cities extends React.Component {
     }
   
 
-    fetchCities = async () => {
-        const cities = await fetch(`http://localhost:5000/api/cities/all`, {
-                method: 'GET',
-            })
-            .then(res =>  res.json() )
-            .catch(err => console.error(err)) 
-        return cities
-    }
+    // fetchCities = async () => {
+    //     const cities = await fetch(`http://localhost:5000/api/cities/all`, {
+    //             method: 'GET',
+    //         })
+    //         .then(res =>  res.json() )
+    //         .catch(err => console.error(err)) 
+    //     return cities
+    // }
 
     handleInputSearch = (e) => {
         let searchValue = e.target.value
@@ -39,11 +41,13 @@ class Cities extends React.Component {
     }
 
     componentDidMount() {
-        this.fetchCities().then((cities)=>{ this.setState({ cities }) }) 
+        // this.fetchCities().then((cities)=>{ this.setState({ cities }) }) 
+        this.props.retrieveCities()
+            .then(()=>{this.setState({ cities: this.props.cities }) })
     }
 
     render() {
-        console.log('from redux: ', this.props.cities)
+ 
         let cities = this.citiesToRender().map((el) => {
             return (
                 <li key={el._id}> 
@@ -52,6 +56,7 @@ class Cities extends React.Component {
                 </li>
             )
         });
+
 
         return (
             <div className="main-container">
@@ -69,8 +74,16 @@ class Cities extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        cities: state.cities
+        cities: state.data.cities,
+        itineraries: state.data.itineraries
     }
 }
 
-export default connect(mapStateToProps)(Cities);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        retrieveCities: () => dispatch(retrieveCities())
+    }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Cities);
