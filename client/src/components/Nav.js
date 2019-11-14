@@ -7,18 +7,32 @@ import { Link } from 'react-router-dom';
 
 
 class Nave extends React.Component {
+
+    state = {
+        displayAvatar : true
+    }
+
+    handleToggle = () => {
+        this.setState({ displayAvatar : !this.state.displayAvatar })
+    }
     render (){
+        let avatarProfile;
+        if (this.state.displayAvatar) {
+            avatarProfile = <Link to='/login' className='profile-img-link'><img src={profileAvatar} alt="" className='avatar' /></Link>
+        } 
         return (
             <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-                <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                <Navbar.Toggle aria-controls="responsive-navbar-nav" onClick={ () => this.handleToggle()}/>
+
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="mr-auto">
                         <Nav.Link href="/cities">Cities</Nav.Link>
                         <Nav.Link href="/">Home</Nav.Link>
                     </Nav>
-                    
                 </Navbar.Collapse>
-                <Link to='/login' className='profile-img-link'><img src={profileAvatar} alt="" className='avatar' /></Link>
+
+                {avatarProfile}
+                {/* <Link to='/login' className='profile-img-link'><img src={profileAvatar} alt="" className='avatar' /></Link> */}
             </Navbar>      
         )
     }

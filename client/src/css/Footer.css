@@ -2,4 +2,11 @@ footer {
     border: 1px solid pink;
     position: absolute;
     bottom: 0;
+    background-color: white;
+    /* margin-top: 3%; */
+    padding: 1%;
+}
+
+footer img {
+    width: 8%;
 }

@@ -1,11 +1,12 @@
 import React from 'react';
 import logo from '../assets/logo.png';
+import itinerary from '../assets/itinerary.jpg';
 import circle from '../assets/circle.png';
-// import home from '../assets/home.png';
 import { Link } from 'react-router-dom';
-// import Nav from  './Nav'
 
 import '../css/Landing.css';
+
+import { Card } from 'react-bootstrap'
 
 class Landing extends React.Component {
     render (){
@@ -35,9 +36,36 @@ class Landing extends React.Component {
 
                 <section className="popular-itineraries">
                     <p>Popular MYitineraries</p>
-                    <article>
-                        one here
-                    </article>
+
+                    
+                    <div className='itineraries-wrapper'>
+                        <Card className="text-white card">
+                            <Card.Img src={itinerary} alt="Card image" />
+                            <Card.ImgOverlay>
+                                <h1>Card Title</h1>
+                            </Card.ImgOverlay>
+                        </Card>
+                        <Card className="text-white card">
+                            <Card.Img src={itinerary} alt="Card image" />
+                            <Card.ImgOverlay>
+                                <h1>Card Title</h1>
+                            </Card.ImgOverlay>
+                        </Card>
+                        <Card className="text-white card">
+                            <Card.Img src={itinerary} alt="Card image" />
+                            <Card.ImgOverlay>
+                                <h1>Card Title</h1>
+                            </Card.ImgOverlay>
+                        </Card>
+                        <Card className="text-white card">
+                            <Card.Img src={itinerary} alt="Card image" className='oimg'/>
+                            <Card.ImgOverlay className='oimg'>
+                                <h1>Card Title</h1>
+                            </Card.ImgOverlay>
+                        </Card>
+                        
+                    </div>
+                    
                 </section>
 
              
