@@ -1,9 +1,6 @@
 footer {
-    /* border: 1px solid pink; */
-    /* position: absolute; */
-    /* bottom: 0; */
+    
     background-color: white;
-    /* margin-top: 3%; */
     padding: 2% 1.5%;
     z-index: 200;
     position: fixed;

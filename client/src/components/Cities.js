@@ -9,7 +9,7 @@ import { retrieveCities } from '../actions/dataActions'
 class Cities extends React.Component {
    
     state = {
-        cities: [],
+        // cities: [],
         filteredCities : [],
         searchValue : ''
     }
@@ -26,25 +26,28 @@ class Cities extends React.Component {
 
     handleInputSearch = (e) => {
         let searchValue = e.target.value
-        let filteredCities = this.state.cities.filter(el => el.name.toLowerCase().match("^" + searchValue.toLowerCase()) )
+        // let filteredCities = this.state.cities.filter(el => el.name.toLowerCase().match("^" + searchValue.toLowerCase()) )
+        let filteredCities = this.props.cities.filter(el => el.name.toLowerCase().match("^" + searchValue.toLowerCase()) )
+
         this.setState({ filteredCities, searchValue })
     }
 
     citiesToRender = () =>{
         let citiesList = []
         if (this.state.searchValue !== '') citiesList = this.state.filteredCities
-        else if (this.state.cities.length > 0) citiesList = this.state.cities
+        // else if (this.state.cities.length > 0) citiesList = this.state.cities
+        else if (this.props.cities.length > 0) citiesList = this.props.cities
         return citiesList
     }
 
     componentDidMount() {
         // this.fetchCities().then((cities)=>{ this.setState({ cities }) }) 
         this.props.retrieveCities()
-            .then(()=>{this.setState({ cities: this.props.cities }) })
+            // .then(()=>{this.setState({ cities: this.props.cities }) })
     }
 
     render() {
- 
+        
         let cities = this.citiesToRender().map((el) => {
             return (
                 <li key={el._id}> 
