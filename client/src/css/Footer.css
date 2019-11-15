@@ -1,10 +1,11 @@
 footer {
-    border: 1px solid pink;
-    position: absolute;
-    bottom: 0;
+    /* border: 1px solid pink; */
+    /* position: absolute; */
+    /* bottom: 0; */
     background-color: white;
     /* margin-top: 3%; */
-    padding: 1%;
+    padding: 1.5%;
+    /* z-index: 200; */
 }
 
 footer img {

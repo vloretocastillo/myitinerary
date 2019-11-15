@@ -3,10 +3,9 @@ import logo from '../assets/logo.png';
 import itinerary from '../assets/itinerary.jpg';
 import circle from '../assets/circle.png';
 import { Link } from 'react-router-dom';
-
+import { Card } from 'react-bootstrap'
 import '../css/Landing.css';
 
-import { Card } from 'react-bootstrap'
 
 class Landing extends React.Component {
     render (){
@@ -21,18 +20,9 @@ class Landing extends React.Component {
                 </section>
 
                 <section className="call-to-action">
-                    {/* <p>Start Browsing</p> */}
                     <Link to='/cities'><img src={circle} className="" alt="circle arrow" /></Link>
-
                 </section>
 
-                {/* <section className="links">
-                    <p>Want to buil your own MYtinerary</p>
-                    <div className='links-wrapper'>
-                        <Link to='/login'>Log in</Link>
-                        <Link to='/signup'>Create Account</Link>
-                    </div>
-                </section> */}
 
                 <section className="popular-itineraries">
                     <p>Popular MYitineraries</p>

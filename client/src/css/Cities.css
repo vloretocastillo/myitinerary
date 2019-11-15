@@ -1,0 +1,51 @@
+
+input {
+    /* border: rgb(143, 192, 221); */
+    font-size: 1.1rem;
+    width: 80%;
+    padding: 1%;
+    /* border-radius: 5px; */
+    margin-bottom: 3%;
+}
+
+input:focus {
+    background-color: rgb(143, 192, 221);
+    outline: none !important;
+    border: 1px solid rgb(143, 192, 221);
+    box-shadow: 0 0 10px rgb(143, 192, 221);
+}
+
+.cities-list-container {
+    /* border: 1px solid red; */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+li {
+    display: inline-block;
+    margin: 1% auto;
+}
+
+.card-cities-index {
+    width: 80vw;
+    height: 15vw;
+    overflow: hidden;
+    position: relative;
+    /* margin: 1% auto; */
+    
+}
+
+.card-cities-index h1 {
+    z-index: 100;
+    color: white;
+    position: relative;
+    top: 8px;
+}
+
+
+
+.card-cities-index img {
+    position: absolute;
+    width: 100%;
+}

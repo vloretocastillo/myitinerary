@@ -12,52 +12,27 @@ img {
 }
 
 header {
-    /* border: 0.5px solid red; */
     padding-top: 6%;
 }
 
 .slogan {
-    /* border: 0.5px solid red; */
     padding: 0 8%;
     margin-top: 3%;
     font-size: 0.8rem;
 }
 
-/* .call-to-action { */
-    /* border: 0.5px solid red; */
-    /* margin-top: 1%; */
-/* } */
 
 .call-to-action img {
     width: 16%;
-    /* margin-top: 1%; */
-    /* height: 50px; */
+    
 }
 
 .popular-itineraries {
-    /* border: 0.5px solid red; */
     margin-top: 3%;
     font-size: 0.9rem;
 }
 
-/* .links p {
-    margin-bottom: 3% ;
-} */
 
-/* .links-wrapper {
-    display: flex;
-    justify-content: space-evenly;
-} */
-
-/* footer {
-    border: 0.5px solid red;
-    margin-top: 3%;
-    padding: 1%;
-}
-
-footer img {
-    width: 12%;
-} */
 
 
 
@@ -71,10 +46,10 @@ footer img {
     width: 35%;
     margin: 1%;
 }
-
+/* 
 .oimg:hover {
     opacity: 0.5;
-}
+} */
 
 .card h1 {
     font-size: 1.5rem;

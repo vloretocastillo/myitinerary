@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
-// import '../css/Cities.css';
+import '../css/Cities.css';
+// import { Card } from 'react-bootstrap'
+import itinerary from '../assets/itinerary.jpg';
 import { connect } from 'react-redux'
 import { retrieveCities } from '../actions/dataActions'
 
@@ -46,8 +48,12 @@ class Cities extends React.Component {
         let cities = this.citiesToRender().map((el) => {
             return (
                 <li key={el._id}> 
-                    {el.name} - {el.country} 
-                    <Link to={ `/itineraries?city=${el.name}`} >Itineraries</Link>
+                    <Link to={ `/itineraries?city=${el.name}`} >
+                        <div className="card card-cities-index">
+                            <img src={itinerary} alt="card image"/>
+                            <h1>{el.name}</h1>
+                        </div>
+                    </Link>
                 </li>
             )
         });
@@ -58,7 +64,8 @@ class Cities extends React.Component {
                 <header className="">
                     <input onChange={this.handleInputSearch} placeholder='Filter...' type="text"/>
                 </header>
-                <ul>
+                
+                <ul className='cities-list-container'>
                     {cities}
                 </ul>
                 

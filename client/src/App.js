@@ -7,7 +7,7 @@ import Itinerary from './components/Itinerary';
 import Footer from './components/Footer';
 
 
-
+import './css/App.css'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
 
