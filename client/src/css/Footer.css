@@ -4,8 +4,10 @@ footer {
     /* bottom: 0; */
     background-color: white;
     /* margin-top: 3%; */
-    padding: 1.5%;
-    /* z-index: 200; */
+    padding: 2% 1.5%;
+    z-index: 200;
+    position: fixed;
+    bottom: 0;
 }
 
 footer img {
