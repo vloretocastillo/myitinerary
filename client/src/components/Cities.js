@@ -49,11 +49,12 @@ class Cities extends React.Component {
     render() {
         
         let cities = this.citiesToRender().map((el) => {
+            let img = el.img ? el.img : itinerary
             return (
                 <li key={el._id}> 
                     <Link to={ `/itineraries?city=${el.name}`} >
                         <div className="card card-cities-index">
-                            <img src={itinerary} alt="card image"/>
+                            <img src={img} alt="card image"/>
                             <h1>{el.name}</h1>
                         </div>
                     </Link>

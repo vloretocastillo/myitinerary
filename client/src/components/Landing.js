@@ -6,9 +6,30 @@ import { Link } from 'react-router-dom';
 import { Card } from 'react-bootstrap'
 import '../css/Landing.css';
 
+import { connect } from 'react-redux'
+import { retrieveSampleCities } from '../actions/dataActions'
+
 
 class Landing extends React.Component {
+
+    componentDidMount() {
+        this.props.retrieveSampleCities()
+    }
+
     render (){
+        // console.log(this.props.cities)
+
+        let cities = this.props.cities.map((el) => {
+            let img = el.img ? el.img : itinerary
+            return (
+                <Card className="text-white card" key={el._id}>
+                    <Card.Img src={img} alt="Card image" />
+                    <Card.ImgOverlay>
+                        <h1>{el.name}</h1>
+                    </Card.ImgOverlay>
+                </Card>
+            )
+        });
         return (
             <div className="main-container">
                 <header className="">
@@ -29,30 +50,7 @@ class Landing extends React.Component {
 
                     
                     <div className='itineraries-wrapper'>
-                        <Card className="text-white card">
-                            <Card.Img src={itinerary} alt="Card image" />
-                            <Card.ImgOverlay>
-                                <h1>Card Title</h1>
-                            </Card.ImgOverlay>
-                        </Card>
-                        <Card className="text-white card">
-                            <Card.Img src={itinerary} alt="Card image" />
-                            <Card.ImgOverlay>
-                                <h1>Card Title</h1>
-                            </Card.ImgOverlay>
-                        </Card>
-                        <Card className="text-white card">
-                            <Card.Img src={itinerary} alt="Card image" />
-                            <Card.ImgOverlay>
-                                <h1>Card Title</h1>
-                            </Card.ImgOverlay>
-                        </Card>
-                        <Card className="text-white card">
-                            <Card.Img src={itinerary} alt="Card image" className='oimg'/>
-                            <Card.ImgOverlay className='oimg'>
-                                <h1>Card Title</h1>
-                            </Card.ImgOverlay>
-                        </Card>
+                        {cities}
                         
                     </div>
                     
@@ -64,4 +62,18 @@ class Landing extends React.Component {
     }
 }
 
-export default Landing;
+const mapStateToProps = (state) => {
+    return {
+        cities: state.data.cities,
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        retrieveSampleCities: () => dispatch(retrieveSampleCities())
+    }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Landing);
+
