@@ -1,6 +1,6 @@
 import React from 'react';
 import logo from '../assets/logo.png';
-import itinerary from '../assets/itinerary.jpg';
+import itineraryDefault from '../assets/itinerary.jpg';
 import circle from '../assets/circle.png';
 import { Link } from 'react-router-dom';
 import { Card } from 'react-bootstrap'
@@ -20,9 +20,10 @@ class Landing extends React.Component {
         // console.log(this.props.cities)
 
         let cities = this.props.cities.map((el) => {
-            let img = el.img ? el.img : itinerary
+            let img = el.img ? el.img : itineraryDefault
             return (
                 <Card className="text-white card" key={el._id}>
+                    <div class='dark-cover'></div>
                     <Card.Img src={img} alt="Card image" />
                     <Card.ImgOverlay>
                         <h1>{el.name}</h1>
@@ -64,7 +65,7 @@ class Landing extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        cities: state.data.cities,
+        cities: state.citiesData.cities,
     }
 }
 

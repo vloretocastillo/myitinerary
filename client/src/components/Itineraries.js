@@ -58,7 +58,7 @@ class Itineraries extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        itineraries: state.data.itineraries
+        itineraries: state.itinerariesData.itineraries
     }
 }
 

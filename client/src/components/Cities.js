@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 import '../css/Cities.css';
-// import { Card } from 'react-bootstrap'
+import { Card } from 'react-bootstrap'
 import itinerary from '../assets/itinerary.jpg';
 import { connect } from 'react-redux'
 import { retrieveCities } from '../actions/dataActions'
@@ -48,17 +48,33 @@ class Cities extends React.Component {
 
     render() {
         
+        // let cities = this.citiesToRender().map((el) => {
+        //     let img = el.img ? el.img : itinerary
+        //     return (
+        //         <li key={el._id}> 
+        //             <div className='dark--cover'></div>
+        //             <Link to={ `/itineraries?city=${el.name}`} >
+        //                 <div className="card card-cities-index">
+        //                     <img src={img} alt="card image"/>
+        //                     <h1>{el.name}</h1>
+        //                 </div>
+        //             </Link>
+        //         </li>
+        //     )
+        // });
+
         let cities = this.citiesToRender().map((el) => {
             let img = el.img ? el.img : itinerary
             return (
-                <li key={el._id}> 
-                    <Link to={ `/itineraries?city=${el.name}`} >
-                        <div className="card card-cities-index">
-                            <img src={img} alt="card image"/>
-                            <h1>{el.name}</h1>
-                        </div>
-                    </Link>
-                </li>
+                <Link to={ `/itineraries?city=${el.name}`} >
+                <Card className="text-white card" key={el._id}>
+                    <div class='dark-cover'></div>
+                    <Card.Img src={img} alt="Card image" />
+                    <Card.ImgOverlay>
+                        <h1>{el.name}</h1>
+                    </Card.ImgOverlay>
+                </Card>
+                </Link>
             )
         });
 
@@ -80,7 +96,7 @@ class Cities extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        cities: state.data.cities,
+        cities: state.citiesData.cities,
     }
 }
 

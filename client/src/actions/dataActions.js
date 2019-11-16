@@ -66,7 +66,7 @@ module.exports = {
             .then(data => {
                 dispatch({
                     type: 'RETRIEVE_ITINERARY',
-                    itinerary: data
+                    itinerary: data[0]
                 })
             })
             .catch(err => console.error(err)) 

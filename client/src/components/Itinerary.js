@@ -1,18 +1,10 @@
 import React from 'react';
-// import home from '../assets/home.png';
-// import { Link } from 'react-router-dom'
 
-// import '../css/Itinerary.css';
 
 import { connect } from 'react-redux'
 import { retrieveItinerary } from '../actions/dataActions'
 
 class Itinerary extends React.Component {
-   
-    // state = {
-        // itinerary : {}
-    // }
-  
 
     // fetchItinerary = async () => {
     //     const itineraryId = this.props.location.pathname.split('/').pop()
@@ -30,34 +22,37 @@ class Itinerary extends React.Component {
         // this.fetchItinerary()
         const itineraryId = this.props.location.pathname.split('/').pop()
         this.props.retrieveItinerary(itineraryId)
-            // .then(()=>{ this.setState({ itinerary: this.props.itinerary }) })
-           
+  
     }
 
     render() {
-        
-        let itinerary = this.props.itinerary
 
-        return (
-            <div className="main-container">
-                {itinerary.title}
-                <ul>
-                    <li>{itinerary.parentCityName}</li>
-                    <li>more info</li>
-                </ul>
-                
-            </div>
-        )
+        // console.log('this.props.itinerary: ', this.props.itinerary)
+        
+        // if (this.props.itinerary) {
+            let itinerary = this.props.itinerary
+            return (
+                <div className="main-container">
+                    <h4>{itinerary.title}</h4>
+                    <ul>
+                        <li>{itinerary.parentCityName}</li>
+                        <li>more info</li>
+                    </ul>
+                    
+                </div>
+            )
+        // } else {
+        //     return <p>Loading...</p>
+        // }
     }
 }
 
-// export default Itinerary;
 
-// const mapStateToProps = (state) => {
-//     return {
-        // itinerary: state.data.itineraries
-//     }
-// }
+const mapStateToProps = (state) => {
+    return {
+        itinerary: state.itinerariesData.itinerary
+    }
+}
 
 const mapDispatchToProps = (dispatch) => {
     return {
@@ -66,4 +61,4 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 
-export default connect(null, mapDispatchToProps)(Itinerary);
+export default connect(mapStateToProps, mapDispatchToProps)(Itinerary);

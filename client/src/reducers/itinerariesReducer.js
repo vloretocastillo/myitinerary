@@ -1,17 +1,9 @@
 const initState = {
-    cities: [],
     itineraries : [],
     itinerary: {}
 }
 
-const dataReducer = (state = initState, action) => {
-
-    if (action.type === 'RETRIEVE_CITIES') {
-        return {
-            ...state,
-            cities: action.cities
-        }
-    }
+const itinerariesReducer = (state = initState, action) => {
 
     if (action.type === 'RETRIEVE_ITINERARIES') {
         return {
@@ -30,4 +22,4 @@ const dataReducer = (state = initState, action) => {
     else return state
 }
 
-export default dataReducer
+export default itinerariesReducer

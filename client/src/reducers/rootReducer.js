@@ -1,12 +1,14 @@
 import authReducer from './authReducer'
-import dataReducer from './dataReducer'
+import citiesReducer from './citiesReducer'
+import itinerariesReducer from './itinerariesReducer'
 import { combineReducers } from 'redux'
 
 
 
 const rootReducer = combineReducers({
     auth: authReducer,
-    data: dataReducer
+    citiesData: citiesReducer,
+    itinerariesData: itinerariesReducer
 })
 
 export default rootReducer
