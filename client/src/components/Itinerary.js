@@ -2,7 +2,7 @@ import React from 'react';
 
 
 import { connect } from 'react-redux'
-import { retrieveItinerary } from '../actions/dataActions'
+import { retrieveItinerary } from '../actions/itinerariesActions'
 
 class Itinerary extends React.Component {
 

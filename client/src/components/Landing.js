@@ -7,7 +7,7 @@ import { Card } from 'react-bootstrap'
 import '../css/Landing.css';
 
 import { connect } from 'react-redux'
-import { retrieveSampleCities } from '../actions/dataActions'
+import { retrieveSampleCities } from '../actions/citiesActions'
 
 
 class Landing extends React.Component {

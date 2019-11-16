@@ -4,7 +4,7 @@ import '../css/Cities.css';
 import { Card } from 'react-bootstrap'
 import itinerary from '../assets/itinerary.jpg';
 import { connect } from 'react-redux'
-import { retrieveCities } from '../actions/dataActions'
+import { retrieveCities } from '../actions/citiesActions'
 
 class Cities extends React.Component {
    

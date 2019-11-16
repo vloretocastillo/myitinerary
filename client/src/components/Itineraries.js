@@ -3,7 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom'
 // import '../css/Itineraries.css';
 import { connect } from 'react-redux'
-import { retrieveItineraries } from '../actions/dataActions'
+import { retrieveItineraries } from '../actions/itinerariesActions'
 
 class Itineraries extends React.Component {
    
