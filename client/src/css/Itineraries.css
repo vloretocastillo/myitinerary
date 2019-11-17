@@ -1,0 +1,32 @@
+.itinerary-list-container {
+    /* border: 1px solid red; */
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin: 0 auto;
+    margin-bottom: 3%;
+}
+
+.itinerary-list-container .avatar-wrapper {
+    background-color: grey;
+    width: 30%;
+    /* border: 1px solid blue; */
+    display: flex;
+    align-items: center;
+}
+
+.itinerary-list-container .avatar-wrapper img {
+    background-color: grey;
+    display: block;
+    margin: 0 auto;
+    width: 40%;
+}
+
+.itinerary-list-container .info-wrapper {
+    text-align: center;
+    width: 70%;
+}
+
+h2 {
+    margin-top: 5%;
+}

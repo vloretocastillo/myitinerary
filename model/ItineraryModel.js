@@ -13,17 +13,17 @@ const itinerarySchema = new mongoose.Schema({
     //     type: String,
     //     required: true,
     // },
-    // duration: {
-    //     type: Date,
-    //     required: true,
-    // },
+    duration: {
+        type: Number,
+        required: true,
+    },
     // price: {
     //     type: Number,
     //     required: true,
     // },
-    // hashtags: {
-    //     type: Array
-    // },
+    hashtags: {
+        type: [String]
+    },
     parentCityId: {
         type: String,
         required: true,

@@ -7,7 +7,7 @@ import { Card } from 'react-bootstrap'
 import '../css/Landing.css';
 
 import { connect } from 'react-redux'
-import { retrieveSampleCities } from '../actions/citiesActions'
+import { retrieveSampleCities } from '../actions/dataActions'
 
 
 class Landing extends React.Component {
@@ -17,15 +17,14 @@ class Landing extends React.Component {
     }
 
     render (){
-        // console.log(this.props.cities)
 
         let cities = this.props.cities.map((el) => {
             let img = el.img ? el.img : itineraryDefault
             return (
                 <Card className="text-white card" key={el._id}>
-                    <div class='dark-cover'></div>
+                    <div className='dark-cover'></div>
                     <Card.Img src={img} alt="Card image" />
-                    <Card.ImgOverlay>
+                    <Card.ImgOverlay className='title-wrapper'>
                         <h1>{el.name}</h1>
                     </Card.ImgOverlay>
                 </Card>

@@ -56,7 +56,6 @@ module.exports = {
     },
 
     retrieveItinerary : (itineraryId) => {
-        // const itineraryId = this.props.location.pathname.split('/').pop()
         const fetchPath = `http://localhost:5000/api/itineraries/${itineraryId}`
         return async (dispatch) => { 
             await fetch(fetchPath, {
@@ -77,11 +76,3 @@ module.exports = {
 
 }
 
-// export function fetchArticleDetails() {
-//     return function(dispatch) {
-//       return axios.get("https://api.myjson.com/bins/19dtxc")
-//         .then(({ data }) => {
-//         dispatch(setArticleDetails(data));
-//       });
-//     };
-//   }

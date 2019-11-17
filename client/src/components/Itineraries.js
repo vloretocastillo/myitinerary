@@ -1,51 +1,57 @@
 import React from 'react';
-// import home from '../assets/home.png';
 import { Link } from 'react-router-dom'
-// import '../css/Itineraries.css';
 import { connect } from 'react-redux'
 import { retrieveItineraries } from '../actions/itinerariesActions'
+import '../css/Itineraries.css';
+import profileAvatar from '../assets/white-avatarr.jpg'
+
 
 class Itineraries extends React.Component {
    
     state = {
-        itineraries : [],
+        currentCity: ''
     }
 
-    // fetchItineraries = async () => {
-    //     const path = `${this.props.location.pathname + this.props.location.search}`
-    //     const fetchPath = `http://localhost:5000/api${path}`
-    //     const itineraries = await fetch(fetchPath, {
-    //             method: 'GET',
-    //         })
-    //         .then(res =>  res.json() )
-    //         .catch(err => console.error(err)) 
-    //     return itineraries
-    // }
 
     componentDidMount() {
         const queryString = this.props.location.search
         this.props.retrieveItineraries(queryString)
-            .then(()=>{ this.setState({ itineraries: this.props.itineraries }) })
             .then(()=>{
-                if (this.state.itineraries.length > 0) {
-                    this.setState({ currentCity : this.props.itineraries[0].parentCityName})
-                }
+                if (this.props.itineraries.length > 0) this.setState({ currentCity : this.props.itineraries[0].parentCityName})
             })
     }
 
     render() {
 
-        let itineraries = this.state.itineraries.map((el) => {
+        // console.log(this.props.itineraries)
+
+        let itineraries = this.props.itineraries.map((el) => {
             return (
                 <li key={el._id}> 
-                    {el.title} 
-                    <Link to={`/itinerary/${el._id}` }>See Details</Link>
+                    <div className='itinerary-list-container'>
+                        <div className='avatar-wrapper'>
+                            <img  src={profileAvatar} alt='profile user photo'></img>
+                        </div>
+                        <div className='info-wrapper'>
+                            <h5> {el.title}  </h5>
+                            <p>Duration: {el.duration} hrs</p>
+                            <ul>
+                                <li>{el.hashtags[0] || '' }</li>
+                                <li>{el.hashtags[1] || '' }</li>
+                            </ul>
+                            <Link to={`/itinerary/${el._id}` }>See Details</Link>
+                        </div>
+                        
+                    </div>
                 </li>
             )
         });
         return (
             <div className="main-container">
-                {this.state.currentCity}
+                <header>
+                    <h2> {this.state.currentCity} </h2>
+                </header>
+                <p>Available MYtineraries:</p>
                 <ul>
                     {itineraries}
                 </ul>

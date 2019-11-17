@@ -43,21 +43,33 @@ header {
 }
 
 .card {
-    width: 35%;
+    width: 40%;
     margin: 1%;
     position: relative;
+
+
+    /* display: flex;
+    align-items: center; */
 }
+
+
 
 .itineraries-wrapper .card img {
     height: 100%;
 }
 
+.itineraries-wrapper .title-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* border: 1px solid red */
+}
+
 
 .card h1 {
-    font-size: 1.1rem;
+    font-size: 1rem;
     color: white;
-    position: relative;
-    top: 12px;
+    
 }
 
 .dark-cover {
