@@ -53,6 +53,25 @@ const retrieveOneCity = (req, res) => {
         });
 }
 
+const retrieveOneCityByName = (req, res) => {
+    // console.log('by name')
+    cityModel.find({name : req.params.name})  // .findById(req.params.id)
+        .then((file) => {
+            file = file.pop()
+            res.send(file);  
+        })
+        .catch(err => {
+            if(err.kind === 'ObjectId') {
+                return res.status(404).send({
+                    message: "Note not found with name " + req.params.name
+                });                
+            }
+            return res.status(500).send({
+                message: "Error retrieving note with name " + req.params.name
+            });
+        });
+}
+
 const updateOneCity = (req, res) => {
 
     
@@ -104,11 +123,14 @@ const deleteOneCity = (req, res) => {
     });
 }
 
+
 cities.get('/all', (req,res) => retrieveAllCities(req,res));
 
 cities.post('/', (req, res) => createOneCity(req,res));
 
 cities.get('/:id', (req, res) => retrieveOneCity(req, res));
+
+cities.get('/name/:name', (req, res) => retrieveOneCityByName(req, res));
 
 cities.put('/:id', (req, res) => updateOneCity(req, res));
 

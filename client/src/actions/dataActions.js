@@ -36,6 +36,24 @@ module.exports = {
         }
     },
 
+    retrieveOneCityByName : (cityName) => {
+        // console.log(`http://localhost:5000/api/cities/${id}`)
+        return async (dispatch) => {
+            return await fetch(`http://localhost:5000/api/cities/name/${cityName}`, {
+                    method: 'GET',
+                })
+                .then(res =>  res.json() )
+                .then(data =>{
+                    // console.log('inside data actions:', data[0])
+                    dispatch({
+                        type: 'RETRIEVE_ONE_CITY',
+                        city: data
+                    })
+                })
+                .catch(err => console.error(err)) 
+        }
+    },
+
 
 
     retrieveSampleCities : () => {

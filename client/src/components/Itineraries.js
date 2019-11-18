@@ -6,26 +6,26 @@ import '../css/Itineraries.css';
 import Itinerary from './Itinerary'
 
 
-import { retrieveOneCity } from '../actions/dataActions'
+import { retrieveOneCityByName } from '../actions/dataActions'
 
 class Itineraries extends React.Component {
    
     state = {
         currentItinerary: {},
-        itinerariesList : []
+        itinerariesList : [],
     }
-
     componentDidMount() {
-        // this.setState({ itinerariesList : [], currentItinerary : {} })
         const queryString = this.props.location.search
-        this.props.retrieveItineraries(queryString)
-            .then(()=>{ this.props.itineraries.length > 0 && this.generateItinerariesList() })
-            .then(()=> { this.props.itineraries.length > 0 && this.props.retrieveOneCity( this.props.itineraries[0].parentCityId ) })
+        const cityName = queryString.split('=').pop()
+        this.props.retrieveOneCityByName(cityName)
             .then(()=> {
-                console.log(this.state.itinerariesList)
+                this.props.retrieveItineraries(queryString)
+                    .then(()=>{ this.props.itineraries.length > 0 && this.generateItinerariesList() })  
             })
             .catch(err => console.log(err))
     }
+
+    componentWillUnmount(){ this.props.resetCurrentCity() }
 
     handleClickDisplayDetails = (e) => {
         let currentItinerary = this.props.itineraries.find((el) => el._id === e.target.id)
@@ -39,36 +39,9 @@ class Itineraries extends React.Component {
         this.setState({ itinerariesList })
     }
 
-    // generateItinerariesList = () => {
-    //     let itinerariesList = this.props.itineraries.map((el) => {
-    //         return (
-    //             <li key={el._id}> 
-    //                 <div className='itinerary-list-container'>
-    //                     <div className='avatar-wrapper'>
-    //                         <img  src={profileAvatar} alt='profile user photo'></img>
-    //                     </div>
-    //                     <div className='info-wrapper'>
-    //                         <h5> {el.title}  </h5>
-    //                         <p>Duration: {el.duration} hrs</p>
-    //                         <p>Price: {el.price} hrs</p>
-    //                         <ul>
-    //                             <li>{el.hashtags[0] || '' }</li>
-    //                             <li>{el.hashtags[1] || '' }</li>
-    //                         </ul>
-    //                     </div>
-    //                     <div className='link-to-details'>
-    //                         <button id={el._id} onClick={  (e) => this.handleClickDisplayDetails(e)   }>See Details</button>
-    //                     </div>
-    //                 </div>
-    //             </li>
-    //         )
-    //     })
-    //     this.setState({ itinerariesList })
-    // }
+    
     
     render() {
-
-
         let mainContent;
         if (Object.getOwnPropertyNames(this.state.currentItinerary).length === 0) {
             mainContent = (
@@ -94,7 +67,7 @@ class Itineraries extends React.Component {
                 <header className='itineraries-list-header'>
                     <h2> { this.props.city.name } </h2>
                     <div className='dark-coverr'></div>
-                    <img src={this.props.city.img} alt=""/>
+                    <img src={ this.props.city.img } alt=""/>
                 </header>
                 { mainContent }   
             </div>
@@ -113,9 +86,47 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         retrieveItineraries: (queryString) => dispatch(retrieveItineraries(queryString)),
-        retrieveOneCity: (id) => dispatch(retrieveOneCity(id))
+        retrieveOneCityByName: (id) => dispatch(retrieveOneCityByName(id)),
+        resetCurrentCity : () => dispatch({ type: 'RESET_CURRENT_CITY'})
     }
 }
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(Itineraries);
+
+
+
+
+
+
+
+
+
+
+
+// generateItinerariesList = () => {
+    //     let itinerariesList = this.props.itineraries.map((el) => {
+    //         return (
+    //             <li key={el._id}> 
+    //                 <div className='itinerary-list-container'>
+    //                     <div className='avatar-wrapper'>
+    //                         <img  src={profileAvatar} alt='profile user photo'></img>
+    //                     </div>
+    //                     <div className='info-wrapper'>
+    //                         <h5> {el.title}  </h5>
+    //                         <p>Duration: {el.duration} hrs</p>
+    //                         <p>Price: {el.price} hrs</p>
+    //                         <ul>
+    //                             <li>{el.hashtags[0] || '' }</li>
+    //                             <li>{el.hashtags[1] || '' }</li>
+    //                         </ul>
+    //                     </div>
+    //                     <div className='link-to-details'>
+    //                         <button id={el._id} onClick={  (e) => this.handleClickDisplayDetails(e)   }>See Details</button>
+    //                     </div>
+    //                 </div>
+    //             </li>
+    //         )
+    //     })
+    //     this.setState({ itinerariesList })
+    // }

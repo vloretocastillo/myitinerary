@@ -19,6 +19,13 @@ const citiesReducer = (state = initState, action) => {
         }
     }
 
+    if (action.type === 'RESET_CURRENT_CITY') {
+        return {
+            ...state,
+            city: {}
+        }
+    }
+
     
     
     else return state
