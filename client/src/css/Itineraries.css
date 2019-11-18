@@ -1,6 +1,46 @@
-.itinerary-list-container {
-    /* border: 1px solid red; */
+header.itineraries-list-header {
+    /* background-image: url('../assets/travelBackground.jpg'); */
+    /* background-image: url('../assets/travelBackground.jpg'); */
+    /* background-size: cover; */
+    height: 25vh;
     display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    margin-bottom: 4%;
+
+    position: relative
+    
+}
+
+header.itineraries-list-header img {
+    position: absolute;
+    width: 100%;
+}
+
+.dark-coverr {
+    /* position: absolute; */
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity:0.4;
+    z-index: 100;
+}
+
+header.itineraries-list-header h2 {
+    z-index: 200;
+    color: white
+}
+
+
+
+
+
+.itinerary-list-container {
+    border: 1px solid red;
+    display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     width: 80%;
     margin: 0 auto;
@@ -10,7 +50,7 @@
 .itinerary-list-container .avatar-wrapper {
     background-color: grey;
     width: 30%;
-    /* border: 1px solid blue; */
+    border: 1px solid blue;
     display: flex;
     align-items: center;
 }
@@ -25,8 +65,34 @@
 .itinerary-list-container .info-wrapper {
     text-align: center;
     width: 70%;
+    border: 1px solid black;
+    padding: 1%;
+    padding-top: 5%;
+    font-size: 0.8rem;
 }
 
-h2 {
+.itinerary-list-container .info-wrapper h5 {
+    font-size: 1.1rem;
+    margin-bottom: 7%;
+    
+}
+
+.itinerary-list-container .info-wrapper .subdetails-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    width: 100%;
+    border: 1px solid red
+}
+
+
+
+/* h2 {
     margin-top: 5%;
+} */
+
+
+.itinerary-list-container .link-to-details {
+    width: 100%;
+    border: 1px solid red
 }

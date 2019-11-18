@@ -17,10 +17,10 @@ const itinerarySchema = new mongoose.Schema({
         type: Number,
         required: true,
     },
-    // price: {
-    //     type: Number,
-    //     required: true,
-    // },
+    price: {
+        type: String,
+        required: true,
+    },
     hashtags: {
         type: [String]
     },

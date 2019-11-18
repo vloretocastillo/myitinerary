@@ -12,6 +12,8 @@ import { retrieveSampleCities } from '../actions/dataActions'
 
 class Landing extends React.Component {
 
+    
+
     componentDidMount() {
         this.props.retrieveSampleCities()
     }
@@ -22,11 +24,13 @@ class Landing extends React.Component {
             let img = el.img ? el.img : itineraryDefault
             return (
                 <Card className="text-white card" key={el._id}>
-                    <div className='dark-cover'></div>
-                    <Card.Img src={img} alt="Card image" />
-                    <Card.ImgOverlay className='title-wrapper'>
-                        <h1>{el.name}</h1>
-                    </Card.ImgOverlay>
+                    <Link to={ `/itineraries?city=${el.name}`}>
+                        <div className='dark-cover'></div>
+                        <Card.Img src={img} alt="Card image" />
+                        <Card.ImgOverlay className='title-wrapper'>
+                            <h1>{el.name}</h1>
+                        </Card.ImgOverlay>
+                    </Link>
                 </Card>
             )
         });

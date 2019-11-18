@@ -1,64 +1,59 @@
 import React from 'react';
+import profileAvatar from '../assets/white-avatarr.jpg'
 
 
-import { connect } from 'react-redux'
-import { retrieveItinerary } from '../actions/itinerariesActions'
+
+// import { connect } from 'react-redux'
+// import { retrieveItinerary } from '../actions/itinerariesActions'
 
 class Itinerary extends React.Component {
 
-    // fetchItinerary = async () => {
-    //     const itineraryId = this.props.location.pathname.split('/').pop()
-    //     const fetchPath = `http://localhost:5000/api/itineraries/${itineraryId}`
-    //     const itinerary = await fetch(fetchPath, {
-    //             method: 'GET',
-    //         })
-    //         .then(res =>  res.json() )
-    //         .catch(err => console.error(err)) 
-    //     return itinerary
-    // }
-
-    
-    componentDidMount() {
-        // this.fetchItinerary()
-        const itineraryId = this.props.location.pathname.split('/').pop()
-        this.props.retrieveItinerary(itineraryId)
-  
+    generateHashtagList = (hashtags) => {
+        return hashtags.map( (hashtag, index) => <span key={index}>{ hashtag }</span> )
     }
 
     render() {
-
-        // console.log('this.props.itinerary: ', this.props.itinerary)
-        
-        // if (this.props.itinerary) {
-            let itinerary = this.props.itinerary
-            return (
-                <div className="main-container">
-                    <h4>{itinerary.title}</h4>
-                    <ul>
-                        <li>{itinerary.parentCityName}</li>
-                        <li>more info</li>
-                    </ul>
-                    
+        let el = this.props.element
+        return (
+            <li > 
+                <div className='itinerary-list-container'>
+                    <div className='avatar-wrapper'>
+                        <img  src={profileAvatar} alt='profile user photo'></img>
+                    </div>
+                    <div className='info-wrapper'>
+                        <h5> {el.title}  </h5>
+                        <div className='subdetails-container'>
+                            <span>Likes: 4</span>
+                            <span>{el.duration} hrs</span>
+                            <span>{el.price} hrs</span>
+                        </div>
+                        <div className='subdetails-container'>
+                            {this.generateHashtagList(el.hashtags)}
+                        </div>
+                        
+                    </div>
+                    <div className='link-to-details'>
+                        <button id={el._id} onClick={  (e) => this.props.handleClickDisplayDetails(e)   }>See Details</button>
+                    </div>
                 </div>
-            )
-        // } else {
-        //     return <p>Loading...</p>
-        // }
+            </li>
+        )
+       
     }
 }
 
+export default Itinerary
+// const mapStateToProps = (state) => {
+//     return {
+//         itinerary: state.itinerariesData.itinerary
+//     }
+// }
 
-const mapStateToProps = (state) => {
-    return {
-        itinerary: state.itinerariesData.itinerary
-    }
-}
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        retrieveItinerary: (itineraryId) => dispatch(retrieveItinerary(itineraryId))
-    }
-}
+// const mapDispatchToProps = (dispatch) => {
+//     return {
+//         retrieveItinerary: (itineraryId) => dispatch(retrieveItinerary(itineraryId))
+//     }
+// }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Itinerary);
+// export default connect(mapStateToProps, mapDispatchToProps)(Itinerary);

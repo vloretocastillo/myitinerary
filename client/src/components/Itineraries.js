@@ -1,61 +1,102 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { retrieveItineraries } from '../actions/itinerariesActions'
 import '../css/Itineraries.css';
-import profileAvatar from '../assets/white-avatarr.jpg'
+// import profileAvatar from '../assets/white-avatarr.jpg'
+import Itinerary from './Itinerary'
 
+
+import { retrieveOneCity } from '../actions/dataActions'
 
 class Itineraries extends React.Component {
    
     state = {
-        currentCity: ''
+        currentItinerary: {},
+        itinerariesList : []
     }
-
 
     componentDidMount() {
+        // this.setState({ itinerariesList : [], currentItinerary : {} })
         const queryString = this.props.location.search
         this.props.retrieveItineraries(queryString)
-            .then(()=>{
-                if (this.props.itineraries.length > 0) this.setState({ currentCity : this.props.itineraries[0].parentCityName})
+            .then(()=>{ this.props.itineraries.length > 0 && this.generateItinerariesList() })
+            .then(()=> { this.props.itineraries.length > 0 && this.props.retrieveOneCity( this.props.itineraries[0].parentCityId ) })
+            .then(()=> {
+                console.log(this.state.itinerariesList)
             })
+            .catch(err => console.log(err))
     }
 
+    handleClickDisplayDetails = (e) => {
+        let currentItinerary = this.props.itineraries.find((el) => el._id === e.target.id)
+        if (currentItinerary) this.setState({ currentItinerary })
+    }
+
+    handleClickHideDetails = () => { this.setState({ currentItinerary : {} }) }
+
+    generateItinerariesList = () => {
+        let itinerariesList =  this.props.itineraries.map((el) => <Itinerary key={el._id} element={el} handleClickDisplayDetails={this.handleClickDisplayDetails}></Itinerary>)
+        this.setState({ itinerariesList })
+    }
+
+    // generateItinerariesList = () => {
+    //     let itinerariesList = this.props.itineraries.map((el) => {
+    //         return (
+    //             <li key={el._id}> 
+    //                 <div className='itinerary-list-container'>
+    //                     <div className='avatar-wrapper'>
+    //                         <img  src={profileAvatar} alt='profile user photo'></img>
+    //                     </div>
+    //                     <div className='info-wrapper'>
+    //                         <h5> {el.title}  </h5>
+    //                         <p>Duration: {el.duration} hrs</p>
+    //                         <p>Price: {el.price} hrs</p>
+    //                         <ul>
+    //                             <li>{el.hashtags[0] || '' }</li>
+    //                             <li>{el.hashtags[1] || '' }</li>
+    //                         </ul>
+    //                     </div>
+    //                     <div className='link-to-details'>
+    //                         <button id={el._id} onClick={  (e) => this.handleClickDisplayDetails(e)   }>See Details</button>
+    //                     </div>
+    //                 </div>
+    //             </li>
+    //         )
+    //     })
+    //     this.setState({ itinerariesList })
+    // }
+    
     render() {
 
-        // console.log(this.props.itineraries)
 
-        let itineraries = this.props.itineraries.map((el) => {
-            return (
-                <li key={el._id}> 
-                    <div className='itinerary-list-container'>
-                        <div className='avatar-wrapper'>
-                            <img  src={profileAvatar} alt='profile user photo'></img>
-                        </div>
-                        <div className='info-wrapper'>
-                            <h5> {el.title}  </h5>
-                            <p>Duration: {el.duration} hrs</p>
-                            <ul>
-                                <li>{el.hashtags[0] || '' }</li>
-                                <li>{el.hashtags[1] || '' }</li>
-                            </ul>
-                            <Link to={`/itinerary/${el._id}` }>See Details</Link>
-                        </div>
-                        
-                    </div>
-                </li>
+        let mainContent;
+        if (Object.getOwnPropertyNames(this.state.currentItinerary).length === 0) {
+            mainContent = (
+                <div>
+                    <p>Available MYtineraries:</p>
+                    <ul>
+                        { this.state.itinerariesList }
+                    </ul>
+                </div>
             )
-        });
+        } else {
+            mainContent = (
+            <div>
+                { this.state.currentItinerary.title }
+                <button  onClick={()=>{ this.handleClickHideDetails()} }>Back</button>
+            </div>
+            )
+        }
+
+        
         return (
             <div className="main-container">
-                <header>
-                    <h2> {this.state.currentCity} </h2>
+                <header className='itineraries-list-header'>
+                    <h2> { this.props.city.name } </h2>
+                    <div className='dark-coverr'></div>
+                    <img src={this.props.city.img} alt=""/>
                 </header>
-                <p>Available MYtineraries:</p>
-                <ul>
-                    {itineraries}
-                </ul>
-                
+                { mainContent }   
             </div>
         )
     }
@@ -64,13 +105,15 @@ class Itineraries extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        itineraries: state.itinerariesData.itineraries
+        itineraries: state.itinerariesData.itineraries,
+        city: state.citiesData.city
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        retrieveItineraries: (queryString) => dispatch(retrieveItineraries(queryString))
+        retrieveItineraries: (queryString) => dispatch(retrieveItineraries(queryString)),
+        retrieveOneCity: (id) => dispatch(retrieveOneCity(id))
     }
 }
 

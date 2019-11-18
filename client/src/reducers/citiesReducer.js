@@ -1,6 +1,6 @@
 const initState = {
     cities: [],
-    
+    city: {}
 }
 
 const citiesReducer = (state = initState, action) => {
@@ -9,6 +9,13 @@ const citiesReducer = (state = initState, action) => {
         return {
             ...state,
             cities: action.cities
+        }
+    }
+
+    if (action.type === 'RETRIEVE_ONE_CITY') {
+        return {
+            ...state,
+            city: action.city
         }
     }
 
