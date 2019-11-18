@@ -13,6 +13,8 @@ header.itineraries-list-header {
     
 }
 
+.main-container {padding-bottom: 15% ;}
+
 header.itineraries-list-header img {
     position: absolute;
     width: 100%;

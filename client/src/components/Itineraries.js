@@ -55,7 +55,7 @@ class Itineraries extends React.Component {
         } else {
             mainContent = (
             <div>
-                { this.state.currentItinerary.title }
+                <h2>{ this.state.currentItinerary.title }</h2>
                 <button  onClick={()=>{ this.handleClickHideDetails()} }>Back</button>
             </div>
             )
