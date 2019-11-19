@@ -2,9 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux'
 import { retrieveItineraries } from '../actions/itinerariesActions'
 import '../css/Itineraries.css';
-import profileAvatar from '../assets/white-avatarr.jpg'
+import profileAvatar from '../assets/black-avatarr.png'
 import Itinerary from './Itinerary'
 import Carousel from './Carousel'
+import Button from 'react-bootstrap/Button'
+
 
 
 import { retrieveOneCityByName } from '../actions/dataActions'
@@ -77,7 +79,7 @@ class Itineraries extends React.Component {
                         <Carousel activities={this.state.currentItinerary.activities}></Carousel>
                     </div>
                 </div>
-                <button  onClick={()=>{ this.handleClickHideDetails()} }>Back</button>
+                <Button className='btn-block btn-dark'  onClick={()=>{ this.handleClickHideDetails()} }>Back</Button>
             </div>
         )
     }

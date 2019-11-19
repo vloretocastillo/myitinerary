@@ -10,7 +10,7 @@ class CarouselComponent extends React.Component {
                 // console.log(activity)
                 return (
                     <Carousel.Item key={index}>
-                        <img className="d-block w-100" src="http://wrbbradio.org/wp-content/uploads/2016/10/grey-background-for-site11.jpg" alt="First slide" />
+                        <img className="d-block w-100" src="https://upload.wikimedia.org/wikipedia/commons/1/1e/A_blank_black_picture.jpg" alt="First slide" />
                         {/* <h3>{activity}</h3> */}
                         <Carousel.Caption>
                             <h3>{activity}</h3>

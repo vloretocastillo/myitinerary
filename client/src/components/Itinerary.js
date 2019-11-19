@@ -1,5 +1,6 @@
 import React from 'react';
-import profileAvatar from '../assets/white-avatarr.jpg'
+import profileAvatar from '../assets/black-avatarr.png'
+import Button from 'react-bootstrap/Button'
 
 
 
@@ -33,7 +34,7 @@ class Itinerary extends React.Component {
                         
                     </div>
                     <div className='link-to-details'>
-                        <button id={el._id} onClick={  (e) => this.props.handleClickDisplayDetails(e)   }>See Details</button>
+                        <Button className='btn-block btn-light'id={el._id} onClick={  (e) => this.props.handleClickDisplayDetails(e)   }>See Details</Button>
                     </div>
                 </div>
             </li>
