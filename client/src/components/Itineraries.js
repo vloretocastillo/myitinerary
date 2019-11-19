@@ -2,8 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux'
 import { retrieveItineraries } from '../actions/itinerariesActions'
 import '../css/Itineraries.css';
-// import profileAvatar from '../assets/white-avatarr.jpg'
+import profileAvatar from '../assets/white-avatarr.jpg'
 import Itinerary from './Itinerary'
+import Carousel from './Carousel'
 
 
 import { retrieveOneCityByName } from '../actions/dataActions'
@@ -35,8 +36,50 @@ class Itineraries extends React.Component {
     handleClickHideDetails = () => { this.setState({ currentItinerary : {} }) }
 
     generateItinerariesList = () => {
-        let itinerariesList =  this.props.itineraries.map((el) => <Itinerary key={el._id} element={el} handleClickDisplayDetails={this.handleClickDisplayDetails}></Itinerary>)
+        let itinerariesList =  this.props.itineraries.map((el) => <Itinerary key={el._id} generateHashtagList={this.generateHashtagList} element={el} handleClickDisplayDetails={this.handleClickDisplayDetails}></Itinerary>)
         this.setState({ itinerariesList })
+    }
+
+    generateHashtagList = (hashtags) => {
+        return hashtags.map( (hashtag, index) => <span key={index}>{ hashtag }</span> )
+    }
+
+    // generateActivitiesList = (activities) => {
+    //     return <Carousel activities={activities}/>
+    //     // return activities.map( (activity, index) => <span key={index}>{ activity }</span> )
+    // }
+
+    generateExtendedItinerary = () => {
+        return (
+            <div>
+                <h2>{ this.state.currentItinerary.title }</h2>
+                <div className='itinerary-list-container'>
+                    <div className='avatar-wrapper'>
+                        <img  src={profileAvatar} alt='profile user photo'></img>
+                    </div>
+                    <div className='info-wrapper'>
+                        
+                        <div className='subdetails-container'>
+                            <span>Likes: 4</span>
+                            <span>{this.state.currentItinerary.duration} hrs</span>
+                            <span>{this.state.currentItinerary.price} hrs</span>
+                        </div>
+                        <div className='subdetails-container'>
+                            {this.generateHashtagList(this.state.currentItinerary.hashtags)}
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div className='carousel-container'>
+                    {/* ACTIVITIES */}
+                    <div>
+                        <Carousel activities={this.state.currentItinerary.activities}></Carousel>
+                    </div>
+                </div>
+                <button  onClick={()=>{ this.handleClickHideDetails()} }>Back</button>
+            </div>
+        )
     }
 
     
@@ -53,12 +96,7 @@ class Itineraries extends React.Component {
                 </div>
             )
         } else {
-            mainContent = (
-            <div>
-                <h2>{ this.state.currentItinerary.title }</h2>
-                <button  onClick={()=>{ this.handleClickHideDetails()} }>Back</button>
-            </div>
-            )
+            mainContent = this.generateExtendedItinerary()
         }
 
         
@@ -70,6 +108,7 @@ class Itineraries extends React.Component {
                     <img src={ this.props.city.img } alt=""/>
                 </header>
                 { mainContent }   
+                
             </div>
         )
     }

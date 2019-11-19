@@ -8,9 +8,9 @@ import profileAvatar from '../assets/white-avatarr.jpg'
 
 class Itinerary extends React.Component {
 
-    generateHashtagList = (hashtags) => {
-        return hashtags.map( (hashtag, index) => <span key={index}>{ hashtag }</span> )
-    }
+    // generateHashtagList = (hashtags) => {
+    //     return hashtags.map( (hashtag, index) => <span key={index}>{ hashtag }</span> )
+    // }
 
     render() {
         let el = this.props.element
@@ -28,7 +28,7 @@ class Itinerary extends React.Component {
                             <span>{el.price} hrs</span>
                         </div>
                         <div className='subdetails-container'>
-                            {this.generateHashtagList(el.hashtags)}
+                            {this.props.generateHashtagList(el.hashtags)}
                         </div>
                         
                     </div>

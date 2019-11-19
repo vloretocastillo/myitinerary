@@ -31,6 +31,9 @@ const itinerarySchema = new mongoose.Schema({
     parentCityName : {
         type: String,
         required: true
+    },
+    activities: {
+        type: [String]
     }
 })
 
