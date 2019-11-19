@@ -81,6 +81,8 @@ h2 {
     display: block;
     margin: 0 auto;
     width: 50%;
+    /* position: relative; */
+    /* top: 12px; */
 }
 
 .itinerary-list-container .info-wrapper {
