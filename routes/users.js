@@ -13,12 +13,17 @@ const retrieveAllUsers = (req, res) => {
 
 const createOneUser = (req,res) => {
 
-    userModel.find({name : req.body.email})
+    userModel.find({email : req.body.email})
         .then((file)=>{
             if (file.length === 0) {
                 const newUser = new userModel({
-                    name: req.body.name,
+                    first_name: req.body.first_name,
+                    last_name: req.body.last_name,
                     country: req.body.country, 
+                    username: req.body.username, 
+                    password: req.body.password, 
+                    email: req.body.email, 
+                    
                 })
                 newUser.save()
                   .then(user => { res.send(user) })
@@ -29,9 +34,7 @@ const createOneUser = (req,res) => {
             }
         })
         .catch(err => { res.status(500).send("Server error")}) 
-
-        
-     
+    
 }
 
 const retrieveOneUser = (req, res) => {
@@ -53,16 +56,16 @@ const retrieveOneUser = (req, res) => {
 
 
 
-const updateOneUser = (req, res) => {
+// const updateOneUser = (req, res) => {
 
     
    
     
-}
+// }
 
-const deleteOneUser= (req, res) => {
+// const deleteOneUser= (req, res) => {
     
-}
+// }
 
 
 users.get('/all', (req,res) => retrieveAllUsers(req,res));
@@ -71,8 +74,8 @@ users.post('/', (req, res) => createOneUser(req,res));
 
 users.get('/:id', (req, res) => retrieveOneUser(req, res));
 
-users.put('/:id', (req, res) => updateOneUser(req, res));
+// users.put('/:id', (req, res) => updateOneUser(req, res));
 
-users.delete('/:id', (req, res) => deleteOneUser(req, res));
+// users.delete('/:id', (req, res) => deleteOneUser(req, res));
 
 module.exports = users;
