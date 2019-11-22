@@ -261,14 +261,17 @@ class Signup extends React.Component {
         ]
     }
 
-    
+    reavealstate = () => {
+        console.log(this.props.currentUser)
+    }
+
 
     validateUserInput = (userObj) => {
 
         if (userObj.first_name.length < 2 ) alert('First Name cannot be empty')
         else if (userObj.last_name.length < 2 ) alert('Last Name cannot be empty')
         else if (userObj.username.length < 2 ) alert('Username cannot be empty')
-        else if (userObj.country.value === 'false'  ) alert('Choose a country')
+        else if (userObj.country === 'false'  ) alert('Choose a country')
         else if (userObj.email.length < 2 || !(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(userObj.email)) ) alert('Email not valid')
         else if (userObj.password.length < 2 ) alert('password cannot be empty')
         else return true 
@@ -286,9 +289,10 @@ class Signup extends React.Component {
             email: e.target.email.value,
             password: e.target.password.value
         }
-        // console.log(newUser)
+        // console.log(newUser.country)
         if ( this.validateUserInput(newUser) ) {
             this.props.createOneUser(newUser)
+                // .then(()=> console.log('with then(): ', this.props.currentUser))
         }
     }
 
@@ -300,6 +304,7 @@ class Signup extends React.Component {
     render() {
         return (
             <div className='signup-container'>
+                <button onClick={()=>this.reavealstate()}>click me for state console.log</button>
                 <h2>Create Account</h2>
                 <Form className='' onSubmit={(e) => this.handleClick(e)}>
 
@@ -356,11 +361,11 @@ class Signup extends React.Component {
     }
 }
 
-// const mapStateToProps = (state) => {
-//     return {
-//         // cities: state.citiesData.cities,
-//     }
-// }
+const mapStateToProps = (state) => {
+    return {
+        currentUser: state.auth.currentUser,
+    }
+}
 
 const mapDispatchToProps = (dispatch) => {
     return {
@@ -369,4 +374,4 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 
-export default connect(null, mapDispatchToProps)(Signup);
+export default connect(mapStateToProps, mapDispatchToProps)(Signup);
