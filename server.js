@@ -11,15 +11,16 @@ const usersRouter = require('./routes/users');
 const db = require('./keys').mongoURI;
 const mongoose = require('mongoose');
 
-
-
-
 app.use(bodyParser.json());
+
 app.use(
   bodyParser.urlencoded({
     extended: true
   })
 );
+
+
+
 app.use(cors());
 app.use('/api/cities', citiesRouter)
 app.use('/api/itineraries', itinerariesRouter)
