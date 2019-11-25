@@ -10,6 +10,14 @@ const authReducer = (state = initState, action) => {
             currentUser: action.user
         }
     }
+
+    // if (action.type === 'LOGIN') {
+    //     return {
+    //         ...state,
+    //         currentUser: action.user
+    //     }
+    // }
+    
     else return state
 }
 

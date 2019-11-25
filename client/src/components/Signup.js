@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button'
 import  '../css/Signup.css'
 import { connect } from 'react-redux'
 import { createOneUser } from '../actions/usersActions'
-import { Redirect } from 'react-router-dom'
+// import { Redirect } from 'react-router-dom'
 
 
 class Signup extends React.Component {

@@ -2,15 +2,24 @@ import React from 'react';
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import  '../css/Signup.css'
+// import  '../css/Login.css'
+import { connect } from 'react-redux'
+
 
 
 class Login extends React.Component {
+
+    handleClick = (e) => {
+        e.preventDefault()
+        this.props.login(id)
+        
+    }
 
     
     render() {
         return (
             <div className='login-container'>
-            <Form>
+            <Form onSubmit={(e) => handleClick(e)}>
                 
                 <Form.Group controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
@@ -38,4 +47,17 @@ class Login extends React.Component {
     }
 }
 
-export default Login
+// const mapStateToProps = (state) => {
+//     return {
+//         currentUser: state.auth.currentUser,
+//     }
+// }
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        login: (id) => dispatch(login(id))
+    }
+}
+
+
+export default connect(null, mapDispatchToProps)(Login);

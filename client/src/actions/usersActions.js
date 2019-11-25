@@ -26,5 +26,29 @@ module.exports = {
                 })
                 .catch(err => console.error(err)) 
         }
+    },
+
+    login : (id) => {
+        return async (dispatch) => {
+            return await fetch(`/api/users/${id}`, {
+                    method: 'GET',
+                    // body: JSON.stringify(newUser),
+                    // headers: {
+                    //     'Content-Type': 'application/x-www-form-urlencoded'
+                    //     // 'Content-Type': 'application/json'
+                    // },
+                    // mode: 'no-cors'
+                })
+                .then(res => {
+                    return res.json()
+                })
+                .then(data =>{
+                    dispatch({
+                        type: 'LOGIN',
+                        user: data
+                    })
+                })
+                .catch(err => console.error(err)) 
+        }
     }
 }
