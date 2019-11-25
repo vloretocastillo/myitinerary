@@ -11,10 +11,9 @@ const retrieveAllUsers = (req, res) => {
         .catch(err => console.log(err));
 }
 
-const createOneUser = (req, res) => {
+const register = (req, res) => {
     
     req.body = JSON.parse(Object.keys(req.body))
-    // console.log(req.body)
     userModel.find( {$or:[{email: req.body.email},{username:req.body.username}]} )
         .then((file)=>{
             if (file.length === 0) {
@@ -39,22 +38,22 @@ const createOneUser = (req, res) => {
     
 }
 
-const retrieveOneUser = (req, res) => {
-    userModel.findById(req.params.id)
-        .then((file) => {
-            res.send(file);  
-        })
-        .catch(err => {
-            if(err.kind === 'ObjectId') {
-                return res.status(404).send({
-                    message: "User not found with id " + req.params.id
-                });                
-            }
-            return res.status(500).send({
-                message: "Error retrieving note with id " + req.params.id
-            });
-        });
-}
+// const retrieveOneUser = (req, res) => {
+//     userModel.findById(req.params.id)
+//         .then((file) => {
+//             res.send(file);  
+//         })
+//         .catch(err => {
+//             if(err.kind === 'ObjectId') {
+//                 return res.status(404).send({
+//                     message: "User not found with id " + req.params.id
+//                 });                
+//             }
+//             return res.status(500).send({
+//                 message: "Error retrieving note with id " + req.params.id
+//             });
+//         });
+// }
 
 
 
@@ -70,14 +69,12 @@ const retrieveOneUser = (req, res) => {
 // }
 
 
-users.get('/all', (req,res) => retrieveAllUsers(req,res));
+users.get('/all', (req,res) => retrieveAllUsers(req,res)); //!
+users.post('/register', (req, res) => register(req,res)); //!
+// users.post('/login', (req, res) => login(req,res)); //!
 
-users.post('/', (req, res) => createOneUser(req,res));
-
-users.get('/:id', (req, res) => retrieveOneUser(req, res));
-
+// users.get('/:id', (req, res) => retrieveOneUser(req, res));
 // users.put('/:id', (req, res) => updateOneUser(req, res));
-
 // users.delete('/:id', (req, res) => deleteOneUser(req, res));
 
 module.exports = users;

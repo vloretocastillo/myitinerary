@@ -5,7 +5,7 @@ module.exports = {
         // console.log(newUser)
         
         return async (dispatch) => {
-            return await fetch('/api/users', {
+            return await fetch('/api/users/register', {
                     method: 'POST',
                     body: JSON.stringify(newUser),
                     headers: {

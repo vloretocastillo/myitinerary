@@ -28,6 +28,7 @@ class Nave extends React.Component {
                     <Nav className="mr-auto">
                         <Nav.Link href="/cities">Cities</Nav.Link>
                         <Nav.Link href="/">Home</Nav.Link>
+                        <Nav.Link href="/signup">Sign Up</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
 
