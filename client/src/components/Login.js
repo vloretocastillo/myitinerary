@@ -1,12 +1,15 @@
 import React from 'react';
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+import  '../css/Signup.css'
+
 
 class Login extends React.Component {
 
     
     render() {
         return (
+            <div className='login-container'>
             <Form>
                 
                 <Form.Group controlId="formBasicEmail">
@@ -21,14 +24,15 @@ class Login extends React.Component {
                     <Form.Label>Password</Form.Label>
                     <Form.Control type="password" placeholder="Password" />
                 </Form.Group>
-                <Form.Group controlId="formBasicCheckbox">
+                {/* <Form.Group controlId="formBasicCheckbox">
                     <Form.Check type="checkbox" label="Check me out" />
-                </Form.Group>
+                </Form.Group> */}
 
                 <Button variant="primary" type="submit">
                     Submit
                 </Button>
             </Form>
+            </div>
         )
        
     }

@@ -4,6 +4,8 @@ import Button from 'react-bootstrap/Button'
 import  '../css/Signup.css'
 import { connect } from 'react-redux'
 import { createOneUser } from '../actions/usersActions'
+import { Redirect } from 'react-router-dom'
+
 
 class Signup extends React.Component {
 
@@ -300,7 +302,7 @@ class Signup extends React.Component {
     render() {
         return (
             <div className='signup-container'>
-                <button onClick={()=>this.reavealstate()}>click me for state console.log</button>
+                {/* <button onClick={()=>this.reavealstate()}>click me for state console.log</button> */}
                 <h2>Create Account</h2>
                 <Form className='' onSubmit={(e) => this.handleClick(e)}>
 
