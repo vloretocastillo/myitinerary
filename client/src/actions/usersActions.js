@@ -18,7 +18,7 @@ module.exports = {
                     return res.json()
                 })
                 .then(data =>{
-                    // console.log(data)
+                    // console.log('data in response.json()', data)
                     dispatch({
                         type: 'CREATE_ONE_USER',
                         user: data

@@ -280,7 +280,6 @@ class Signup extends React.Component {
 
     handleClick = (e) => {
         e.preventDefault()
-        // console.log(e.target.country.value)
         let newUser = {
             first_name : e.target.first_name.value,
             last_name: e.target.last_name.value,
@@ -289,11 +288,8 @@ class Signup extends React.Component {
             email: e.target.email.value,
             password: e.target.password.value
         }
-        // console.log(newUser.country)
-        if ( this.validateUserInput(newUser) ) {
-            this.props.createOneUser(newUser)
-                // .then(()=> console.log('with then(): ', this.props.currentUser))
-        }
+        if ( this.validateUserInput(newUser) ) this.props.createOneUser(newUser)
+        
     }
 
     generateSelectOptionsCountries = () => {
@@ -321,9 +317,7 @@ class Signup extends React.Component {
                     <Form.Group controlId="formBasicEmail">
                         <Form.Label>Email address</Form.Label>
                         <Form.Control type="email" placeholder="Enter email" name="email" id="email"/>
-                        {/* <Form.Text className="text-muted">
-                        We'll never share your email with anyone else.
-                        </Form.Text> */}
+                        
                     </Form.Group>
 
                     <Form.Group controlId="formBasicPassword">
@@ -336,15 +330,12 @@ class Signup extends React.Component {
                         <Form.Control type="password" placeholder="Password" name="password" id="password"/>
                     </Form.Group>
 
-                    {/* <Form.Group controlId="formBasicPassword">
-                        <Form.Label>Country</Form.Label>
-                        <Form.Control type="text" placeholder="Country" name="country" id="country"/>
-                    </Form.Group> */}
+                   
 
                     <Form.Group controlId="exampleForm.ControlSelect1">
                         <Form.Label>Country</Form.Label>
-                        <Form.Control as="select" name="country" id="country">
-                            <option value='false'>Choose a country...</option>
+                        <Form.Control as="select" name="country" id="country" className='select' >
+                            <option   value='false'>Choose a country...</option>
                             {this.generateSelectOptionsCountries()}
                         </Form.Control>
                     </Form.Group>

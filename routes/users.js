@@ -14,10 +14,9 @@ const retrieveAllUsers = (req, res) => {
 const createOneUser = (req, res) => {
     
     req.body = JSON.parse(Object.keys(req.body))
-    console.log(req.body)
+    // console.log(req.body)
     userModel.find( {$or:[{email: req.body.email},{username:req.body.username}]} )
         .then((file)=>{
-            // console.log('file: ', file)
             if (file.length === 0) {
                 // console.log('req.body.first_name: ', req.body.first_name)
                 const newUser = new userModel({
@@ -28,7 +27,6 @@ const createOneUser = (req, res) => {
                     password: req.body.password, 
                     email: req.body.email,    
                 })
-                // console.log('newUser: ', newUser)
                 newUser.save()
                   .then(user => { res.send(user) })
             } else {
