@@ -1,8 +1,8 @@
 module.exports = {
 
-    createOneUser : (newUser) => {
+    register : (newUser) => {
 
-        // console.log(newUser)
+        // console.log('inside register:', newUser)
         
         return async (dispatch) => {
             return await fetch('/api/users/register', {

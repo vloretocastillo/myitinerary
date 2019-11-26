@@ -10,6 +10,7 @@
   "author": "Valentina Loreto",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^3.0.7",
     "concurrently": "^5.0.0",
     "express": "^4.17.1",
     "mongoose": "^5.7.8",

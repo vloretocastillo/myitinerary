@@ -3,7 +3,7 @@ import Nav from  './components/Nav'
 import Landing from './components/Landing';
 import Cities from './components/Cities';
 import Itineraries from './components/Itineraries';
-import Itinerary from './components/Itinerary';
+// import Itinerary from './components/Itinerary';
 import Footer from './components/Footer';
 import Signup from './components/Signup';
 import Login from './components/Login';

@@ -3,8 +3,7 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import  '../css/Signup.css'
 import { connect } from 'react-redux'
-import { createOneUser } from '../actions/usersActions'
-// import { Redirect } from 'react-router-dom'
+import { register } from '../actions/usersActions'
 
 
 class Signup extends React.Component {
@@ -290,7 +289,7 @@ class Signup extends React.Component {
             email: e.target.email.value,
             password: e.target.password.value
         }
-        if ( this.validateUserInput(newUser) ) this.props.createOneUser(newUser)
+        if ( this.validateUserInput(newUser) ) this.props.register(newUser)
         
     }
 
@@ -306,7 +305,7 @@ class Signup extends React.Component {
                 <h2>Create Account</h2>
                 <Form className='' onSubmit={(e) => this.handleClick(e)}>
 
-                <Form.Group controlId="formBasicPassword">
+                <Form.Group >
                         <Form.Label>First Name</Form.Label>
                         <Form.Control type="text" placeholder="First Name" name="first_name" id="first_name" className='alert-inpu'/>
                     </Form.Group>
@@ -316,25 +315,25 @@ class Signup extends React.Component {
                         <Form.Control type="text" placeholder="Last Name" name="last_name" id="last_name"/>
                     </Form.Group>
                     
-                    <Form.Group controlId="formBasicEmail">
+                    <Form.Group >
                         <Form.Label>Email address</Form.Label>
                         <Form.Control type="email" placeholder="Enter email" name="email" id="email"/>
                         
                     </Form.Group>
 
-                    <Form.Group controlId="formBasicPassword">
+                    <Form.Group >
                         <Form.Label>Username</Form.Label>
                         <Form.Control type="text" placeholder="Username" name="username" id="username"/>
                     </Form.Group>
 
-                    <Form.Group controlId="formBasicPassword">
+                    <Form.Group >
                         <Form.Label>Password</Form.Label>
                         <Form.Control type="password" placeholder="Password" name="password" id="password"/>
                     </Form.Group>
 
                    
 
-                    <Form.Group controlId="exampleForm.ControlSelect1">
+                    <Form.Group >
                         <Form.Label>Country</Form.Label>
                         <Form.Control as="select" name="country" id="country" className='select' >
                             <option   value='false'>Choose a country...</option>
@@ -362,7 +361,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        createOneUser: (newUser) => dispatch(createOneUser(newUser))
+        register: (newUser) => dispatch(register(newUser))
     }
 }
 

@@ -33,7 +33,7 @@ class Nave extends React.Component {
                 </Navbar.Collapse>
 
                 {avatarProfile}
-                {/* <Link to='/login' className='profile-img-link'><img src={profileAvatar} alt="" className='avatar' /></Link> */}
+                
             </Navbar>      
         )
     }
