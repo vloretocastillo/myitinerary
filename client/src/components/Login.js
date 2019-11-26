@@ -13,8 +13,13 @@ class Login extends React.Component {
 
     handleClick = (e) => {
         e.preventDefault()
-        console.log(e.target.email.value, e.target.password.value)
-        // this.props.login(id)
+        // console.log(e.target.email.value, e.target.password.value)
+        let user = {
+            email : e.target.email.value,
+            password: e.target.password.value
+        }
+        console.log('about to send: ', user)
+        this.props.login(user)
         
     }
 
@@ -31,7 +36,7 @@ class Login extends React.Component {
                     We'll never share your email with anyone else.
                     </Form.Text>
                 </Form.Group>
-
+                
                 <Form.Group controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
                     <Form.Control type="password" placeholder="Password" name="password"/>
@@ -58,7 +63,7 @@ class Login extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        login: (id) => dispatch(login(id))
+        login: (user) => dispatch(login(user))
     }
 }
 
