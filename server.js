@@ -11,6 +11,11 @@ const usersRouter = require('./routes/users');
 const db = require('./keys').mongoURI;
 const mongoose = require('mongoose');
 
+const passport = require("passport");
+require("./passport");
+
+
+app.use(passport.initialize());
 app.use(bodyParser.json());
 
 app.use(

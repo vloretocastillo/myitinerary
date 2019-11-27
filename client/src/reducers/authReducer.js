@@ -4,7 +4,7 @@ const initState = {
 
 const authReducer = (state = initState, action) => {
 
-    if (action.type === 'CREATE_ONE_USER') {
+    if (action.type === 'REGISTER') {
         return {
             ...state,
             currentUser: action.user

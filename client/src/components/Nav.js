@@ -29,6 +29,7 @@ class Nave extends React.Component {
                         <Nav.Link href="/cities">Cities</Nav.Link>
                         <Nav.Link href="/">Home</Nav.Link>
                         <Nav.Link href="/signup">Sign Up</Nav.Link>
+                        <Nav.Link href="/login">Log in</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
 

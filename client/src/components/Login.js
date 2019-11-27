@@ -18,7 +18,7 @@ class Login extends React.Component {
             email : e.target.email.value,
             password: e.target.password.value
         }
-        console.log('about to send: ', user)
+        // console.log('about to send: ', user)
         this.props.login(user)
         
     }

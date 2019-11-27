@@ -20,7 +20,7 @@ module.exports = {
                 .then(data =>{
                     // console.log('data in response.json()', data)
                     dispatch({
-                        type: 'CREATE_ONE_USER',
+                        type: 'REGISTER',
                         user: data
                     })
                 })
@@ -29,7 +29,7 @@ module.exports = {
     },
 
     login : (user) => {
-        console.log('to send to fetch: ', user)
+        // console.log('to send to fetch: ', user)
         return async (dispatch) => {
             return await fetch('/api/users/login', {
                     method: 'POST',

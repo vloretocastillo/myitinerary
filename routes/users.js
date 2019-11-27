@@ -3,6 +3,8 @@ const users = require('express').Router();
 const userModel = require('../model/UserModel')
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
+const jwt = require("jsonwebtoken")
+
 
 
 const retrieveAllUsers = (req, res) => {
@@ -58,16 +60,7 @@ const register = (req, res) => {
             }
         })
         .catch(err => console.log(err)) 
-    })
-
-
-       
-
-
-   
-
-    
-    
+    })  
 }
 
 const login = (req, res) => {
@@ -83,14 +76,36 @@ const login = (req, res) => {
             } else {
                 bcrypt.compare(req.body.password, user.password, function (err, result) {
                     if (result == true) {
-                        // console.log('found')
-                        res.send({msg: 'correct match!'});
+                        // console.log('found'); // res.send({msg: 'correct match!'});
+
+                        const payload = {
+                            id: user._id,
+                            username: user.username,
+                            // avatarPicture: user.avatarPicture
+                        };
+                        const options = {expiresIn: 2592000};
+                        jwt.sign(
+                            payload,
+                            key.secretOrKey,
+                            options,
+                            (err, token) => {
+                                if(err){
+                                    res.json({
+                                        success: false,
+                                        token: "There was an error"
+                                    });
+                                } else {
+                                    res.json({
+                                        success: true,
+                                        token: token
+                                    });
+                                }
+                            }
+                        );
                     } else {
-                        // console.log('incorrect match')
                         res.send({msg : 'Incorrect password'});
-                        // res.redirect('/');
                     }
-                });
+                })
             }
         })
         .catch(err => console.log(err)) 
