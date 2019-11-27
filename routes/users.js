@@ -4,7 +4,7 @@ const userModel = require('../model/UserModel')
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const jwt = require("jsonwebtoken")
-
+const secretOrKey = require("../keys").secretOrKey
 
 
 const retrieveAllUsers = (req, res) => {
@@ -86,7 +86,7 @@ const login = (req, res) => {
                         const options = {expiresIn: 2592000};
                         jwt.sign(
                             payload,
-                            key.secretOrKey,
+                            secretOrKey,
                             options,
                             (err, token) => {
                                 if(err){
