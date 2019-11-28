@@ -32,7 +32,7 @@ const register = (req, res) => {
    
 
     bcrypt.hash(req.body.password, saltRounds, function (err,   hash) {
-        console.log(hash)
+        // console.log(hash)
         userModel.find( {$or:[{email: req.body.email},{username:req.body.username}]} )
         .then((file)=>{
             if (file.length === 0) {
@@ -55,7 +55,7 @@ const register = (req, res) => {
                     
             } else {
                 return res.send({
-                    message: "This user information already exists in database"
+                    msg: "This user information already exists in database"
                 });
             }
         })
@@ -84,24 +84,19 @@ const login = (req, res) => {
                             // avatarPicture: user.avatarPicture
                         };
                         const options = {expiresIn: 2592000};
-                        jwt.sign(
-                            payload,
-                            secretOrKey,
-                            options,
-                            (err, token) => {
-                                if(err){
-                                    res.json({
-                                        success: false,
-                                        token: "There was an error"
-                                    });
-                                } else {
-                                    res.json({
-                                        success: true,
-                                        token: token
-                                    });
-                                }
+                        jwt.sign( payload, secretOrKey, options, (err, token) => {
+                            if(err){
+                                res.json({
+                                    success: false,
+                                    token: "There was an error"
+                                })
+                            } else {
+                                res.json({
+                                    success: true,
+                                    token: token
+                                })
                             }
-                        );
+                        })
                     } else {
                         res.send({msg : 'Incorrect password'});
                     }

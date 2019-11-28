@@ -1,60 +1,76 @@
-module.exports = {
-
-    register : (newUser) => {
-
-        // console.log('inside register:', newUser)
-        
-        return async (dispatch) => {
-            return await fetch('/api/users/register', {
-                    method: 'POST',
-                    body: JSON.stringify(newUser),
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded'
-                        // 'Content-Type': 'application/json'
-                    },
-                    mode: 'no-cors'
-                })
-                .then(res => {
-                    return res.json()
-                })
-                .then(data =>{
-                    // console.log('data in response.json()', data)
+const login = (user) => {
+    // console.log('inside login user parameter:', user)
+    // console.log('about to post to api/users/login')
+    return async (dispatch) => {
+        return await fetch('/api/users/login', {
+                method: 'POST',
+                body: JSON.stringify(user),
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                mode: 'no-cors'
+            })
+            .then(res => {
+                // console.log('got the response adter loggin in succesfully')
+                return res.json()
+            })
+            
+            .then(data =>{
+                console.log('after converting to json: ', data)
+                if (data.msg) console.log(data.msg)
+                else if (data.token) {
+                    // console.log('from login this is the response data.token to be dispacthed : ', data.token)
                     dispatch({
-                        type: 'REGISTER',
-                        user: data
+                        type: 'LOGIN',
+                        token: data.token
                     })
-                })
-                .catch(err => console.error(err)) 
-        }
-    },
-
-    login : (user) => {
-        // console.log('to send to fetch: ', user)
-        return async (dispatch) => {
-            return await fetch('/api/users/login', {
-                    method: 'POST',
-                    body: JSON.stringify(user),
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded'
-                        // 'Content-Type': 'application/json'
-                    },
-                    mode: 'no-cors'
-                })
-                .then(res => {
-                    // res = res.json()
-                    // console.log('RESPONSE from fetch: ', res)
-                    return res.json()
-                })
-                .then(res => {
-                    console.log('RESPONSE from fetch: ', res)
-                })
-                // .then(data =>{
-                //     dispatch({
-                //         type: 'LOGIN',
-                //         user: data
-                //     })
-                // })
-                .catch(err => console.error(err)) 
-        }
+                }
+            })
+            
+            .catch(err => console.error(err)) 
     }
+}
+
+
+
+const register = (newUser) => {
+
+    // console.log('inside register:', newUser)
+
+    const originalPassword = newUser.password
+
+    // console.log('original password:', originalPassword)
+    
+    return async (dispatch) => {
+        return await fetch('/api/users/register', {
+                method: 'POST',
+                body: JSON.stringify(newUser),
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                mode: 'no-cors'
+            })
+            .then(res => {
+                return res.json()
+            })
+            .then(data =>{
+                if (data.msg) console.log(data.msg)
+                else {
+                    
+                    const user = {email : data.email, password : originalPassword}
+                    // console.log('user obj before dispatching to login:', user)
+                    
+                    dispatch(login(user))
+                }
+            })
+            .catch(err => console.error(err)) 
+    }
+}
+
+
+
+
+module.exports = {
+    login : login,
+    register : register
 }

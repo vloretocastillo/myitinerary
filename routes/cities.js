@@ -2,6 +2,8 @@
 const cities = require('express').Router();
 const cityModel = require('../model/CityModel')
 
+const passport = require("passport");
+
 
 const retrieveAllCities = (req, res) => {
     cityModel.find({})
@@ -122,7 +124,7 @@ const retrieveOneCityByName = (req, res) => {
 //         });
 //     });
 // }
-
+// passport.authenticate("jwt", { session: false })
 
 cities.get('/all', (req,res) => retrieveAllCities(req,res)); //!
 cities.post('/', (req, res) => createOneCity(req,res)); //!

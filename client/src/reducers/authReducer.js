@@ -1,22 +1,22 @@
 const initState = {
-    currentUser: {}
+    token: ""
 }
 
 const authReducer = (state = initState, action) => {
 
-    if (action.type === 'REGISTER') {
-        return {
-            ...state,
-            currentUser: action.user
-        }
-    }
-
-    // if (action.type === 'LOGIN') {
+    // if (action.type === 'REGISTER') {
     //     return {
     //         ...state,
-    //         currentUser: action.user
+    //         token: action.token
     //     }
     // }
+
+    if (action.type === 'LOGIN') {
+        return {
+            ...state,
+            token: action.token
+        }
+    }
     
     else return state
 }
