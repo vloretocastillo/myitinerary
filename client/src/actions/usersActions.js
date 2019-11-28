@@ -16,7 +16,7 @@ const login = (user) => {
             })
             
             .then(data =>{
-                console.log('after converting to json: ', data)
+                // console.log('after converting to json: ', data)
                 if (data.msg) console.log(data.msg)
                 else if (data.token) {
                     // console.log('from login this is the response data.token to be dispacthed : ', data.token)
@@ -26,7 +26,9 @@ const login = (user) => {
                     })
                 }
             })
-            
+            // .then(()=>{
+            //     console.log('after dispatching LOGIN and hopefully having changed the state token')
+            // })
             .catch(err => console.error(err)) 
     }
 }
@@ -56,10 +58,8 @@ const register = (newUser) => {
             .then(data =>{
                 if (data.msg) console.log(data.msg)
                 else {
-                    
                     const user = {email : data.email, password : originalPassword}
                     // console.log('user obj before dispatching to login:', user)
-                    
                     dispatch(login(user))
                 }
             })

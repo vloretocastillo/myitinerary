@@ -20,8 +20,10 @@ class Login extends React.Component {
         }
         // console.log('about to send: ', user)
         this.props.login(user)
-        
+            // .then(() => console.log('after this.props.login(user) TOKEN:', this.props.token)) 
     }
+
+
 
     
     render() {
@@ -41,9 +43,7 @@ class Login extends React.Component {
                     <Form.Label>Password</Form.Label>
                     <Form.Control type="password" placeholder="Password" name="password"/>
                 </Form.Group>
-                {/* <Form.Group controlId="formBasicCheckbox">
-                    <Form.Check type="checkbox" label="Check me out" />
-                </Form.Group> */}
+                
 
                 <Button variant="primary" type="submit">
                     Submit
@@ -57,7 +57,7 @@ class Login extends React.Component {
 
 // const mapStateToProps = (state) => {
 //     return {
-//         currentUser: state.auth.currentUser,
+//         token: state.auth.token,
 //     }
 // }
 
