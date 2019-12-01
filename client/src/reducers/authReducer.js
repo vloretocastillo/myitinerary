@@ -1,5 +1,5 @@
 const initState = {
-    token: ''
+    currentUser: {}
 }
 
 const authReducer = (state = initState, action) => {
@@ -9,14 +9,14 @@ const authReducer = (state = initState, action) => {
     if (action.type === 'LOGIN') {
         return {
             ...state,
-            token: action.token
+            currentUser: action.currentUser
         }
     }
 
     if (action.type === 'LOGOUT') {
         return {
             ...state,
-            token: ''
+            currentUser: {}
         }
     }
     

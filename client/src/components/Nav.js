@@ -4,6 +4,7 @@ import '../css/Navbar.css';
 // import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 import { Navbar, Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+// import { connect } from 'react-redux'
 
 
 class Nave extends React.Component {
@@ -11,6 +12,10 @@ class Nave extends React.Component {
     state = {
         displayAvatar : true
     }
+
+    // componentDidMount () {
+    //     if (localStorage.token)
+    // }
 
     handleToggle = () => {
         this.setState({ displayAvatar : !this.state.displayAvatar })
@@ -41,3 +46,10 @@ class Nave extends React.Component {
 }
 
 export default Nave;
+
+// const mapStateToProps = (state) => {
+//     return {
+//         currentUser: state.auth.currentUser,
+//     }
+// }
+// export default connect(mapStateToProps)(Nave);

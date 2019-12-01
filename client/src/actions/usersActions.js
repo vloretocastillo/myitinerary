@@ -16,13 +16,14 @@ const login = (user) => {
             })
             
             .then(data =>{
-                // console.log('after converting to json: ', data)
+                console.log('after converting to json the response: ', data)
                 if (data.msg) console.log(data.msg)
                 else if (data.token) {
                     // console.log('from login this is the response data.token to be dispacthed : ', data.token)
+                    localStorage.setItem('token', data.token)
                     dispatch({
                         type: 'LOGIN',
-                        token: data.token
+                        currentUser: user
                     })
                 }
             })

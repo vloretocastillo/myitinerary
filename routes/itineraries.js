@@ -1,6 +1,8 @@
 
 const itineraries = require('express').Router();
 const itineraryModel = require('../model/ItineraryModel')
+const passport = require("passport");
+
 
 const retrieveAllItineraries = (req, res) => {
     itineraryModel.find({})
@@ -101,6 +103,10 @@ const retrieveAllItinerariesByCityName = (req, res) => {
     .catch(err => console.log(err));
 }
 
+itineraries.get('/favorites', passport.authenticate('jwt', {session : false}), (req, res) => {
+    res.send('protected')
+});
+
 itineraries.get('/', (req,res) => retrieveAllItinerariesByCityName(req,res));
 itineraries.get('/all/:cityId', (req,res) => retrieveAllItinerariesByCity(req,res));
 itineraries.get('/all', (req,res) => retrieveAllItineraries(req,res)); //!
@@ -109,5 +115,9 @@ itineraries.get('/:id', (req, res) => retrieveOneItinerary(req, res));
 
 // itineraries.put('/:id', (req, res) => updateOneItinerary(req, res));
 // itineraries.delete('/:id', (req, res) => deleteOneItinerary(req, res));
+
+
+
+
 
 module.exports = itineraries;

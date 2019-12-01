@@ -65,24 +65,18 @@ const register = (req, res) => {
 
 const login = (req, res) => {
     req.body = JSON.parse(Object.keys(req.body))
-    // console.log('body:', req.body)
     userModel.findOne({ email: req.body.email })
         
         .then( (user) => {
-            // console.log(user)
             if (!user) {
-                // console.log('not found')
                 res.send({msg: 'user not found'});
             } else {
                 bcrypt.compare(req.body.password, user.password, function (err, result) {
                     if (result == true) {
-                        // console.log('found'); // res.send({msg: 'correct match!'});
-
                         const payload = {
                             id: user._id,
                             username: user.username,
-                            // avatarPicture: user.avatarPicture
-                        };
+                        }
                         const options = {expiresIn: 2592000};
                         jwt.sign( payload, secretOrKey, options, (err, token) => {
                             if(err){
@@ -93,7 +87,8 @@ const login = (req, res) => {
                             } else {
                                 res.json({
                                     success: true,
-                                    token: token
+                                    token: token,
+                                    user : user
                                 })
                             }
                         })

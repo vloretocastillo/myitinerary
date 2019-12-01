@@ -6,6 +6,7 @@ const passport = require("passport");
 
 
 const retrieveAllCities = (req, res) => {
+    console.log('req.query: ', req.query.auth_token)
     cityModel.find({})
     .then(files => {
         res.send(files)
