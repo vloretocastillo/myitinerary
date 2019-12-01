@@ -58,15 +58,15 @@ module.exports = {
 
     retrieveSampleCities : () => {
         // console.log('from retrieveSampleCities', localStorage.token)
-        console.log(`Bearer ${localStorage.token}`)
+        // console.log(`Bearer ${localStorage.token}`)
         return async (dispatch) => {
             return await fetch('http://localhost:5000/api/cities/all', {
                     method: 'GET',
-                    headers: { Authorization: 'Bearer ' + localStorage.token }
+                    // headers: { Authorization: 'Bearer ' + localStorage.token }
                 })
                 .then(res =>  res.json() )
                 .then(data =>{
-                    console.log('data:', data)
+                    // console.log('data:', data)
                     dispatch({
                         type: 'RETRIEVE_CITIES',
                         cities: data.slice(0,4)

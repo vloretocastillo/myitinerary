@@ -13,6 +13,13 @@ const authReducer = (state = initState, action) => {
         }
     }
 
+    if (action.type === 'SET_CURRENT_USER') {
+        return {
+            ...state,
+            currentUser: action.currentUser
+        }
+    }
+
     if (action.type === 'LOGOUT') {
         return {
             ...state,

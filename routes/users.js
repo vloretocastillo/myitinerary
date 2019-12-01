@@ -121,6 +121,30 @@ const login = (req, res) => {
 
 
 
+users.get('/currentuser', (req,res) => {
+    // console.log(req.query)
+    jwt.verify(req.query.auth_token, secretOrKey, (err, decodedToken) => {
+        if(err) { /* handle token err */ }
+        else {
+            // res.send({id: decodedToken.id})
+            // console.log(decodedToken.id)
+            userModel.findById(decodedToken.id)
+                .then((file) => {
+                    res.send(file);  
+                })
+                .catch(err => {
+                    if(err.kind === 'ObjectId') {
+                        return res.status(404).send({
+                            message: "User not found with id " + decodedToken.id
+                        });                
+                    }
+                    return res.status(500).send({
+                        message: "Error retrieving note with id " + decodedToken.id
+                    });
+                });
+        }
+    });
+}); 
 
 
 users.get('/all', (req,res) => retrieveAllUsers(req,res)); //!
@@ -128,6 +152,7 @@ users.post('/register', (req, res) => register(req,res)); //!
 users.post('/login', (req, res) => login(req,res)); //!
 
 // users.get('/:id', (req, res) => retrieveOneUser(req, res));
+
 // users.put('/:id', (req, res) => updateOneUser(req, res));
 // users.delete('/:id', (req, res) => deleteOneUser(req, res));
 

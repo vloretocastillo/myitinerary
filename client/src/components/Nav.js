@@ -4,7 +4,9 @@ import '../css/Navbar.css';
 // import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 import { Navbar, Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-// import { connect } from 'react-redux'
+import { connect } from 'react-redux'
+import { getCurrentUser } from '../actions/usersActions'
+
 
 
 class Nave extends React.Component {
@@ -13,9 +15,16 @@ class Nave extends React.Component {
         displayAvatar : true
     }
 
-    // componentDidMount () {
-    //     if (localStorage.token)
-    // }
+    componentDidMount () {
+
+        if (localStorage.token ) {
+            // console.log('theres a token', localStorage.token)
+            // console.log('theres a ccc user', this.props.currentUser)
+            this.props.getCurrentUser(localStorage.token)
+        }
+        // if (localStorage.token) get the user information and update the current user in the state
+        // ask if there's a current user and if so, display the avatar picture that will take me to the user profile page -- which will be protected 
+    }
 
     handleToggle = () => {
         this.setState({ displayAvatar : !this.state.displayAvatar })
@@ -45,11 +54,20 @@ class Nave extends React.Component {
     }
 }
 
-export default Nave;
+// export default Nave;
 
-// const mapStateToProps = (state) => {
-//     return {
-//         currentUser: state.auth.currentUser,
-//     }
-// }
-// export default connect(mapStateToProps)(Nave);
+const mapStateToProps = (state) => {
+    return {
+        currentUser: state.auth.currentUser
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        getCurrentUser: (token) => dispatch(getCurrentUser(token))
+        // login: (user) => dispatch(login(user))
+    }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Nave);
