@@ -10,29 +10,55 @@ import Login from './components/Login';
 
 
 import './css/App.css'
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
+
+import { connect } from 'react-redux'
 
 
 
+class App extends React.Component {
+  
+  render () {
+    return (
+      <BrowserRouter>
+          <div className="App">
+            <Nav />
+            <Switch>
+              <Route exact path='/' component={Landing} />
+\              <Route exact path='/cities' component={Cities} />
+              <Route path='/itineraries' component={Itineraries} />
 
+             
 
-function App() {
-  return (
-    <BrowserRouter>
-        <div className="App">
-          <Nav />
-          <Switch>
-            <Route exact path='/' component={Landing} />
-            <Route exact path='/login' component={Login} />
-            <Route exact path='/signup' component={Signup} />
-            <Route exact path='/cities' component={Cities} />
-            <Route path='/itineraries' component={Itineraries} />
-            {/* <Route path='/itinerary' component={Itinerary} /> */}
-          </Switch>
-          <Footer />
-        </div>
-    </BrowserRouter>
-  );
+              <Route exact path="/login" component={Login} >
+                { this.props.currentUser.first_name ? <Redirect to="/" /> : false }
+              </Route>
+
+              <Route exact path="/signup" component={Signup} >
+                { this.props.currentUser.first_name ? <Redirect to="/" /> : false }
+              </Route>
+
+            </Switch>
+            <Footer />
+          </div>
+      </BrowserRouter>
+    )
+  }
 }
 
-export default App;
+// export default App;
+
+const mapStateToProps = (state) => {
+  return {
+      currentUser: state.auth.currentUser
+  }
+}
+
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//       getCurrentUser: (token) => dispatch(getCurrentUser(token))
+//   }
+// }
+
+
+export default connect(mapStateToProps)(App);
