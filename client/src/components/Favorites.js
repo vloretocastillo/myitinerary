@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux'
-// import { retrieveItineraries } from '../actions/itinerariesActions'
+import { retrieveFavoriteItineraries } from '../actions/itinerariesActions'
 // import '../css/Itineraries.css';
 // import profileAvatar from '../assets/black-avatarr.png'
 // import Itinerary from './Itinerary'
@@ -11,18 +11,19 @@ import { connect } from 'react-redux'
 class Favorites extends React.Component {
    
     state = {
-        
+    }
+
+    getFavorites = () => {
+        this.props.retrieveFavoriteItineraries(this.props.currentUser.favorites)
+            
     }
     
 
     render() {
-        
-
-        
         return (
             <div className="main-container">
                 Favs
-                
+                <button onClick={()=> { this.getFavorites()} }>Get Favorites</button>
             </div>
         )
     }
@@ -31,21 +32,19 @@ class Favorites extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        // itineraries: state.itinerariesData.itineraries,
-        // city: state.citiesData.city
+        currentUser: state.auth.currentUser,
     }
 }
 
-// const mapDispatchToProps = (dispatch) => {
-//     return {
-//         retrieveItineraries: (queryString) => dispatch(retrieveItineraries(queryString)),
-//         retrieveOneCityByName: (id) => dispatch(retrieveOneCityByName(id)),
-//         resetCurrentCity : () => dispatch({ type: 'RESET_CURRENT_CITY'})
-//     }
-// }
+const mapDispatchToProps = (dispatch) => {
+    return {
+        retrieveFavoriteItineraries: (ids) => dispatch(retrieveFavoriteItineraries(ids)),
+        
+    }
+}
 
 
-export default connect(mapStateToProps)(Favorites);
+export default connect(mapStateToProps, mapDispatchToProps)(Favorites);
 
 
 

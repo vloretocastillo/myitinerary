@@ -48,52 +48,8 @@ const retrieveOneItinerary = (req, res) => {
         });
 }
 
-// const updateOneItinerary = (req, res) => {
-//     itineraryModel.findByIdAndUpdate(req.params.id, {
-//         title: req.body.title,
-//     }, {new: true})
-//     .then(file => {
-//         file.save()
-//         if(!file) {
-//             return res.status(404).send({
-//                 message: "Note not found with id " + req.params.id
-//             });
-//         }
-//         res.send(file);
-//     })
-//     .catch(err => {
-//         if(err.kind === 'ObjectId') {
-//             return res.status(404).send({
-//                 message: "Note not found with id " + req.params.id
-//             });                
-//         }
-//         return res.status(500).send({
-//             message: "Error updating note with id " + req.params.id
-//         });
-//     });
-    
-// }
 
-// const deleteOneItinerary = (req, res) => {
-//     itineraryModel.findByIdAndRemove(req.params.id)
-//     .then(file => {
-//         if(!file) {
-//             return res.status(404).send({
-//                 message: "Note not found with id " + req.params.id
-//             });
-//         }
-//         res.send({message: "Note deleted successfully!"});
-//     }).catch(err => {
-//         if(err.kind === 'ObjectId' || err.name === 'NotFound') {
-//             return res.status(404).send({
-//                 message: "Note not found with id " + req.params.id
-//             });                
-//         }
-//         return res.status(500).send({
-//             message: "Could not delete note with id " + req.params.id
-//         });
-//     });
-// }
+
 
 const retrieveAllItinerariesByCityName = (req, res) => {
     itineraryModel.find({parentCityName : req.query.city })
@@ -103,8 +59,14 @@ const retrieveAllItinerariesByCityName = (req, res) => {
     .catch(err => console.log(err));
 }
 
-itineraries.get('/favorites', passport.authenticate('jwt', {session : false}), (req, res) => {
-    res.send('protected')
+itineraries.get('/favorites/', passport.authenticate('jwt', {session : false}), (req, res) => {
+    // console.log(req.headers.favorites)
+    const ids = req.headers.favorites.split(',')
+    // console.log('ids', ids)
+    itineraryModel.find( { _id : { $in : ids } } )
+        .then(data => res.send(data))
+        .catch(err => console.log(err));
+    // res.send('protected')
 });
 
 itineraries.get('/', (req,res) => retrieveAllItinerariesByCityName(req,res));

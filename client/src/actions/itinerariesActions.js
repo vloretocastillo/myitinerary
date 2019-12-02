@@ -1,39 +1,26 @@
 module.exports = {
 
 
-    // retrieveCities : () => {
-    //     return async (dispatch) => {
-    //         return await fetch(`http://localhost:5000/api/cities/all`, {
-    //                 method: 'GET',
-    //             })
-    //             .then(res =>  res.json() )
-    //             .then(data =>{
-    //                 dispatch({
-    //                     type: 'RETRIEVE_CITIES',
-    //                     cities: data
-    //                 })
-    //             })
-    //             .catch(err => console.error(err)) 
-    //     }
-    // },
-
-
-
-    // retrieveSampleCities : () => {
-    //     return async (dispatch) => {
-    //         return await fetch(`http://localhost:5000/api/cities/all`, {
-    //                 method: 'GET',
-    //             })
-    //             .then(res =>  res.json() )
-    //             .then(data =>{
-    //                 dispatch({
-    //                     type: 'RETRIEVE_CITIES',
-    //                     cities: data.slice(0,4)
-    //                 })
-    //             })
-    //             .catch(err => console.error(err)) 
-    //     }
-    // },
+    retrieveFavoriteItineraries : (ids) => {
+        return async (dispatch) => {
+            return await fetch('http://localhost:5000/api/itineraries/favorites', {
+                    method: 'GET',
+                    headers: { 
+                        Authorization: 'Bearer ' + localStorage.token,
+                        favorites: ids
+                    }
+                })
+                .then(res =>  res.json() )
+                .then(data =>{
+                    console.log('data:', data)
+                    // dispatch({
+                    //     type: 'SET_FAVORITES',
+                    //     cities: data
+                    // })
+                })
+                .catch(err => console.error(err)) 
+        }
+    },
 
 
     retrieveItineraries : (queryString) => {

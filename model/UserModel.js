@@ -32,7 +32,10 @@ const userSchema = new mongoose.Schema({
     avatar : {
         type: String,
     },
-    
+
+    favorites : {
+        type: [String]
+    }
 })
 
 module.exports = mongoose.model('user', userSchema)
