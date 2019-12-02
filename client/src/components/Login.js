@@ -5,7 +5,7 @@ import  '../css/Signup.css'
 // import  '../css/Login.css'
 import { connect } from 'react-redux'
 import { login } from '../actions/usersActions'
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 
 
@@ -13,50 +13,60 @@ import { Link } from 'react-router-dom';
 
 class Login extends React.Component {
 
+    state = {
+        redirect : false
+    }
+
     handleClick = (e) => {
         e.preventDefault()
-        // console.log(e.target.email.value, e.target.password.value)
         let user = {
             email : e.target.email.value,
             password: e.target.password.value
         }
-        // console.log('about to send: ', user)
         this.props.login(user)
-            // .then(() => console.log('after this.props.login(user) TOKEN:', this.props.token)) 
+            .then(() => { if (localStorage.token) window.location.href = '/' } )
+                
     }
 
 
 
     
     render() {
-        return (
-            <div className='login-container'>
-            <Form onSubmit={(e) => this.handleClick(e)}>
-                
-                <Form.Group controlId="formBasicEmail">
-                    <Form.Label>Email address</Form.Label>
-                    <Form.Control type="email" placeholder="Enter email" name="email"/>
+        // if (this.state.redirect) {
+            
+        //     return <Redirect to="/" />
+                     
+        // }
+        // else {
+            return (
+                <div className='login-container'>
+                <Form onSubmit={(e) => this.handleClick(e)}>
+                    
+                    <Form.Group controlId="formBasicEmail">
+                        <Form.Label>Email address</Form.Label>
+                        <Form.Control type="email" placeholder="Enter email" name="email"/>
+                        <Form.Text className="text-muted">
+                            We'll never share your email with anyone else.
+                        </Form.Text>
+                    </Form.Group>
+                    
+                    <Form.Group controlId="formBasicPassword">
+                        <Form.Label>Password</Form.Label>
+                        <Form.Control type="password" placeholder="Password" name="password"/>
+                    </Form.Group>
+                    
+
+                    <Button variant="primary" type="submit">
+                        Submit
+                    </Button>
+
                     <Form.Text className="text-muted">
-                        We'll never share your email with anyone else.
+                        Don't have an account yet? <Link to='/signup'>Register Here</Link>
                     </Form.Text>
-                </Form.Group>
-                
-                <Form.Group controlId="formBasicPassword">
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" placeholder="Password" name="password"/>
-                </Form.Group>
-                
-
-                <Button variant="primary" type="submit">
-                    Submit
-                </Button>
-
-                <Form.Text className="text-muted">
-                    Don't have an account yet? <Link to='/signup'>Register Here</Link>
-                </Form.Text>
-            </Form>
-            </div>
-        )
+                </Form>
+                </div>
+            )
+        // }
        
     }
 }

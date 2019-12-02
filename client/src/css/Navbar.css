@@ -1,11 +1,19 @@
 .avatar {
-    width: 100%;
+    width: 95%;
     color: white;
+    /* border-radius: 50px; */
+}
+
+.avatar-profile-wrapper {
+    width: 40px;
+    height: 40px;
+    border-radius: 50px;
+    overflow: hidden;
 }
 
 .profile-img-link {
     /* border: 1px solid red; */
-    width: 9%;
+    /* width: 9%; */
 }
 
 .profile-img-link:hover {

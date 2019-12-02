@@ -12,12 +12,24 @@ import { getCurrentUser } from '../actions/usersActions'
 class Nave extends React.Component {
 
     state = {
-        displayAvatar : true
+        displayAvatar : true,
+        currentUser : false
     }
 
     componentDidMount () {
 
-        if (localStorage.token ) this.props.getCurrentUser(localStorage.token)
+        if ( localStorage.token ) {
+            this.props.getCurrentUser(localStorage.token)
+                // then(()=> {
+                //     if (this.props.currentUser.first_name) {
+                //         this.setState({currentUser : true})
+                //     }
+                // })
+        }
+
+        // if (this.props.currentUser.first_name) {
+        //     this.setState({currentUser : true})
+        // }
         
     }
 
@@ -29,10 +41,13 @@ class Nave extends React.Component {
         this.setState({ displayAvatar : !this.state.displayAvatar })
     }
     render (){
+        
+
         let avatarProfile;
         if (this.state.displayAvatar) {
-            avatarProfile = <Link to='/login' className='profile-img-link'><img src={profileAvatar} alt="" className='avatar' /></Link>
+            avatarProfile = <Link to='/login' className='profile-img-link'><img src={ this.props.currentUser.avatar || profileAvatar} alt="" className='avatar' /></Link>
         } 
+
         return (
             <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" onClick={ () => this.handleToggle()}/>
@@ -45,9 +60,9 @@ class Nave extends React.Component {
                         {!this.props.currentUser.first_name ? <Nav.Link href="/login">Log In</Nav.Link> : <Nav.Link href="/" onClick={()=> this.logout()}>Log out</Nav.Link>   }
                     </Nav>
                 </Navbar.Collapse>
-                {this.props.currentUser.last_name}
-                {avatarProfile}
-                
+                <div className='avatar-profile-wrapper'> 
+                    { avatarProfile }
+                </div>
             </Navbar>      
         )
     }
