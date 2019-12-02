@@ -13,10 +13,10 @@ module.exports = {
                 .then(res =>  res.json() )
                 .then(data =>{
                     console.log('data:', data)
-                    // dispatch({
-                    //     type: 'SET_FAVORITES',
-                    //     cities: data
-                    // })
+                    dispatch({
+                        type: 'SET_FAVORITES',
+                        favorites: data
+                    })
                 })
                 .catch(err => console.error(err)) 
         }

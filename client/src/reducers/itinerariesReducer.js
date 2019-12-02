@@ -1,6 +1,7 @@
 const initState = {
     itineraries : [],
-    itinerary: {}
+    itinerary: {},
+    favorites: []
 }
 
 const itinerariesReducer = (state = initState, action) => {
@@ -16,6 +17,13 @@ const itinerariesReducer = (state = initState, action) => {
         return {
             ...state,
             itinerary: action.itinerary
+        }
+    }
+
+    if (action.type === 'SET_FAVORITES') {
+        return {
+            ...state,
+            favorites: action.favorites
         }
     }
     

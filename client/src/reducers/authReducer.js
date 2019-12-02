@@ -23,7 +23,8 @@ const authReducer = (state = initState, action) => {
     if (action.type === 'LOGOUT') {
         return {
             ...state,
-            currentUser: {}
+            currentUser: {},
+            favorites: []
         }
     }
     
