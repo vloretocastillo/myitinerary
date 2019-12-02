@@ -1,6 +1,4 @@
 const login = (user) => {
-    // console.log('inside login user parameter:', user)
-    // console.log('about to post to api/users/login')
     return async (dispatch) => {
         return await fetch('/api/users/login', {
                 method: 'POST',
@@ -11,15 +9,13 @@ const login = (user) => {
                 mode: 'no-cors'
             })
             .then(res => {
-                // console.log('got the response adter loggin in succesfully')
                 return res.json()
             })
             
             .then(data =>{
-                console.log('after converting to json the response: ', data)
+                // console.log('after converting to json the response: ', data)
                 if (data.msg) console.log(data.msg)
                 else if (data.token) {
-                    // console.log('from login this is the response data.token to be dispacthed : ', data.token)
                     localStorage.setItem('token', data.token)
                     dispatch({
                         type: 'LOGIN',
@@ -27,9 +23,7 @@ const login = (user) => {
                     })
                 }
             })
-            // .then(()=>{
-            //     console.log('after dispatching LOGIN and hopefully having changed the state token')
-            // })
+            
             .catch(err => console.error(err)) 
     }
 }
@@ -38,11 +32,9 @@ const login = (user) => {
 
 const register = (newUser) => {
 
-    // console.log('inside register:', newUser)
 
     const originalPassword = newUser.password
 
-    // console.log('original password:', originalPassword)
     
     return async (dispatch) => {
         return await fetch('/api/users/register', {
@@ -60,7 +52,6 @@ const register = (newUser) => {
                 if (data.msg) console.log(data.msg)
                 else {
                     const user = {email : data.email, password : originalPassword}
-                    // console.log('user obj before dispatching to login:', user)
                     dispatch(login(user))
                 }
             })
@@ -92,6 +83,7 @@ const getCurrentUser = (token) => {
             .catch(err => console.error(err)) 
     }
 }
+    
 
 
 

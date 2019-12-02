@@ -17,13 +17,12 @@ class Nave extends React.Component {
 
     componentDidMount () {
 
-        if (localStorage.token ) {
-            // console.log('theres a token', localStorage.token)
-            // console.log('theres a ccc user', this.props.currentUser)
-            this.props.getCurrentUser(localStorage.token)
-        }
-        // if (localStorage.token) get the user information and update the current user in the state
-        // ask if there's a current user and if so, display the avatar picture that will take me to the user profile page -- which will be protected 
+        if (localStorage.token ) this.props.getCurrentUser(localStorage.token)
+        
+    }
+
+    logout = () => {
+        localStorage.removeItem('token')
     }
 
     handleToggle = () => {
@@ -42,11 +41,11 @@ class Nave extends React.Component {
                     <Nav className="mr-auto">
                         <Nav.Link href="/cities">Cities</Nav.Link>
                         <Nav.Link href="/">Home</Nav.Link>
-                        <Nav.Link href="/signup">Sign Up</Nav.Link>
-                        <Nav.Link href="/login">Log in</Nav.Link>
+                        {!this.props.currentUser.first_name ? <Nav.Link href="/signup">Sign Up</Nav.Link> : false  }
+                        {!this.props.currentUser.first_name ? <Nav.Link href="/login">Log In</Nav.Link> : <Nav.Link href="/" onClick={()=> this.logout()}>Log out</Nav.Link>   }
                     </Nav>
                 </Navbar.Collapse>
-
+                {this.props.currentUser.last_name}
                 {avatarProfile}
                 
             </Navbar>      
@@ -65,7 +64,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         getCurrentUser: (token) => dispatch(getCurrentUser(token))
-        // login: (user) => dispatch(login(user))
     }
 }
 

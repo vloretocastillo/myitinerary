@@ -5,6 +5,8 @@ import  '../css/Signup.css'
 // import  '../css/Login.css'
 import { connect } from 'react-redux'
 import { login } from '../actions/usersActions'
+import { Link } from 'react-router-dom';
+
 
 
 
@@ -35,7 +37,7 @@ class Login extends React.Component {
                     <Form.Label>Email address</Form.Label>
                     <Form.Control type="email" placeholder="Enter email" name="email"/>
                     <Form.Text className="text-muted">
-                    We'll never share your email with anyone else.
+                        We'll never share your email with anyone else.
                     </Form.Text>
                 </Form.Group>
                 
@@ -48,6 +50,10 @@ class Login extends React.Component {
                 <Button variant="primary" type="submit">
                     Submit
                 </Button>
+
+                <Form.Text className="text-muted">
+                    Don't have an account yet? <Link to='/signup'>Register Here</Link>
+                </Form.Text>
             </Form>
             </div>
         )
