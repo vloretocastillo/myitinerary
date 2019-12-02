@@ -7,6 +7,7 @@ import Itineraries from './components/Itineraries';
 import Footer from './components/Footer';
 import Signup from './components/Signup';
 import Login from './components/Login';
+import Favorites from './components/Favorites';
 
 
 import './css/App.css'
@@ -37,6 +38,14 @@ class App extends React.Component {
               <Route exact path="/signup" component={Signup} >
                 { this.props.currentUser.first_name ? <Redirect to="/" /> : false }
               </Route>
+
+              <Route exact path="/favorites" component={Favorites} >
+                { !localStorage.token ? <Redirect to="/" /> : false }
+              </Route>
+
+              {/* <Route exact path="/favorites" component={Favorites} >
+                { !this.props.currentUser.first_name ? alert(this.props.currentUser.first_name) : false }
+              </Route> */}
 
             </Switch>
             <Footer />

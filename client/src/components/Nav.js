@@ -56,6 +56,7 @@ class Nave extends React.Component {
                     <Nav className="mr-auto">
                         <Nav.Link href="/cities">Cities</Nav.Link>
                         <Nav.Link href="/">Home</Nav.Link>
+                        { this.props.currentUser.first_name ? <Nav.Link href="/favorites">Favorites</Nav.Link> : false  }
                         {!this.props.currentUser.first_name ? <Nav.Link href="/signup">Sign Up</Nav.Link> : false  }
                         {!this.props.currentUser.first_name ? <Nav.Link href="/login">Log In</Nav.Link> : <Nav.Link href="/" onClick={()=> this.logout()}>Log out</Nav.Link>   }
                     </Nav>
