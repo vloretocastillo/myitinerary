@@ -59,8 +59,8 @@ const retrieveAllItinerariesByCityName = (req, res) => {
     .catch(err => console.log(err));
 }
 
-itineraries.get('/favorites/', passport.authenticate('jwt', {session : false}), (req, res) => {
-    // console.log(req.headers.favorites)
+itineraries.get('/favorites', passport.authenticate('jwt', {session : false}), (req, res) => {
+    console.log('req.headers.favorites', req.headers.favorites)
     const ids = req.headers.favorites.split(',')
     // console.log('ids', ids)
     itineraryModel.find( { _id : { $in : ids } } )
