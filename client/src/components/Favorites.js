@@ -96,7 +96,7 @@ class Favorites extends React.Component {
 
         return (
             <div className="main-container">
-                FAVORITES
+                <h1>FAVORITES</h1>
                 { mainContent }   
                 
             </div>

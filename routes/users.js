@@ -32,7 +32,6 @@ const register = (req, res) => {
    
 
     bcrypt.hash(req.body.password, saltRounds, function (err,   hash) {
-        // console.log(hash)
         userModel.find( {$or:[{email: req.body.email},{username:req.body.username}]} )
         .then((file)=>{
             if (file.length === 0) {
@@ -46,12 +45,8 @@ const register = (req, res) => {
                 })
                 newUser.save()
                     .then(user => {  
-                        // res.redirect('/')
                         res.send(user)
-                        // res.redirect('/')
-                        // return res.redirect('/')
                     })
-                    // .catch(err => console.log(err)) 
                     
             } else {
                 return res.send({
@@ -122,12 +117,9 @@ const login = (req, res) => {
 
 
 users.get('/currentuser', (req,res) => {
-    // console.log(req.query)
     jwt.verify(req.query.auth_token, secretOrKey, (err, decodedToken) => {
         if(err) { /* handle token err */ }
         else {
-            // res.send({id: decodedToken.id})
-            // console.log(decodedToken.id)
             userModel.findById(decodedToken.id)
                 .then((file) => {
                     res.send(file);  
@@ -146,13 +138,33 @@ users.get('/currentuser', (req,res) => {
     });
 }); 
 
+const addToFavorites = (req, res) => {
+    userModel.findById(req.params.id)
+        .then((user)=> {
+            user.favorites.push(req.headers.itinerary)
+            user.save()
+                .then((file) => res.send(file.favorites)  )
+        })
+}
+
+const removeFromFavorites = (req, res) => {
+    userModel.findById(req.params.id)
+        .then((user)=> {
+            user.favorites.splice( user.favorites.indexOf(req.headers.itinerary), 1)
+            // list.splice( list.indexOf('foo'), 1 );
+            user.save()
+                .then((file) => res.send(file.favorites)  )
+        })
+}
+
 
 users.get('/all', (req,res) => retrieveAllUsers(req,res)); //!
 users.post('/register', (req, res) => register(req,res)); //!
 users.post('/login', (req, res) => login(req,res)); //!
+users.get('/addfavorite/:id', (req, res) => addToFavorites(req,res)); //!
+users.get('/removefavorite/:id', (req, res) => removeFromFavorites(req,res));
 
 // users.get('/:id', (req, res) => retrieveOneUser(req, res));
-
 // users.put('/:id', (req, res) => updateOneUser(req, res));
 // users.delete('/:id', (req, res) => deleteOneUser(req, res));
 
