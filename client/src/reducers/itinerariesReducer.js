@@ -26,6 +26,8 @@ const itinerariesReducer = (state = initState, action) => {
             favorites: action.favorites
         }
     }
+
+   
     
     else return state
 }

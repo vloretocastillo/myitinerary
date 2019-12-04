@@ -58,7 +58,49 @@ module.exports = {
             .catch(err => console.error(err)) 
         
         }
-    }
+    },
+
+    addFavorite : (id, itineraryId) => {
+        return async (dispatch) => {
+            return await fetch(`http://localhost:5000/api/users/addfavorite/${id}`, {
+                    method: 'GET',
+                    headers: { 
+                        Authorization: 'Bearer ' + localStorage.token,
+                        itinerary: itineraryId
+                    }
+                })
+                .then(res =>  res.json() )
+                .then(data =>{
+                    console.log('data:', data)
+                    dispatch({
+                        type: 'SET_FAVORITES',
+                        favorites: data
+                    })
+                })
+                .catch(err => console.error(err)) 
+        }
+    },
+
+    removeFavorite : (id, itineraryId) => {
+        return async (dispatch) => {
+            return await fetch(`http://localhost:5000/api/users/removefavorite/${id}`, {
+                    method: 'GET',
+                    headers: { 
+                        Authorization: 'Bearer ' + localStorage.token,
+                        itinerary: itineraryId
+                    }
+                })
+                .then(res =>  res.json() )
+                .then(data =>{
+                    console.log('data:', data)
+                    dispatch({
+                        type: 'SET_FAVORITES',
+                        favorites: data
+                    })
+                })
+                .catch(err => console.error(err)) 
+        }
+    },
 
 
 }

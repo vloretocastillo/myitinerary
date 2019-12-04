@@ -15,21 +15,11 @@ const retrieveAllUsers = (req, res) => {
         .catch(err => console.log(err));
 }
 
-// const encryptPassword = async (password) => {
-//     return await crypt.genSalt(saltRounds, (err, salt) => {
-//         bcrypt.hash(password, salt, (err, hash) => {
-//             return hash
-//         });
-//     });
-// }
+
 
 const register = (req, res) => {
 
     req.body = JSON.parse(Object.keys(req.body))
-
-    // console.log(req.body)
-
-   
 
     bcrypt.hash(req.body.password, saltRounds, function (err,   hash) {
         userModel.find( {$or:[{email: req.body.email},{username:req.body.username}]} )
@@ -145,6 +135,16 @@ const addToFavorites = (req, res) => {
             user.save()
                 .then((file) => res.send(file.favorites)  )
         })
+        .catch(err => {
+            if(err.kind === 'ObjectId') {
+                return res.status(404).send({
+                    message: "User not found with id " + req.params.id
+                });                
+            }
+            return res.status(500).send({
+                message: "Error retrieving note with id " + req.params.id
+            });
+        });
 }
 
 const removeFromFavorites = (req, res) => {
@@ -155,6 +155,16 @@ const removeFromFavorites = (req, res) => {
             user.save()
                 .then((file) => res.send(file.favorites)  )
         })
+        .catch(err => {
+            if(err.kind === 'ObjectId') {
+                return res.status(404).send({
+                    message: "User not found with id " + req.params.id
+                });                
+            }
+            return res.status(500).send({
+                message: "Error retrieving note with id " + req.params.id
+            });
+        });
 }
 
 

@@ -34,7 +34,7 @@ class Favorites extends React.Component {
     handleClickHideDetails = () => { this.setState({ currentItinerary : {} }) }
 
     generateItinerariesList = () => {
-        let itinerariesList =  this.props.favorites.map((el) => <Itinerary key={el._id} generateHashtagList={this.generateHashtagList} element={el} handleClickDisplayDetails={this.handleClickDisplayDetails}></Itinerary>)
+        let itinerariesList =  this.props.favorites.map((el) => <Itinerary  key={el._id} generateHashtagList={this.generateHashtagList} element={el} handleClickDisplayDetails={this.handleClickDisplayDetails}></Itinerary>)
         this.setState({ itinerariesList })
     }
 
