@@ -17,11 +17,18 @@ class Itinerary extends React.Component {
         let el = this.props.element
         let button;
 
+        console.log('this.props.userId from child: ', this.props.userId)
+
         if (this.props.parent == 'favorites') {
             button = <button className='btn bg-danger' onClick={ () => this.props.removeItineraryFromFavoritesList(this.props.userId, el._id )}>X</button>
         } else if (this.props.parent == 'itineraries') {
-            if (this.props.removeItineraryFromFavoritesList) button = <button className='btn bg-danger' onClick={ () => this.props.removeItineraryFromFavoritesList(this.props.currentUser._id, el._id )}>X</button>
-            else button = <button className='btn bg-success' onClick={ () => this.props.addItineraryToFavoritesList(this.props.currentUser._id, el._id )}>+</button>
+
+            if (this.props.userId) {
+
+                if (this.props.removeItineraryFromFavoritesList) button = <button className='btn bg-danger' onClick={ () => this.props.removeItineraryFromFavoritesList(this.props.userId, el._id )}>X</button>
+                else button = <button className='btn bg-success' onClick={ () => this.props.addItineraryToFavoritesList(this.props.userId, el._id )}>+</button>
+        
+            } 
         }
         return (
             <li > 

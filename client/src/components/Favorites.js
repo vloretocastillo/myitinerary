@@ -10,19 +10,16 @@ class Favorites extends React.Component {
    
     state = {
         currentItinerary: {},
-        // itinerariesList : [],
     }
 
     componentDidUpdate(prevProps) {
         if (this.props.currentUser !== prevProps.currentUser) {
             this.props.retrieveFavoriteItineraries(this.props.currentUser.favorites)
-                // .then( ()=> console.log('this.props.favorites ', this.props.favorites) )
-                // .then( () => {this.props.favorites.length > 0 && this.generateItinerariesList() })
-                // .then( () => console.log('this.props.favorites: ', this.props.favorites ))
         }
     }
 
     componentWillUnmount(){ this.props.resetCurrentCity() }
+
     removeItineraryFromFavoritesList = (userId, itineraryId) => {
         this.props.removeFavorite(userId, itineraryId)
             .then(()=> {
@@ -90,7 +87,8 @@ class Favorites extends React.Component {
                 <div>
                     
                     <ul>
-                        { this.props.favorites.length > 0 ? this.generateItinerariesList() : false  }
+                        {/* { this.props.favorites.length > 0 ? this.generateItinerariesList() : false  } */}
+                        { this.generateItinerariesList() }
                     </ul>
                 </div>
             )
