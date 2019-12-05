@@ -1,32 +1,33 @@
 import React from 'react';
 import profileAvatar from '../assets/black-avatarr.png'
 import Button from 'react-bootstrap/Button'
-
-
-
 import { connect } from 'react-redux'
-import { removeFavorite, addFavorite } from '../actions/itinerariesActions'
+
+
+
+
+
+// import { removeFavorite, addFavorite } from '../actions/itinerariesActions'
 
 class Itinerary extends React.Component {
-
-
-    componentDidMount(){
-        console.log(this.props.currentUser, this.props.favorites)
-    }
+    
 
     render() {
         
         let el = this.props.element
         let button;
-        if (this.props.currentUser.first_name) {
-            if (this.props.currentUser.favorites.indexOf(el._id) != -1) button = <button onClick={ () => this.props.removeFavorite(this.props.currentUser._id, el._id )}>Remove</button>
-            else button = <button onClick={ () => this.props.addFavorite(this.props.currentUser._id, el._id )}>Add</button>
+
+        if (this.props.parent == 'favorites') {
+            button = <button className='btn bg-danger' onClick={ () => this.props.removeItineraryFromFavoritesList(this.props.userId, el._id )}>X</button>
+        } else if (this.props.parent == 'itineraries') {
+            if (this.props.removeItineraryFromFavoritesList) button = <button className='btn bg-danger' onClick={ () => this.props.removeItineraryFromFavoritesList(this.props.currentUser._id, el._id )}>X</button>
+            else button = <button className='btn bg-success' onClick={ () => this.props.addItineraryToFavoritesList(this.props.currentUser._id, el._id )}>+</button>
         }
         return (
             <li > 
-                
-                <div className='itinerary-list-container'>
                 {button}
+                <div className='itinerary-list-container'>
+                
                     <div className='avatar-wrapper'>
                         <img  src={profileAvatar} alt='profile user photo'></img>
                     </div>
@@ -60,12 +61,12 @@ const mapStateToProps = (state) => {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        removeFavorite: (id, itineraryId) => dispatch(removeFavorite(id, itineraryId)),
-        addFavorite: (id, itineraryId) => dispatch(addFavorite(id, itineraryId))
-    }
-}
+// const mapDispatchToProps = (dispatch) => {
+//     return {
+//         // removeFavorite: (id, itineraryId) => dispatch(removeFavorite(id, itineraryId)),
+//         // addFavorite: (id, itineraryId) => dispatch(addFavorite(id, itineraryId))
+//     }
+// }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Itinerary);
+export default connect(mapStateToProps)(Itinerary);

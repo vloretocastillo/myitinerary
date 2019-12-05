@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { retrieveItineraries } from '../actions/itinerariesActions'
+import { retrieveItineraries, removeFavorite, addFavorite } from '../actions/itinerariesActions'
 import '../css/Itineraries.css';
 import profileAvatar from '../assets/black-avatarr.png'
 import Itinerary from './Itinerary'
@@ -15,7 +15,8 @@ class Itineraries extends React.Component {
    
     state = {
         currentItinerary: {},
-        itinerariesList : [],
+        // itinerariesList : [],
+        favoritesIds: []
     }
     componentDidMount() {
         const queryString = this.props.location.search
@@ -23,10 +24,20 @@ class Itineraries extends React.Component {
         this.props.retrieveOneCityByName(cityName)
             .then(()=> {
                 this.props.retrieveItineraries(queryString)
-                    .then(()=>{ this.props.itineraries.length > 0 && this.generateItinerariesList() })  
+                    // .then(()=>{ this.props.itineraries.length > 0 && this.generateItinerariesList() })  
             })
             .catch(err => console.log(err))
     }
+
+    componentDidUpdate(prevProps) {
+        if (this.props.currentUser !== prevProps.currentUser) {
+            this.setState({ favoritesIds: this.props.currentUser.favorites })
+            // this.props.retrieveFavoriteItineraries(this.props.currentUser.favorites)
+                // .then( ()=> console.log('this.props.favorites ', this.props.favorites) )
+                
+        }
+    }
+    
 
     componentWillUnmount(){ this.props.resetCurrentCity() }
 
@@ -35,21 +46,39 @@ class Itineraries extends React.Component {
         if (currentItinerary) this.setState({ currentItinerary })
     }
 
+    removeItineraryFromFavoritesList = (userId, itineraryId) => {
+        this.props.removeFavorite(userId, itineraryId)
+            .then(()=> {
+                // if (this.props.favorites.length > 0) {
+                    this.generateItinerariesList() 
+                // }
+            })
+    }
+
+    addItineraryToFavoritesList = (userId, itineraryId) => {
+        this.props.addFavorite(userId, itineraryId)
+            .then(()=> {
+                // if (this.props.favorites.length > 0) {
+                    this.generateItinerariesList() 
+                // }
+            })
+    }
+
     handleClickHideDetails = () => { this.setState({ currentItinerary : {} }) }
 
     generateItinerariesList = () => {
-        let itinerariesList =  this.props.itineraries.map((el) => <Itinerary key={el._id} generateHashtagList={this.generateHashtagList} element={el} handleClickDisplayDetails={this.handleClickDisplayDetails}></Itinerary>)
-        this.setState({ itinerariesList })
+        
+        return this.props.itineraries.map((el) => {
+            if(this.state.favoritesIds.length > 0) {
+                if (this.state.favoritesIds.indexOf(el._id) != -1 ) return <Itinerary removeItineraryFromFavoritesList={ this.removeItineraryFromFavoritesList } parent={'itineraries'} key={el._id} generateHashtagList={this.generateHashtagList} element={el} handleClickDisplayDetails={this.handleClickDisplayDetails}></Itinerary>
+                else return <Itinerary addItineraryToFavoritesList={ this.addItineraryToFavoritesList } parent={'itineraries'} key={el._id} generateHashtagList={this.generateHashtagList} element={el} handleClickDisplayDetails={this.handleClickDisplayDetails}></Itinerary>
+            }
+            else return <Itinerary parent={'itineraries'} key={el._id} generateHashtagList={this.generateHashtagList} element={el} handleClickDisplayDetails={this.handleClickDisplayDetails}></Itinerary>
+        })
     }
 
-    generateHashtagList = (hashtags) => {
-        return hashtags.map( (hashtag, index) => <span key={index}>{ hashtag }</span> )
-    }
-
-    // generateActivitiesList = (activities) => {
-    //     return <Carousel activities={activities}/>
-    //     // return activities.map( (activity, index) => <span key={index}>{ activity }</span> )
-    // }
+    generateHashtagList = (hashtags) =>  hashtags.map( (hashtag, index) => <span key={index}>{ hashtag }</span> )
+    
 
     generateExtendedItinerary = () => {
         return (
@@ -93,7 +122,7 @@ class Itineraries extends React.Component {
                 <div>
                     <p>Available MYtineraries:</p>
                     <ul>
-                        { this.state.itinerariesList }
+                        { this.props.itineraries.length > 0 ? this.generateItinerariesList() : false  }
                     </ul>
                 </div>
             )
@@ -120,7 +149,8 @@ class Itineraries extends React.Component {
 const mapStateToProps = (state) => {
     return {
         itineraries: state.itinerariesData.itineraries,
-        city: state.citiesData.city
+        city: state.citiesData.city, 
+        currentUser: state.auth.currentUser
     }
 }
 
@@ -128,7 +158,10 @@ const mapDispatchToProps = (dispatch) => {
     return {
         retrieveItineraries: (queryString) => dispatch(retrieveItineraries(queryString)),
         retrieveOneCityByName: (id) => dispatch(retrieveOneCityByName(id)),
-        resetCurrentCity : () => dispatch({ type: 'RESET_CURRENT_CITY'})
+        resetCurrentCity : () => dispatch({ type: 'RESET_CURRENT_CITY'}),
+        removeFavorite: (id, itineraryId) => dispatch(removeFavorite(id, itineraryId)),
+        addFavorite: (id, itineraryId) => dispatch(addFavorite(id, itineraryId)),
+
     }
 }
 

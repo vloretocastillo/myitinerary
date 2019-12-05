@@ -1,30 +1,36 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { retrieveFavoriteItineraries } from '../actions/itinerariesActions'
-// import '../css/Itineraries.css';
+import { retrieveFavoriteItineraries, removeFavorite } from '../actions/itinerariesActions'
 import profileAvatar from '../assets/black-avatarr.png'
 import Itinerary from './Itinerary'
 import Carousel from './Carousel'
 import Button from 'react-bootstrap/Button'
-// import { retrieveOneCityByName } from '../actions/dataActions'
 
 class Favorites extends React.Component {
    
     state = {
         currentItinerary: {},
-        itinerariesList : [],
+        // itinerariesList : [],
     }
 
     componentDidUpdate(prevProps) {
         if (this.props.currentUser !== prevProps.currentUser) {
             this.props.retrieveFavoriteItineraries(this.props.currentUser.favorites)
-                // .then(()=> this.setState({ itinerariesList : this.props.favorites}) )
-                .then( () => {this.props.favorites.length > 0 && this.generateItinerariesList() })
-                .then( () => console.log('this.props.favorites: ', this.props.favorites ))
+                // .then( ()=> console.log('this.props.favorites ', this.props.favorites) )
+                // .then( () => {this.props.favorites.length > 0 && this.generateItinerariesList() })
+                // .then( () => console.log('this.props.favorites: ', this.props.favorites ))
         }
     }
 
     componentWillUnmount(){ this.props.resetCurrentCity() }
+    removeItineraryFromFavoritesList = (userId, itineraryId) => {
+        this.props.removeFavorite(userId, itineraryId)
+            .then(()=> {
+                if (this.props.favorites.length > 0) {
+                    this.generateItinerariesList() 
+                }
+            })
+    }
 
     handleClickDisplayDetails = (e) => {
         let currentItinerary = this.props.favorites.find((el) => el._id === e.target.id)
@@ -33,16 +39,15 @@ class Favorites extends React.Component {
 
     handleClickHideDetails = () => { this.setState({ currentItinerary : {} }) }
 
-    generateItinerariesList = () => {
-        let itinerariesList =  this.props.favorites.map((el) => <Itinerary  key={el._id} generateHashtagList={this.generateHashtagList} element={el} handleClickDisplayDetails={this.handleClickDisplayDetails}></Itinerary>)
-        this.setState({ itinerariesList })
-    }
+    generateItinerariesList = () =>  this.props.favorites.map((el) => <Itinerary userId={this.props.currentUser._id} removeItineraryFromFavoritesList={ this.removeItineraryFromFavoritesList } parent={'favorites'} key={el._id} generateHashtagList={this.generateHashtagList} element={el} handleClickDisplayDetails={this.handleClickDisplayDetails}></Itinerary>)
+    
 
-    generateHashtagList = (hashtags) => {
-        return hashtags.map( (hashtag, index) => <span key={index}>{ hashtag }</span> )
-    }
+    generateHashtagList = (hashtags) =>  hashtags.map( (hashtag, index) => <span key={index}>{ hashtag }</span> ) 
+
+    
 
     generateExtendedItinerary = () => {
+        
         return (
             <div>
                 <h2>{ this.state.currentItinerary.title }</h2>
@@ -78,13 +83,14 @@ class Favorites extends React.Component {
 
     render() {
 
+
         let mainContent;
         if (Object.getOwnPropertyNames(this.state.currentItinerary).length === 0) {
             mainContent = (
                 <div>
                     
                     <ul>
-                        { this.state.itinerariesList }
+                        { this.props.favorites.length > 0 ? this.generateItinerariesList() : false  }
                     </ul>
                 </div>
             )
@@ -92,7 +98,6 @@ class Favorites extends React.Component {
             mainContent = this.generateExtendedItinerary()
         }
 
-        // console.log(this.state.itinerariesList)
 
         return (
             <div className="main-container">
@@ -115,7 +120,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         retrieveFavoriteItineraries: (ids) => dispatch(retrieveFavoriteItineraries(ids)),
-        resetCurrentCity : () => dispatch({ type: 'RESET_CURRENT_CITY'})
+        resetCurrentCity : () => dispatch({ type: 'RESET_CURRENT_CITY'}),
+        removeFavorite: (id, itineraryId) => dispatch(removeFavorite(id, itineraryId)),
+
 
     }
 }

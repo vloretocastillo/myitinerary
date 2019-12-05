@@ -1,7 +1,7 @@
-module.exports = {
+// module.exports = {
 
 
-    retrieveFavoriteItineraries : (ids) => {
+    const retrieveFavoriteItineraries = (ids) => {
         return async (dispatch) => {
             return await fetch('http://localhost:5000/api/itineraries/favorites', {
                     method: 'GET',
@@ -12,7 +12,7 @@ module.exports = {
                 })
                 .then(res =>  res.json() )
                 .then(data =>{
-                    console.log('data:', data)
+                    // console.log('data:', data)
                     dispatch({
                         type: 'SET_FAVORITES',
                         favorites: data
@@ -20,10 +20,10 @@ module.exports = {
                 })
                 .catch(err => console.error(err)) 
         }
-    },
+    }
 
 
-    retrieveItineraries : (queryString) => {
+    const retrieveItineraries = (queryString) => {
 
         const fetchPath = `http://localhost:5000/api/itineraries${queryString}`
         return async (dispatch) => {
@@ -40,9 +40,9 @@ module.exports = {
             .catch(err => console.error(err)) 
         
         }
-    },
+    }
 
-    retrieveItinerary : (itineraryId) => {
+    const retrieveItinerary = (itineraryId) => {
         const fetchPath = `http://localhost:5000/api/itineraries/${itineraryId}`
         return async (dispatch) => { 
             await fetch(fetchPath, {
@@ -58,9 +58,9 @@ module.exports = {
             .catch(err => console.error(err)) 
         
         }
-    },
+    }
 
-    addFavorite : (id, itineraryId) => {
+    const addFavorite = (id, itineraryId) => {
         return async (dispatch) => {
             return await fetch(`http://localhost:5000/api/users/addfavorite/${id}`, {
                     method: 'GET',
@@ -71,7 +71,7 @@ module.exports = {
                 })
                 .then(res =>  res.json() )
                 .then(data =>{
-                    console.log('data:', data)
+                    // console.log('data:', data)
                     dispatch({
                         type: 'SET_FAVORITES',
                         favorites: data
@@ -79,9 +79,9 @@ module.exports = {
                 })
                 .catch(err => console.error(err)) 
         }
-    },
+    }
 
-    removeFavorite : (id, itineraryId) => {
+    const removeFavorite = (id, itineraryId) => {
         return async (dispatch) => {
             return await fetch(`http://localhost:5000/api/users/removefavorite/${id}`, {
                     method: 'GET',
@@ -92,15 +92,30 @@ module.exports = {
                 })
                 .then(res =>  res.json() )
                 .then(data =>{
-                    console.log('data:', data)
-                    dispatch({
-                        type: 'SET_FAVORITES',
-                        favorites: data
-                    })
+                    // console.log('data after removal in removeFavorite:', data)
+
+                    // the problem here is that we are setting the data to be an array of string IDS!!!!!!!!!!!
+                    // instead, we should call a dispatch(retrieveFavoriteItineraries(data))
+                    // dispatch({
+                    //     type: 'SET_FAVORITES',
+                    //     favorites: data
+                    // })
+                    // lets try
+                    dispatch(retrieveFavoriteItineraries(data))
+
                 })
                 .catch(err => console.error(err)) 
         }
-    },
+    }
 
+
+// }
+
+module.exports = {
+    retrieveFavoriteItineraries : retrieveFavoriteItineraries,
+    retrieveItineraries : retrieveItineraries,
+    retrieveItinerary : retrieveItinerary,
+    addFavorite : addFavorite,
+    removeFavorite : removeFavorite
 
 }

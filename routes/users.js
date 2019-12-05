@@ -148,10 +148,16 @@ const addToFavorites = (req, res) => {
 }
 
 const removeFromFavorites = (req, res) => {
+    console.log(req.params)
     userModel.findById(req.params.id)
         .then((user)=> {
+            // console.log('user.favorites: ', user.favorites)
+            // console.log('req.headers.itinerary ', req.headers.itinerary)
+            // console.log('user.favorites.indexOf(req.headers.itinerary) ', user.favorites.indexOf(req.headers.itinerary))
+
             user.favorites.splice( user.favorites.indexOf(req.headers.itinerary), 1)
             // list.splice( list.indexOf('foo'), 1 );
+            // console.log('favorites now', user.favorites)
             user.save()
                 .then((file) => res.send(file.favorites)  )
         })
