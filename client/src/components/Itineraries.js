@@ -54,17 +54,17 @@ class Itineraries extends React.Component {
 
     removeItineraryFromFavoritesList = (userId, itineraryId) => {
         this.props.removeFavorite(userId, itineraryId)
-            .then(()=> {
-                    this.generateItinerariesList() 
-            })
+            // .then(()=> {
+            //         this.generateItinerariesListIfUser() 
+            // })
     }
 
     addItineraryToFavoritesList = (userId, itineraryId) => {
         this.props.addFavorite(userId, itineraryId)
-            .then(()=> {
-                    this.generateItinerariesList() 
+            // .then(()=> {
+            //         this.generateItinerariesListIfUser() 
                
-            })
+            // })
     }
 
     handleClickHideDetails = () => { this.setState({ currentItinerary : {} }) }
