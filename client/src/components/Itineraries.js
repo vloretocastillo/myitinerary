@@ -49,12 +49,12 @@ class Itineraries extends React.Component {
         return true
     }
 
-    // componentDidUpdate(prevProps) {
-    //     if (this.props.currentUser !== prevProps.currentUser) {
-    //         console.log('UPDATED')
-    //         this.props.retrieveFavoriteItineraries(this.props.currentUser.favorites)
-    //     }
-    // }
+    componentDidUpdate(prevProps) {
+        if (this.props.currentUser !== prevProps.currentUser) {
+            console.log('UPDATED')
+            this.props.retrieveFavoriteItineraries(this.props.currentUser.favorites)
+        }
+    }
     
 
     componentWillUnmount(){ this.props.resetCurrentCity() }
