@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { retrieveItineraries, removeFavorite, addFavorite } from '../actions/itinerariesActions'
+import { retrieveItineraries, removeFavorite, addFavorite, retrieveFavoriteItineraries } from '../actions/itinerariesActions'
 import '../css/Itineraries.css';
 import profileAvatar from '../assets/black-avatarr.png'
 import Itinerary from './Itinerary'
@@ -23,24 +23,36 @@ class Itineraries extends React.Component {
     
     componentDidMount() {
 
-                
+        
         
 
         const queryString = this.props.location.search
         const cityName = queryString.split('=').pop()
         this.props.retrieveOneCityByName(cityName)
             .then(()=> this.props.retrieveItineraries(queryString) )
-            // .then(()=>  { if ( localStorage.token ) this.props.getCurrentUser(localStorage.token) })
-            // .then(()=> this.forceUpdate())
             .catch(err => console.log(err))
+    }
+
+    shouldComponentUpdate(nextProps) {
+        console.log('nextProps.currentUser', nextProps.currentUser)
+        console.log('this.props.currentUser', this.props.currentUser )
+        if (this.props.currentUser === nextProps.currentUser && this.props.currentUser._id && this.props.favorites.length === 0) {
+             this.props.retrieveFavoriteItineraries(this.props.currentUser.favorites)
+
+        }
+        // console.log('shuold be UPDATED')
+        // console.log('this.props.currentUser', this.props.currentUser)
+        // if (this.props.currentUser._id) {
+            
+        //     this.props.retrieveFavoriteItineraries(this.props.currentUser.favorites)
+        // }
+        return true
     }
 
     // componentDidUpdate(prevProps) {
     //     if (this.props.currentUser !== prevProps.currentUser) {
-    //         // this.props.retrieveItineraries(this.props.location.search) 
-    //         // .then(()=> this.setState({ favoritesIds: this.props.currentUser.favorites })  )
-    //         // this.setState({ favoritesIds: this.props.currentUser.favorites })    
-            
+    //         console.log('UPDATED')
+    //         this.props.retrieveFavoriteItineraries(this.props.currentUser.favorites)
     //     }
     // }
     
@@ -132,15 +144,12 @@ class Itineraries extends React.Component {
     
     render() {
         let mainContent;
-
-        
         if (Object.getOwnPropertyNames(this.state.currentItinerary).length === 0) {
             mainContent = (
                 <div>
                     <p>Available MYtineraries:</p>
                     <ul>
-                        {/* { this.props.itineraries.length > 0 ? this.generateItinerariesList() : false  } */}
-                        { this.props.currentUser._id ?  this.generateItinerariesListIfUser() : this.generateItinerariesList() }
+                        { this.props.favorites.length > 0 ?  this.generateItinerariesListIfUser() : this.generateItinerariesList() }
                     </ul>
                 </div>
             )
@@ -148,7 +157,6 @@ class Itineraries extends React.Component {
             mainContent = this.generateExtendedItinerary()
         }
  
-        
         return (
             <div className="main-container">
                 <header className='itineraries-list-header'>
@@ -156,8 +164,7 @@ class Itineraries extends React.Component {
                     <div className='dark-coverr'></div>
                     <img src={ this.props.city.img } alt=""/>
                 </header>
-                { mainContent }   
-                
+                { mainContent }       
             </div>
         )
     }
@@ -168,12 +175,16 @@ const mapStateToProps = (state) => {
     return {
         itineraries: state.itinerariesData.itineraries,
         city: state.citiesData.city, 
-        currentUser: state.auth.currentUser
+        currentUser: state.auth.currentUser,
+        favorites: state.itinerariesData.favorites
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        retrieveFavoriteItineraries: (ids) => dispatch(retrieveFavoriteItineraries(ids)),
+
+
         retrieveItineraries: (queryString) => dispatch(retrieveItineraries(queryString)),
         retrieveOneCityByName: (id) => dispatch(retrieveOneCityByName(id)),
         resetCurrentCity : () => dispatch({ type: 'RESET_CURRENT_CITY'}),

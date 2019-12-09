@@ -18,7 +18,7 @@ class Favorites extends React.Component {
         }
     }
 
-    componentWillUnmount(){ this.props.resetCurrentCity() }
+    // componentWillUnmount(){ this.props.resetCurrentCity() }
 
     removeItineraryFromFavoritesList = (userId, itineraryId) => {
         this.props.removeFavorite(userId, itineraryId)
@@ -87,8 +87,8 @@ class Favorites extends React.Component {
                 <div>
                     
                     <ul>
-                        {/* { this.props.favorites.length > 0 ? this.generateItinerariesList() : false  } */}
-                        { this.generateItinerariesList() }
+                        { this.props.favorites.length > 0 ? this.generateItinerariesList() : false  }
+                        {/* { this.generateItinerariesList() } */}
                     </ul>
                 </div>
             )
@@ -118,7 +118,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         retrieveFavoriteItineraries: (ids) => dispatch(retrieveFavoriteItineraries(ids)),
-        resetCurrentCity : () => dispatch({ type: 'RESET_CURRENT_CITY'}),
+        // resetCurrentCity : () => dispatch({ type: 'RESET_CURRENT_CITY'}),
         removeFavorite: (id, itineraryId) => dispatch(removeFavorite(id, itineraryId)),
 
 
