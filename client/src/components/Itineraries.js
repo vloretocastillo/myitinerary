@@ -39,7 +39,11 @@ class Itineraries extends React.Component {
         if (this.props.currentUser === nextProps.currentUser && this.props.currentUser._id && this.props.favorites.length === 0) {
              this.props.retrieveFavoriteItineraries(this.props.currentUser.favorites)
 
-        }
+        } 
+        //else if (this.props.favorites.length !== nextProps.favorites.length) {
+        //     this.props.retrieveFavoriteItineraries(this.props.currentUser.favorites)
+
+        // }
         // console.log('shuold be UPDATED')
         // console.log('this.props.currentUser', this.props.currentUser)
         // if (this.props.currentUser._id) {
@@ -50,7 +54,7 @@ class Itineraries extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (this.props.currentUser !== prevProps.currentUser) {
+        if (this.props.favorites !== prevProps.favorites) {
             console.log('UPDATED')
             this.props.retrieveFavoriteItineraries(this.props.currentUser.favorites)
         }
@@ -66,15 +70,18 @@ class Itineraries extends React.Component {
 
     removeItineraryFromFavoritesList = (userId, itineraryId) => {
         this.props.removeFavorite(userId, itineraryId)
-            // .then(()=> {
-            //         this.generateItinerariesListIfUser() 
-            // })
+        // .then(()=> {
+        //     this.props.retrieveFavoriteItineraries(this.props.currentUser.favorites)
+                
+           
+        // })
     }
 
     addItineraryToFavoritesList = (userId, itineraryId) => {
         this.props.addFavorite(userId, itineraryId)
             // .then(()=> {
-            //         this.generateItinerariesListIfUser() 
+            //     this.props.retrieveFavoriteItineraries(this.props.currentUser.favorites)
+                    
                
             // })
     }
