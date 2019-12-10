@@ -20,19 +20,19 @@ class Itinerary extends React.Component {
         console.log('this.props.userId from child: ', this.props.userId)
 
         if (this.props.parent == 'favorites') {
-            button = <button className='btn bg-danger' onClick={ () => this.props.removeItineraryFromFavoritesList(this.props.userId, el._id )}>X</button>
+            button = <button className='btn btn-block bg-danger custom-butto' onClick={ () => this.props.removeItineraryFromFavoritesList(this.props.userId, el._id )}>Remove from Favorites</button>
         } else if (this.props.parent == 'itineraries') {
 
             if (this.props.userId) {
 
-                if (this.props.removeItineraryFromFavoritesList) button = <button className='btn bg-danger' onClick={ () => this.props.removeItineraryFromFavoritesList(this.props.userId, el._id )}>X</button>
-                else button = <button className='btn bg-success' onClick={ () => this.props.addItineraryToFavoritesList(this.props.userId, el._id )}>+</button>
+                if (this.props.removeItineraryFromFavoritesList) button = <button className='btn btn-block bg-danger custom-butto' onClick={ () => this.props.removeItineraryFromFavoritesList(this.props.userId, el._id )}>Remove from Favorites</button>
+                else button = <button className='btn btn-block bg-success mt-2 custom-butto' onClick={ () => this.props.addItineraryToFavoritesList(this.props.userId, el._id )}>Add to Favorites</button>
         
             } 
         }
         return (
-            <li > 
-                {button}
+            <li className='custom-li'> 
+                {/* {button} */}
                 <div className='itinerary-list-container'>
                 
                     <div className='avatar-wrapper'>
@@ -53,6 +53,7 @@ class Itinerary extends React.Component {
                     <div className='link-to-details'>
                         <Button className='btn-block btn-light'id={el._id} onClick={  (e) => this.props.handleClickDisplayDetails(e)   }>See Details</Button>
                     </div>
+                    {button}
                 </div>
             </li>
         )
