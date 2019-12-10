@@ -34,40 +34,17 @@ class Itineraries extends React.Component {
     }
 
     shouldComponentUpdate(nextProps) {
-        // console.log('---------------------------------')
-        // console.log('from shouldComponentUpdate ')
-        // console.log('nextProps.currentUser', nextProps.currentUser)
-        // console.log('this.props.currentUser', this.props.currentUser )
+        
         if (this.props.currentUser === nextProps.currentUser && this.props.currentUser._id && this.props.favorites.length === 0) {
             this.props.retrieveFavoriteItineraries(this.props.currentUser.favorites)
             
 
         } 
 
-        // console.log('this.props.favorites.length', this.props.favorites.length)
-        // console.log('extProps.favorites.length', nextProps.favorites.length )
-        // if (this.props.favorites.length !== nextProps.favorites.length) {
-            // console.log('outh to rerender')
-            // this.forceUpdate()
-            // this.setState({ rerender : true })
-            // this.props.retrieveFavoriteItineraries(this.props.currentUser.favorites)
-                // .then(()=> this.setState({ rerender : true }))
-        // }
-        // console.log('---------------------------------')
-        
         return true
     }
 
-    // componentDidUpdate (prevProps) {
-        // this.setState({ rerender : false})
-        // console.log('---------------------------------')
-        // console.log('from componentDidUpdate ')
-        // console.log('this.props.favorites.length', this.props.favorites.length)
-        // console.log('prevProps.favorites.length', prevProps.favorites.length )
-        // console.log('---------------------------------')
-        // if (this.props.favorites.length === prevProps.favorites.length ) this.setState({ rerender : false })
-    // }
-
+    
  
 
     componentWillUnmount(){ this.props.resetCurrentCity() }
@@ -165,15 +142,7 @@ class Itineraries extends React.Component {
     
     
     render() {
-        // console.log('-------------FROM RENDER----------------')
-        // console.log('this.props.favorites.length', this.props.favorites.length)
-        // let hasTheFavoritesArrayChanged = false
-        // if (this.props.currentUser.favorites) {
-        //     if(this.props.currentUser.favorites.length !== this.props.favorites.length) {
-        //         console.log('HAVE TO UPDATE')
-        //         hasTheFavoritesArrayChanged = true
-        //     }
-        // }
+       
 
         let isThereACurrentUser = this.props.currentUser._id ? true : false
         let doesTheCurrentUserHaveFavorites = this.props.favorites.length > 0 ? true : false

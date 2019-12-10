@@ -76,6 +76,7 @@
                         type: 'SET_FAVORITES',
                         favorites: data
                     })
+
                 })
                 .catch(err => console.error(err)) 
         }
@@ -92,7 +93,7 @@
                 })
                 .then(res =>  res.json() )
                 .then(data =>{
-                    // console.log('data after removal in removeFavorite:', data)
+                    // console.log('data:', data)
 
                     // the problem here is that we are setting the data to be an array of string IDS!!!!!!!!!!!
                     // instead, we should call a dispatch(retrieveFavoriteItineraries(data))
