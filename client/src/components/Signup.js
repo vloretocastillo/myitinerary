@@ -287,7 +287,8 @@ class Signup extends React.Component {
             username: e.target.username.value,
             country: e.target.country.value,
             email: e.target.email.value,
-            password: e.target.password.value
+            password: e.target.password.value,
+            avatar: e.target.avatar.value
         }
         if ( this.validateUserInput(newUser) ) this.props.register(newUser)
         
@@ -331,6 +332,10 @@ class Signup extends React.Component {
                         <Form.Control type="password" placeholder="Password" name="password" id="password"/>
                     </Form.Group>
 
+                    <Form.Group >
+                        <Form.Label>Photo URL</Form.Label>
+                        <Form.Control type="text" placeholder="photo URL" name="avatar" id="avatar"/>
+                    </Form.Group>
                    
 
                     <Form.Group >

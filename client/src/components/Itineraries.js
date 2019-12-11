@@ -126,17 +126,11 @@ class Itineraries extends React.Component {
 
         let listOfItineraries;
         if (hasTheFavoritesArrayChanged) {
-            // console.log('inside hasTheFavoritesArrayChanged i need to generateItinerariesListIfUser again')
-            // console.log('this.props.currentUser.favorites.length', this.props.currentUser.favorites.length)
-            // console.log('this.props.favorites.length', this.props.favorites.length)
-
             listOfItineraries = this.generateItinerariesListIfUserFavoritesChanged()
         }
-        else if (isThereACurrentUser && doesTheCurrentUserHaveFavorites) {
-            // console.log('inside 2nd')
+        else if (isThereACurrentUser) {
             listOfItineraries = this.generateItinerariesListIfUser()
         } else {
-            // console.log('inside 3rd')
             listOfItineraries = this.generateItinerariesList()
         }
 
@@ -145,9 +139,9 @@ class Itineraries extends React.Component {
             
             mainContent = (
                 <div>
-                    <p>Available MYtineraries:</p>
+                    {/* <p>Available MYtineraries:</p> */}
                     <ul>
-                        {listOfItineraries}
+                        { listOfItineraries.length > 0 ? listOfItineraries : 'NO MyTINERARIES FOR THIS CITY AT THE MOMENT'}
                         {/* { isThereACurrentUser && doesTheCurrentUserHaveFavorites ?  this.generateItinerariesListIfUser() : this.generateItinerariesList() } */}
                         {/* { this.props.favorites.length > 0 ?  this.generateItinerariesListIfUser() : this.generateItinerariesList() } */}
                     </ul>

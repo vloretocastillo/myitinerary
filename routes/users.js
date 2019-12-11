@@ -21,6 +21,8 @@ const register = (req, res) => {
 
     req.body = JSON.parse(Object.keys(req.body))
 
+    console.log(req.body)
+
     bcrypt.hash(req.body.password, saltRounds, function (err,   hash) {
         userModel.find( {$or:[{email: req.body.email},{username:req.body.username}]} )
         .then((file)=>{
@@ -31,7 +33,9 @@ const register = (req, res) => {
                     country: req.body.country, 
                     username: req.body.username, 
                     password: hash, 
-                    email: req.body.email,    
+                    email: req.body.email,   
+                    avatar:  req.body.avatar,
+                    favorites: [] 
                 })
                 newUser.save()
                     .then(user => {  
