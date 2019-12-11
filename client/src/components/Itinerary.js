@@ -20,13 +20,13 @@ class Itinerary extends React.Component {
         console.log('this.props.userId from child: ', this.props.userId)
 
         if (this.props.parent == 'favorites') {
-            button = <button className='btn btn-block bg-danger custom-butto' onClick={ () => this.props.removeItineraryFromFavoritesList(this.props.userId, el._id )}>Remove from Favorites</button>
+            button = <button className='btn btn-block btn-outline-danger m-2 custom-button' onClick={ () => this.props.removeItineraryFromFavoritesList(this.props.userId, el._id )}>Remove from Favorites</button>
         } else if (this.props.parent == 'itineraries') {
 
             if (this.props.userId) {
 
-                if (this.props.removeItineraryFromFavoritesList) button = <button className='btn btn-block bg-danger custom-butto' onClick={ () => this.props.removeItineraryFromFavoritesList(this.props.userId, el._id )}>Remove from Favorites</button>
-                else button = <button className='btn btn-block bg-success mt-2 custom-butto' onClick={ () => this.props.addItineraryToFavoritesList(this.props.userId, el._id )}>Add to Favorites</button>
+                if (this.props.removeItineraryFromFavoritesList) button = <button className='btn btn-block btn-outline-danger m-2 custom-button' onClick={ () => this.props.removeItineraryFromFavoritesList(this.props.userId, el._id )}>Remove from Favorites</button>
+                else button = <button className='btn btn-block btn-outline-success m-2 custom-button' onClick={ () => this.props.addItineraryToFavoritesList(this.props.userId, el._id )}>Add to Favorites</button>
         
             } 
         }
@@ -51,9 +51,10 @@ class Itinerary extends React.Component {
                         
                     </div>
                     <div className='link-to-details'>
-                        <Button className='btn-block btn-light'id={el._id} onClick={  (e) => this.props.handleClickDisplayDetails(e)   }>See Details</Button>
+                        <button className='btn btn-block btn-outline-secondary m-2'id={el._id} onClick={  (e) => this.props.handleClickDisplayDetails(e)   }>See Details</button>
+                        {button}
                     </div>
-                    {button}
+                    
                 </div>
             </li>
         )
