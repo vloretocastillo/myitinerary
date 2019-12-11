@@ -136,6 +136,21 @@ h2 {
 
 }
 
-/* .custom-li {
+.custom-li {
     position: relative;
-} */
+}
+
+.parentCityName {
+    position : absolute;
+    background-color: black;
+    color: white;
+    padding: 1% 2%;
+    font-size: 0.8rem;
+    border-radius: 5px;
+    position: absolute;
+    top: 7%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    letter-spacing: 1px;
+    font-weight: bold;
+}

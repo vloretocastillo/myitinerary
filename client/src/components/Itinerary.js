@@ -34,6 +34,10 @@ class Itinerary extends React.Component {
             <li className='custom-li'> 
                 {/* {button} */}
                 <div className='itinerary-list-container'>
+
+                    <div className='parentCityName'>
+                            {el.parentCityName}
+                    </div>
                 
                     <div className='avatar-wrapper'>
                         <img  src={profileAvatar} alt='profile user photo'></img>
