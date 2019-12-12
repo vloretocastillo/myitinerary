@@ -13,20 +13,20 @@ class Favorites extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (this.props.currentUser !== prevProps.currentUser) {
-            this.props.retrieveFavoriteItineraries(this.props.currentUser.favorites)
-        }
+        // if (this.props.currentUser !== prevProps.currentUser) {
+        //     this.props.retrieveFavoriteItineraries(this.props.currentUser.favorites)
+        // }
     }
 
     // componentWillUnmount(){ this.props.resetCurrentCity() }
 
     removeItineraryFromFavoritesList = (userId, itineraryId) => {
         this.props.removeFavorite(userId, itineraryId)
-            .then(()=> {
-                if (this.props.favorites.length > 0) {
-                    this.generateItinerariesList() 
-                }
-            })
+            // .then(()=> {
+                // if (this.props.favorites.length > 0) {
+                    // this.generateItinerariesList() 
+                // }
+            // })
     }
 
     handleClickDisplayDetails = (e) => {
@@ -81,14 +81,17 @@ class Favorites extends React.Component {
     render() {
 
 
+
+
         let mainContent;
         if (Object.getOwnPropertyNames(this.state.currentItinerary).length === 0) {
             mainContent = (
                 <div>
                     
                     <ul>
-                        { this.props.favorites.length > 0 ? this.generateItinerariesList() : false  }
-                        {/* { this.generateItinerariesList() } */}
+                        { this.generateItinerariesList() }
+
+                        {/* { this.props.favorites.length > 0 ? this.generateItinerariesList() : false  } */}
                     </ul>
                 </div>
             )
@@ -111,7 +114,7 @@ class Favorites extends React.Component {
 const mapStateToProps = (state) => {
     return {
         currentUser: state.auth.currentUser,
-        favorites: state.itinerariesData.favorites
+        favorites: state.auth.favorites
     }
 }
 

@@ -5,6 +5,8 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const jwt = require("jsonwebtoken")
 const secretOrKey = require("../keys").secretOrKey
+const itineraryModel = require('../model/ItineraryModel')
+
 
 
 const retrieveAllUsers = (req, res) => {
@@ -17,11 +19,31 @@ const retrieveAllUsers = (req, res) => {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 const register = (req, res) => {
+    // console.log('here in the backend')
+
+    // console.log('req.body:', req.body)
+    // console.log('Object.keys(req.body)', Object.keys(req.body))
 
     req.body = JSON.parse(Object.keys(req.body))
 
-    console.log(req.body)
+    // console.log('req.body after parse:', req.body)
+    
 
     bcrypt.hash(req.body.password, saltRounds, function (err,   hash) {
         userModel.find( {$or:[{email: req.body.email},{username:req.body.username}]} )
@@ -53,6 +75,7 @@ const register = (req, res) => {
 }
 
 const login = (req, res) => {
+    console.log('inside the login in the backend')
     req.body = JSON.parse(Object.keys(req.body))
     userModel.findOne({ email: req.body.email })
         
@@ -74,11 +97,19 @@ const login = (req, res) => {
                                     token: "There was an error"
                                 })
                             } else {
-                                res.json({
-                                    success: true,
-                                    token: token,
-                                    user : user
-                                })
+                                itineraryModel.find( { _id : { $in : user.favorites } } )
+                                    .then(favorites => {
+                                        // res.send(data)
+                                        // console.log(favorites)
+                                        res.json({
+                                            success: true,
+                                            token: token,
+                                            user : user,
+                                            favorites : favorites
+                                        })
+                                        
+                                    })
+                                
                             }
                         })
                     } else {
@@ -115,8 +146,14 @@ users.get('/currentuser', (req,res) => {
         if(err) { /* handle token err */ }
         else {
             userModel.findById(decodedToken.id)
-                .then((file) => {
-                    res.send(file);  
+                .then((user) => {
+                    itineraryModel.find( { _id : { $in : user.favorites } } )
+                        .then(favorites => {
+                            res.send({   
+                                user : user,
+                                favorites : favorites
+                            }) 
+                        })
                 })
                 .catch(err => {
                     if(err.kind === 'ObjectId') {

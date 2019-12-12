@@ -290,8 +290,18 @@ class Signup extends React.Component {
             password: e.target.password.value,
             avatar: e.target.avatar.value
         }
-        if ( this.validateUserInput(newUser) ) this.props.register(newUser)
+        if ( this.validateUserInput(newUser) ) {
+            console.log('about to register the newUser', newUser)
+            this.props.register(newUser)
+                // .then(()=> console.log('localStorage', localStorage.token))
+                // .then(() => { if (localStorage.token) window.location.href = '/' } )
+        }
         
+    }
+
+    componentDidUpdate() {
+        // console.log(localStorage.token)
+        if (localStorage.token) window.location.href = '/' 
     }
 
     generateSelectOptionsCountries = () => {

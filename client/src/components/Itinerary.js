@@ -17,7 +17,7 @@ class Itinerary extends React.Component {
         let el = this.props.element
         let button;
 
-        console.log('this.props.userId from child: ', this.props.userId)
+        // console.log('this.props.userId from child: ', this.props.userId)
 
         if (this.props.parent == 'favorites') {
             button = <button className='btn btn-block btn-outline-danger m-2 custom-button' onClick={ () => this.props.removeItineraryFromFavoritesList(this.props.userId, el._id )}>Remove from Favorites</button>

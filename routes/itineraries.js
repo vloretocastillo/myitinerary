@@ -61,12 +61,18 @@ const retrieveAllItinerariesByCityName = (req, res) => {
 
 itineraries.get('/favorites', passport.authenticate('jwt', {session : false}), (req, res) => {
     // console.log('req.headers.favorites', req.headers.favorites)
-    const ids = req.headers.favorites.split(',')
-    // console.log('ids', ids)
-    itineraryModel.find( { _id : { $in : ids } } )
-        .then(data => res.send(data))
-        .catch(err => console.log(err));
-    // res.send('protected')
+    // console.log('req.headers.favorites', req.headers.favorites == '')
+    if (req.headers.favorites != '') {
+        const ids = req.headers.favorites.split(',')
+        // console.log('ids', ids)
+        itineraryModel.find( { _id : { $in : ids } } )
+            .then(data => res.send(data))
+            .catch(err => console.log(err));
+    } else {
+        res.send([])
+    }
+    
+    
 });
 
 itineraries.get('/', (req,res) => retrieveAllItinerariesByCityName(req,res));

@@ -1,4 +1,5 @@
 const login = (user) => {
+    console.log('about to send a login to the backendwith ', user)
     return async (dispatch) => {
         return await fetch('/api/users/login', {
                 method: 'POST',
@@ -13,13 +14,14 @@ const login = (user) => {
             })
             
             .then(data =>{
-                // console.log('after converting to json the response: ', data)
+                console.log('login after converting to json the response: ', data)
                 if (data.msg) console.log(data.msg)
                 else if (data.token) {
                     localStorage.setItem('token', data.token)
                     dispatch({
                         type: 'LOGIN',
-                        currentUser: user
+                        currentUser: data.user,
+                        favorites: data.favorites
                     })
                 }
             })
@@ -34,6 +36,10 @@ const register = (newUser) => {
 
 
     const originalPassword = newUser.password
+
+    console.log('about to register the newUser here in usersActions', newUser)
+    console.log('about to register the newUser here in usersActions stringified', JSON.stringify(newUser))
+
 
     
     return async (dispatch) => {
@@ -68,14 +74,15 @@ const getCurrentUser = (token) => {
             .then(res => {
                 return res.json()
             })
-            .then(user =>{
+            .then(data =>{
                 // console.log('after converting to json the response: ', user)
                 // if (data.msg) console.log(data.msg)
                 // else if (data.token) {
                     // localStorage.setItem('token', data.token)
                     dispatch({
                         type: 'SET_CURRENT_USER',
-                        currentUser: user
+                        currentUser: data.user,
+                        favorites: data.favorites
                     })
                 // }
             })

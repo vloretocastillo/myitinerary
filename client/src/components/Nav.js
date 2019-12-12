@@ -6,6 +6,8 @@ import { Navbar, Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux'
 import { getCurrentUser } from '../actions/usersActions'
+import { retrieveFavoriteItineraries } from '../actions/itinerariesActions'
+
 
 
 
@@ -20,6 +22,16 @@ class Nave extends React.Component {
 
         if ( localStorage.token ) {
             this.props.getCurrentUser(localStorage.token)
+                .then(()=> {
+                    // console.log('about to retreive the favorites with', this.props.currentUser.favorites )
+                    this.props.retrieveFavoriteItineraries(this.props.currentUser.favorites)
+                    // .then(()=>{
+                    //     console.log('FROM NAV< THE FAVORITES:')
+                    //     console.log(this.props.favorites)
+                    // })
+
+                })
+                
                 // then(()=> {
                 //     if (this.props.currentUser.first_name) {
                 //         this.setState({currentUser : true})
@@ -32,6 +44,14 @@ class Nave extends React.Component {
         // }
         
     }
+
+    // shouldComponentUpdate(nextProps) {
+    //     console.log(this.props)
+    //     if (this.props.currentUser ) {
+    //         this.props.retrieveFavoriteItineraries(this.props.currentUser.favorites)
+    //     } 
+    //     return true
+    // }
 
     logout = () => {
         localStorage.removeItem('token')
@@ -73,12 +93,15 @@ class Nave extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        currentUser: state.auth.currentUser
+        currentUser: state.auth.currentUser,
+        favorites: state.itinerariesData.favorites
+
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        retrieveFavoriteItineraries: (ids) => dispatch(retrieveFavoriteItineraries(ids)),
         getCurrentUser: (token) => dispatch(getCurrentUser(token))
     }
 }

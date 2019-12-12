@@ -23,6 +23,7 @@ class Login extends React.Component {
             email : e.target.email.value,
             password: e.target.password.value
         }
+        console.log('about to send fetch with info', user)
         this.props.login(user)
             .then(() => { if (localStorage.token) window.location.href = '/' } )
                 
@@ -32,12 +33,7 @@ class Login extends React.Component {
 
     
     render() {
-        // if (this.state.redirect) {
-            
-        //     return <Redirect to="/" />
-                     
-        // }
-        // else {
+        
             return (
                 <div className='login-container'>
                 <Form onSubmit={(e) => this.handleClick(e)}>
@@ -66,16 +62,11 @@ class Login extends React.Component {
                 </Form>
                 </div>
             )
-        // }
        
     }
 }
 
-// const mapStateToProps = (state) => {
-//     return {
-//         token: state.auth.token,
-//     }
-// }
+
 
 const mapDispatchToProps = (dispatch) => {
     return {

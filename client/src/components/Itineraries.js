@@ -26,12 +26,12 @@ class Itineraries extends React.Component {
             .catch(err => console.log(err))
     }
 
-    shouldComponentUpdate(nextProps) {
-        if (this.props.currentUser === nextProps.currentUser && this.props.currentUser._id && this.props.favorites.length === 0) {
-            this.props.retrieveFavoriteItineraries(this.props.currentUser.favorites)
-        } 
-        return true
-    }
+    // shouldComponentUpdate(nextProps) {
+    //     if (this.props.currentUser === nextProps.currentUser && this.props.currentUser._id && this.props.favorites.length === 0) {
+    //         this.props.retrieveFavoriteItineraries(this.props.currentUser.favorites)
+    //     } 
+    //     return true
+    // }
 
     
  
@@ -65,15 +65,18 @@ class Itineraries extends React.Component {
     }
 
     generateItinerariesListIfUser = () => {
+        let favorites = this.props.favorites.map((el)=> el._id)
         return this.props.itineraries.map((el) => {
-            if (this.props.currentUser.favorites.indexOf(el._id) != -1 ) return <Itinerary userId={this.props.currentUser._id } removeItineraryFromFavoritesList={ this.removeItineraryFromFavoritesList } parent={'itineraries'} key={el._id} generateHashtagList={this.generateHashtagList} element={el} handleClickDisplayDetails={this.handleClickDisplayDetails}></Itinerary>
+            if (favorites.indexOf(el._id) != -1 ) return <Itinerary userId={this.props.currentUser._id } removeItineraryFromFavoritesList={ this.removeItineraryFromFavoritesList } parent={'itineraries'} key={el._id} generateHashtagList={this.generateHashtagList} element={el} handleClickDisplayDetails={this.handleClickDisplayDetails}></Itinerary>
             else return <Itinerary userId={this.props.currentUser._id } addItineraryToFavoritesList={ this.addItineraryToFavoritesList } parent={'itineraries'} key={el._id} generateHashtagList={this.generateHashtagList} element={el} handleClickDisplayDetails={this.handleClickDisplayDetails}></Itinerary>
         })
     }
 
     generateItinerariesListIfUserFavoritesChanged = () => {
+        let favorites = this.props.favorites.map((el)=> el._id)
         return this.props.itineraries.map((el) => {
-            if (this.props.favorites.indexOf(el._id) != -1 ) return <Itinerary userId={this.props.currentUser._id } removeItineraryFromFavoritesList={ this.removeItineraryFromFavoritesList } parent={'itineraries'} key={el._id} generateHashtagList={this.generateHashtagList} element={el} handleClickDisplayDetails={this.handleClickDisplayDetails}></Itinerary>
+            
+            if (favorites.indexOf(el._id) != -1 ) return <Itinerary userId={this.props.currentUser._id } removeItineraryFromFavoritesList={ this.removeItineraryFromFavoritesList } parent={'itineraries'} key={el._id} generateHashtagList={this.generateHashtagList} element={el} handleClickDisplayDetails={this.handleClickDisplayDetails}></Itinerary>
             else return <Itinerary userId={this.props.currentUser._id } addItineraryToFavoritesList={ this.addItineraryToFavoritesList } parent={'itineraries'} key={el._id} generateHashtagList={this.generateHashtagList} element={el} handleClickDisplayDetails={this.handleClickDisplayDetails}></Itinerary>
         })
     }
@@ -115,22 +118,50 @@ class Itineraries extends React.Component {
         )
     }
 
+    areTheseArraysEqual = (arr1, arr2) => {
+        console.log('inside areTheseArraysEqual? method comparing', arr1, arr2)
+        // console.log(arr1.length, arr1.length == 0)
+        if (arr1.length == 0 && arr2.length == 0 ) return true
+        let arr1Extras = arr1.filter((el) => arr2.indexOf(el) == -1)
+        let arr2Extras =  arr2.filter((el) => arr1.indexOf(el) == -1)
+        console.log('about to return: ', arr1Extras.length == 0 && arr2Extras.length == 0 ?  true : false)
+        return arr1Extras.length == 0 && arr2Extras.length == 0 ?  true : false
+    }
+
     
     
     render() {
        
 
+
         let isThereACurrentUser = this.props.currentUser._id ? true : false
-        let doesTheCurrentUserHaveFavorites = this.props.favorites.length > 0 ? true : false
-        let hasTheFavoritesArrayChanged = isThereACurrentUser && this.props.currentUser.favorites.length !== this.props.favorites.length
+        // let doesTheCurrentUserHaveFavorites = this.propss.favorites.length > 0 ? true : false
+        // let hasTheFavoritesArrayChanged = isThereACurrentUser && this.props.currentUser.favorites.length !== this.props.favorites.length
+        
+        let hasTheFavoritesArrayChanged = isThereACurrentUser && !this.areTheseArraysEqual(this.props.currentUser.favorites, this.props.favorites.map(el=> el._id))
+        
+        if (isThereACurrentUser) {
+
+            console.log('-----------------------------------------------------------------')
+            console.log('THERE IS A CURRENTUSER')
+            console.log('THE USER HAS AN ARRAY OF FAVORITES this.props.currentUser.favorites', this.props.currentUser.favorites)
+            console.log('this.props.favorites ', this.props.favorites, 'length:', this.props.favorites.length)
+
+            console.log('this.props.favorites mapped', this.props.favorites.map(el=> el._id))
+            console.log('are they the same arrays?', this.areTheseArraysEqual(this.props.currentUser.favorites, this.props.favorites.map(el=> el._id)))
+            console.log('-----------------------------------------------------------------')
+        }
 
         let listOfItineraries;
         if (hasTheFavoritesArrayChanged) {
+            console.log('if the favorites array has changed:generateItinerariesListIfUserFavoritesChanged')
             listOfItineraries = this.generateItinerariesListIfUserFavoritesChanged()
         }
         else if (isThereACurrentUser) {
+            console.log(' else if there is a current user:generateItinerariesListIfUser')
             listOfItineraries = this.generateItinerariesListIfUser()
         } else {
+            // console.log(' else there is no user:generateItinerariesList')
             listOfItineraries = this.generateItinerariesList()
         }
 
