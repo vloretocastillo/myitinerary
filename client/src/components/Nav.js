@@ -24,7 +24,7 @@ class Nave extends React.Component {
             this.props.getCurrentUser(localStorage.token)
                 .then(()=> {
                     // console.log('about to retreive the favorites with', this.props.currentUser.favorites )
-                    this.props.retrieveFavoriteItineraries(this.props.currentUser.favorites)
+                    // this.props.retrieveFavoriteItineraries(this.props.currentUser.favorites)
                     // .then(()=>{
                     //     console.log('FROM NAV< THE FAVORITES:')
                     //     console.log(this.props.favorites)

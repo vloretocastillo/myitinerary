@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { retrieveFavoriteItineraries, removeFavorite } from '../actions/itinerariesActions'
+import { removeFavorite } from '../actions/usersActions'
 import profileAvatar from '../assets/black-avatarr.png'
 import Itinerary from './Itinerary'
 import Carousel from './Carousel'
@@ -13,7 +13,7 @@ class Favorites extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        // if (this.props.currentUser !== prevProps.currentUser) {
+        // if (this.props.favorites !== prevProps.favorites) {
         //     this.props.retrieveFavoriteItineraries(this.props.currentUser.favorites)
         // }
     }
@@ -120,8 +120,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        retrieveFavoriteItineraries: (ids) => dispatch(retrieveFavoriteItineraries(ids)),
-        // resetCurrentCity : () => dispatch({ type: 'RESET_CURRENT_CITY'}),
+        // retrieveFavoriteItineraries: (ids) => dispatch(retrieveFavoriteItineraries(ids)),
         removeFavorite: (id, itineraryId) => dispatch(removeFavorite(id, itineraryId)),
 
 

@@ -31,6 +31,13 @@ const authReducer = (state = initState, action) => {
             favorites: []
         }
     }
+
+    if (action.type === 'UPDATE_FAVORITES') {
+        return {
+            ...state,
+            favorites: action.favorites
+        }
+    }
     
     else return state
 }

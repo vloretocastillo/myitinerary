@@ -1,28 +1,28 @@
 // module.exports = {
 
 
-    const retrieveFavoriteItineraries = (ids) => {
-        // console.log('about to send the fetch to the backend with the array', ids)
-        ///IM NOT GETTING THE EMPTY ARRAY FROM THE BACKEND!!!!!! THE PROBLEM IS WITH THE ROUTE
-        return async (dispatch) => {
-            return await fetch('http://localhost:5000/api/itineraries/favorites', {
-                    method: 'GET',
-                    headers: { 
-                        Authorization: 'Bearer ' + localStorage.token,
-                        favorites: ids
-                    }
-                })
-                .then(res =>  res.json() )
-                .then(data =>{
-                    // console.log('abotu to set the new FAVORITES state with this new data:', data)
-                    dispatch({
-                        type: 'SET_FAVORITES',
-                        favorites: data
-                    })
-                })
-                .catch(err => console.error(err)) 
-        }
-    }
+    // const retrieveFavoriteItineraries = (ids) => {
+    //     // console.log('about to send the fetch to the backend with the array', ids)
+    //     ///IM NOT GETTING THE EMPTY ARRAY FROM THE BACKEND!!!!!! THE PROBLEM IS WITH THE ROUTE
+    //     return async (dispatch) => {
+    //         return await fetch('http://localhost:5000/api/itineraries/favorites', {
+    //                 method: 'GET',
+    //                 headers: { 
+    //                     Authorization: 'Bearer ' + localStorage.token,
+    //                     favorites: ids
+    //                 }
+    //             })
+    //             .then(res =>  res.json() )
+    //             .then(data =>{
+    //                 // console.log('abotu to set the new FAVORITES state with this new data:', data)
+    //                 dispatch({
+    //                     type: 'SET_FAVORITES',
+    //                     favorites: data
+    //                 })
+    //             })
+    //             .catch(err => console.error(err)) 
+    //     }
+    // }
 
 
     const retrieveItineraries = (queryString) => {
@@ -62,68 +62,62 @@
         }
     }
 
-    const addFavorite = (id, itineraryId) => {
-        return async (dispatch) => {
-            return await fetch(`http://localhost:5000/api/users/addfavorite/${id}`, {
-                    method: 'GET',
-                    headers: { 
-                        Authorization: 'Bearer ' + localStorage.token,
-                        itinerary: itineraryId
-                    }
-                })
-                .then(res =>  res.json() )
-                .then(data =>{
-                    // console.log('data:', data)
-                    // dispatch({
-                    //     type: 'SET_FAVORITES',
-                    //     favorites: data
-                    // })
-                    dispatch(retrieveFavoriteItineraries(data))
+    // const addFavorite = (id, itineraryId) => {
+    //     return async (dispatch) => {
+    //         return await fetch(`http://localhost:5000/api/users/addfavorite/${id}`, {
+    //                 method: 'GET',
+    //                 headers: { 
+    //                     Authorization: 'Bearer ' + localStorage.token,
+    //                     itinerary: itineraryId
+    //                 }
+    //             })
+    //             .then(res =>  res.json() )
+    //             .then(data =>{
+    //                 // console.log('data:', data)
+    //                 // dispatch({
+    //                 //     type: 'SET_FAVORITES',
+    //                 //     favorites: data
+    //                 // })
+    //                 dispatch(retrieveFavoriteItineraries(data))
 
 
-                })
-                .catch(err => console.error(err)) 
-        }
-    }
+    //             })
+    //             .catch(err => console.error(err)) 
+    //     }
+    // }
 
-    const removeFavorite = (id, itineraryId) => {
-        console.log('inside removeFavorite in actionsCreators about to send to removeFavorite', id, itineraryId)
-        return async (dispatch) => {
-            return await fetch(`http://localhost:5000/api/users/removefavorite/${id}`, {
-                    method: 'GET',
-                    headers: { 
-                        Authorization: 'Bearer ' + localStorage.token,
-                        itinerary: itineraryId
-                    }
-                })
-                .then(res =>  res.json() )
+    // const removeFavorite = (id, itineraryId) => {
+    //     console.log('inside removeFavorite in actionsCreators about to send to removeFavorite', id, itineraryId)
+    //     return async (dispatch) => {
+    //         return await fetch(`http://localhost:5000/api/users/removefavorite/${id}`, {
+    //                 method: 'GET',
+    //                 headers: { 
+    //                     Authorization: 'Bearer ' + localStorage.token,
+    //                     itinerary: itineraryId
+    //                 }
+    //             })
+    //             .then(res =>  res.json() )
 
-                .then(data =>{
+    //             .then(data =>{
 
-                    console.log('data response in removeFavorite:', data)
+    //                 // console.log('data response in removeFavorite:', data)
 
-                    // the problem here is that we are setting the data to be an array of string IDS!!!!!!!!!!!
-                    // instead, we should call a dispatch(retrieveFavoriteItineraries(data))
-                    // dispatch({
-                    //     type: 'SET_FAVORITES',
-                    //     favorites: data
-                    // })
-                    // lets try
-                    dispatch(retrieveFavoriteItineraries(data))
+                    
+    //                 dispatch(retrieveFavoriteItineraries(data))
 
-                })
-                .catch(err => console.error(err)) 
-        }
-    }
+    //             })
+    //             .catch(err => console.error(err)) 
+    //     }
+    // }
 
 
 // }
 
 module.exports = {
-    retrieveFavoriteItineraries : retrieveFavoriteItineraries,
+    // retrieveFavoriteItineraries : retrieveFavoriteItineraries,
     retrieveItineraries : retrieveItineraries,
     retrieveItinerary : retrieveItinerary,
-    addFavorite : addFavorite,
-    removeFavorite : removeFavorite
+    // addFavorite : addFavorite,
+    // removeFavorite : removeFavorite
 
 }
