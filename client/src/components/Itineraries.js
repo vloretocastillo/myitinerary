@@ -2,14 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux'
 import { retrieveItineraries  } from '../actions/itinerariesActions'
 import {  removeFavorite, addFavorite } from '../actions/usersActions'
-
 import '../css/Itineraries.css';
 import profileAvatar from '../assets/black-avatarr.png'
 import Itinerary from './Itinerary'
 import Carousel from './Carousel'
 import Button from 'react-bootstrap/Button'
-
-
 
 import { retrieveOneCityByName } from '../actions/dataActions'
 
@@ -35,9 +32,7 @@ class Itineraries extends React.Component {
         if (currentItinerary) this.setState({ currentItinerary })
     }
 
-    // removeItineraryFromFavoritesList = (userId, itineraryId) => { this.props.removeFavorite(userId, itineraryId) }
 
-    // addItineraryToFavoritesList = (userId, itineraryId) => { this.props.addFavorite(userId, itineraryId) }
 
     handleClickHideDetails = () => { this.setState({ currentItinerary : {} }) }
 
@@ -96,22 +91,13 @@ class Itineraries extends React.Component {
     
     
     render() {
-       
-
-
         let isThereACurrentUser = this.props.currentUser._id ? true : false
-       
-
         let listOfItineraries = isThereACurrentUser ? this.generateItinerariesListIfUser() : this.generateItinerariesList()
-       
-       
-
         let mainContent;
+
         if (Object.getOwnPropertyNames(this.state.currentItinerary).length === 0) {
-            
             mainContent = (
                 <div>
-                    {/* <p>Available MYtineraries:</p> */}
                     <ul>
                         { listOfItineraries.length > 0 ? listOfItineraries : 'NO MyTINERARIES FOR THIS CITY AT THE MOMENT'}
                     </ul>
@@ -146,7 +132,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        // retrieveFavoriteItineraries: (ids) => dispatch(retrieveFavoriteItineraries(ids)),
         retrieveItineraries: (queryString) => dispatch(retrieveItineraries(queryString)),
         retrieveOneCityByName: (id) => dispatch(retrieveOneCityByName(id)),
         resetCurrentCity : () => dispatch({ type: 'RESET_CURRENT_CITY'}),

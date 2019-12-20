@@ -2,7 +2,6 @@ import React from 'react';
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import  '../css/Signup.css'
-// import  '../css/Login.css'
 import { connect } from 'react-redux'
 import { login } from '../actions/usersActions'
 import { Link, Redirect } from 'react-router-dom';
@@ -23,7 +22,7 @@ class Login extends React.Component {
             email : e.target.email.value,
             password: e.target.password.value
         }
-        console.log('about to send fetch with info', user)
+        // console.log('about to send fetch with info', user)
         this.props.login(user)
             .then(() => { if (localStorage.token) window.location.href = '/' } )
                 

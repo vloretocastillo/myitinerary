@@ -4,11 +4,6 @@ import Button from 'react-bootstrap/Button'
 import { connect } from 'react-redux'
 
 
-
-
-
-// import { removeFavorite, addFavorite } from '../actions/itinerariesActions'
-
 class Itinerary extends React.Component {
     
 
@@ -16,8 +11,6 @@ class Itinerary extends React.Component {
         
         let el = this.props.element
         let button;
-
-        // console.log('this.props.userId from child: ', this.props.userId)
 
         if (this.props.parent == 'favorites') {
             button = <button className='btn btn-block btn-outline-danger m-2 custom-button' onClick={ () => this.props.removeItineraryFromFavoritesList(this.props.userId, el._id )}>Remove from Favorites</button>
@@ -32,7 +25,6 @@ class Itinerary extends React.Component {
         }
         return (
             <li className='custom-li'> 
-                {/* {button} */}
                 <div className='itinerary-list-container'>
 
                     <div className='parentCityName'>
@@ -66,20 +58,12 @@ class Itinerary extends React.Component {
     }
 }
 
-// export default Itinerary
 const mapStateToProps = (state) => {
     return {
         currentUser: state.auth.currentUser,
-        // favorites: state.itinerariesData.favorites
     }
 }
 
-// const mapDispatchToProps = (dispatch) => {
-//     return {
-//         // removeFavorite: (id, itineraryId) => dispatch(removeFavorite(id, itineraryId)),
-//         // addFavorite: (id, itineraryId) => dispatch(addFavorite(id, itineraryId))
-//     }
-// }
 
 
 export default connect(mapStateToProps)(Itinerary);

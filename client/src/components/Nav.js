@@ -1,7 +1,6 @@
 import React from 'react';
 import profileAvatar from '../assets/white-avatarr.jpg'
 import '../css/Navbar.css';
-// import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 import { Navbar, Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux'
@@ -19,39 +18,9 @@ class Nave extends React.Component {
     }
 
     componentDidMount () {
-
-        if ( localStorage.token ) {
-            this.props.getCurrentUser(localStorage.token)
-                .then(()=> {
-                    // console.log('about to retreive the favorites with', this.props.currentUser.favorites )
-                    // this.props.retrieveFavoriteItineraries(this.props.currentUser.favorites)
-                    // .then(()=>{
-                    //     console.log('FROM NAV< THE FAVORITES:')
-                    //     console.log(this.props.favorites)
-                    // })
-
-                })
-                
-                // then(()=> {
-                //     if (this.props.currentUser.first_name) {
-                //         this.setState({currentUser : true})
-                //     }
-                // })
-        }
-
-        // if (this.props.currentUser.first_name) {
-        //     this.setState({currentUser : true})
-        // }
-        
+        if ( localStorage.token ) this.props.getCurrentUser(localStorage.token)
     }
 
-    // shouldComponentUpdate(nextProps) {
-    //     console.log(this.props)
-    //     if (this.props.currentUser ) {
-    //         this.props.retrieveFavoriteItineraries(this.props.currentUser.favorites)
-    //     } 
-    //     return true
-    // }
 
     logout = () => {
         localStorage.removeItem('token')
@@ -88,8 +57,6 @@ class Nave extends React.Component {
         )
     }
 }
-
-// export default Nave;
 
 const mapStateToProps = (state) => {
     return {

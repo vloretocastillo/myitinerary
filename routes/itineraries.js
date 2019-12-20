@@ -60,11 +60,8 @@ const retrieveAllItinerariesByCityName = (req, res) => {
 }
 
 itineraries.get('/favorites', passport.authenticate('jwt', {session : false}), (req, res) => {
-    // console.log('req.headers.favorites', req.headers.favorites)
-    // console.log('req.headers.favorites', req.headers.favorites == '')
     if (req.headers.favorites != '') {
         const ids = req.headers.favorites.split(',')
-        // console.log('ids', ids)
         itineraryModel.find( { _id : { $in : ids } } )
             .then(data => res.send(data))
             .catch(err => console.log(err));
@@ -80,12 +77,5 @@ itineraries.get('/all/:cityId', (req,res) => retrieveAllItinerariesByCity(req,re
 itineraries.get('/all', (req,res) => retrieveAllItineraries(req,res)); //!
 itineraries.post('/', (req, res) => createOneItinerary(req,res)); //!
 itineraries.get('/:id', (req, res) => retrieveOneItinerary(req, res));
-
-// itineraries.put('/:id', (req, res) => updateOneItinerary(req, res));
-// itineraries.delete('/:id', (req, res) => deleteOneItinerary(req, res));
-
-
-
-
 
 module.exports = itineraries;

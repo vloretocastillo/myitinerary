@@ -37,11 +37,6 @@ const register = (newUser) => {
 
     const originalPassword = newUser.password
 
-    // console.log('about to register the newUser here in usersActions', newUser)
-    // console.log('about to register the newUser here in usersActions stringified', JSON.stringify(newUser))
-
-
-    
     return async (dispatch) => {
         return await fetch('/api/users/register', {
                 method: 'POST',
@@ -81,7 +76,7 @@ const getCurrentUser = (token) => {
                         currentUser: data.user,
                         favorites: data.favorites
                     })
-                // }
+                
             })
             
             .catch(err => console.error(err)) 
@@ -114,7 +109,6 @@ const setFavoriteItineraries = (ids) => {
 }
 
 const removeFavorite = (id, itineraryId) => {
-    // console.log('inside removeFavorite in actionsCreators about to send to removeFavorite', id, itineraryId)
     return async (dispatch) => {
         return await fetch(`http://localhost:5000/api/users/removefavorite/${id}`, {
                 method: 'GET',
@@ -125,8 +119,7 @@ const removeFavorite = (id, itineraryId) => {
             })
             .then(res =>  res.json() )
             .then(data =>{
-                // console.log('data', data)
-                // dispatch(setFavoriteItineraries(data))
+               
                 dispatch({
                     type: 'UPDATE_FAVORITES',
                     favorites: data
@@ -148,12 +141,10 @@ const addFavorite = (id, itineraryId) => {
             })
             .then(res =>  res.json() )
             .then(data =>{
-                // console.log('data:', data)
                 dispatch({
                     type: 'UPDATE_FAVORITES',
                     favorites: data
                 })
-                // dispatch(retrieveFavoriteItineraries(data))
 
 
             })

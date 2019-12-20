@@ -17,33 +17,11 @@ const retrieveAllUsers = (req, res) => {
         .catch(err => console.log(err));
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 const register = (req, res) => {
-    // console.log('here in the backend')
 
-    // console.log('req.body:', req.body)
-    // console.log('Object.keys(req.body)', Object.keys(req.body))
 
     req.body = JSON.parse(Object.keys(req.body))
 
-    // console.log('req.body after parse:', req.body)
-    
 
     bcrypt.hash(req.body.password, saltRounds, function (err,   hash) {
         userModel.find( {$or:[{email: req.body.email},{username:req.body.username}]} )
@@ -75,7 +53,6 @@ const register = (req, res) => {
 }
 
 const login = (req, res) => {
-    console.log('inside the login in the backend')
     req.body = JSON.parse(Object.keys(req.body))
     userModel.findOne({ email: req.body.email })
         
@@ -99,8 +76,6 @@ const login = (req, res) => {
                             } else {
                                 itineraryModel.find( { _id : { $in : user.favorites } } )
                                     .then(favorites => {
-                                        // res.send(data)
-                                        // console.log(favorites)
                                         res.json({
                                             success: true,
                                             token: token,
@@ -121,22 +96,6 @@ const login = (req, res) => {
         .catch(err => console.log(err)) 
 }
 
-// const retrieveOneUser = (req, res) => {
-//     userModel.findById(req.params.id)
-//         .then((file) => {
-//             res.send(file);  
-//         })
-//         .catch(err => {
-//             if(err.kind === 'ObjectId') {
-//                 return res.status(404).send({
-//                     message: "User not found with id " + req.params.id
-//                 });                
-//             }
-//             return res.status(500).send({
-//                 message: "Error retrieving note with id " + req.params.id
-//             });
-//         });
-// }
 
 
 
@@ -192,7 +151,6 @@ const addToFavorites = (req, res) => {
 }
 
 const removeFromFavorites = (req, res) => {
-    // console.log(req.params)
     userModel.findById(req.params.id)
         .then((user)=> {
             
@@ -223,8 +181,5 @@ users.post('/login', (req, res) => login(req,res)); //!
 users.get('/addfavorite/:id', (req, res) => addToFavorites(req,res)); //!
 users.get('/removefavorite/:id', (req, res) => removeFromFavorites(req,res));
 
-// users.get('/:id', (req, res) => retrieveOneUser(req, res));
-// users.put('/:id', (req, res) => updateOneUser(req, res));
-// users.delete('/:id', (req, res) => deleteOneUser(req, res));
 
 module.exports = users;

@@ -8,7 +8,6 @@ const authReducer = (state = initState, action) => {
     
 
     if (action.type === 'LOGIN') {
-        // console.log('in the reducer', action.favorites)
         return {
             ...state,
             currentUser: action.currentUser,

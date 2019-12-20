@@ -12,21 +12,11 @@ class Favorites extends React.Component {
         currentItinerary: {},
     }
 
-    componentDidUpdate(prevProps) {
-        // if (this.props.favorites !== prevProps.favorites) {
-        //     this.props.retrieveFavoriteItineraries(this.props.currentUser.favorites)
-        // }
-    }
+    
 
-    // componentWillUnmount(){ this.props.resetCurrentCity() }
 
     removeItineraryFromFavoritesList = (userId, itineraryId) => {
         this.props.removeFavorite(userId, itineraryId)
-            // .then(()=> {
-                // if (this.props.favorites.length > 0) {
-                    // this.generateItinerariesList() 
-                // }
-            // })
     }
 
     handleClickDisplayDetails = (e) => {
@@ -90,8 +80,6 @@ class Favorites extends React.Component {
                     
                     <ul>
                         { this.generateItinerariesList() }
-
-                        {/* { this.props.favorites.length > 0 ? this.generateItinerariesList() : false  } */}
                     </ul>
                 </div>
             )
@@ -120,10 +108,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        // retrieveFavoriteItineraries: (ids) => dispatch(retrieveFavoriteItineraries(ids)),
         removeFavorite: (id, itineraryId) => dispatch(removeFavorite(id, itineraryId)),
-
-
     }
 }
 
